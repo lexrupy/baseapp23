@@ -1,0 +1,76 @@
+<%= content_for :header, "Ticket #{@ticket.ticket_id}" %>
+<% content_for :additional_css do %>
+  <%= stylesheet_link_tag 'ticket' %>
+<% end -%>
+<% content_for :sidebar do -%>
+  <ul class="sidebar_menu">
+    <li><%= link_to_back tickets_path, :text => 'Back to ticket list' %></li>
+    <li><%= link_to_edit @ticket %></li>
+    <li><%= link_to_destroy @ticket %></li>
+  </ul>
+<% end -%>
+
+<div id="ticket">
+  <p>
+    <span class="ticket_id"><%= @ticket.ticket_id %></span>
+    <span style="float:left;width:200px;margin-top:3px">Priority: <strong><%= @ticket.priority_name %></strong></span>
+    <span class="right">Category: <strong><%=h @ticket.category_name %></strong></span>
+  </p>
+  <p>
+    <span style="float:left;width:300px;"><strong>Created at: </strong><%= @ticket.created_at.to_s(:short) %></span>
+    <span class="right">Status: <strong><%=h @ticket.status_name %></strong></span>
+  </p>
+  <div class="ticket_body">
+    <h3><strong><em><%=h @ticket.subject %></em></strong></h3>
+    <%= textilize @ticket.body %>
+  </div>
+</div>
+<% unless @ticket.ticket_updates.blank? -%>
+  <div id="updates_ticket">
+    <% for update in @ticket.ticket_updates -%>
+      <span style="float:right"><%= link_to_destroy update_delete_ticket_path(update) %></span>
+      <p><em><%=h update.user_change %></em> at <strong><%= update.created_at.to_s(:short) %>:</strong></p>
+      <% unless update.assigned_change.blank? -%>
+        <p><em><%= sanitize update.assigned_change %></em></p>
+      <% end -%>
+      <% unless update.status_change.blank? -%>
+        <p><em><%= sanitize update.status_change %></em></p>
+      <% end -%>
+      <% unless update.category_change.blank? -%>
+        <p><em><%= sanitize update.category_change %></em></p>
+      <% end -%>
+      <% unless update.priority_change.blank? -%>
+        <p><em><%= sanitize update.priority_change %></em></p>
+      <% end -%>
+      <% unless update.body.blank? -%>
+        <div class="ticket_body"><%= textilize update.body %></div>
+      <% end -%>
+      <% unless @ticket.ticket_updates.to_a.last == update -%><hr /><% end -%>
+    <% end -%>
+  </div>
+<% end -%>
+<div id="update_ticket_form">
+<% form_for :ticket_update, @ticket.new_update, :url => { :action => "ticket_update" } do |f| -%>
+  <table>
+    <tr>
+      <td><%= f.label :assigned_to_id, "Assigned to" %></td>
+      <td width='55%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :name, {:prompt => '--unassigned--'} %></td>
+      <td><%= f.label :category %></td>
+      <td><%= f.select :category, string_array_for_select(Ticket::CATEGORIES) %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :priority %></td>
+      <td><%= f.select :priority, string_array_for_select(Ticket::PRIORITIES) %></td>
+      <td><%= f.label :status %></td>
+      <td><%= f.select :status, @ticket.status_for_select %></td>
+    </tr>
+  </table>
+  <p>
+    <%= f.label :body, "Comments:" %><br />
+    <%= f.text_area :body, :rows => 10, :cols => 80 %>
+  </p>
+  <p>
+    <%= f.submit "Confirm" %>
+  </p>
+<% end -%>
+</div>

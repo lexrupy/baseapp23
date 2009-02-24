@@ -1,0 +1,24 @@
+# Configuration options can be accessed as
+#   configatron.site_name
+
+development: &local
+    site_name: BaseApp
+    site_url: "localhost:3000"
+
+    company_name: BaseApp Inc.
+    admin_email: admin@example.com
+
+    support_name: Support
+    support_email: support@example.com
+
+    session_time_out: 5
+
+production:
+  <<: *local
+  session_time_out: 20
+
+staging:
+  <<: *local
+
+test:
+  <<: *local

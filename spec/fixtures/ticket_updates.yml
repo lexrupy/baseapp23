@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ticket: 
+  user: 
+  status_change: MyString
+  category_change: MyString
+  priority_change: MyString
+  body: MyText
+
+two:
+  ticket: 
+  user: 
+  status_change: MyString
+  category_change: MyString
+  priority_change: MyString
+  body: MyText

@@ -1,0 +1,24 @@
+<% content_for :sidebar do %>
+  <ul class="sidebar_menu">
+    <li><%= link_to_back admin_resources_path, :text => 'Back to resource list' %></li>
+  </ul>
+<% end -%>
+<% form_for @resource, :url => resource_form_path(@resource) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :resource, "Identifier" %><br />
+    <%= f.text_field :resource, :size => 40 %><br />
+    <small>For an <strong>Action Resource</strong>, the Identifier should have the format: <strong>namespace:controller-action</strong></small>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :size => 50 %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description, :size => 60 %>
+  </p>
+  <p>
+    <%= f.submit "Confirm" %>
+  </p>
+<% end %>

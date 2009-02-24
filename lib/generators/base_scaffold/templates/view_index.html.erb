@@ -1,0 +1,28 @@
+<%%= content_for :header, "Listing <%= plural_name %>" %>
+<%% content_for :sidebar do %>
+  <ul class="sidebar_menu">
+    <li><%%= link_to 'New <%= singular_name %>', new_<%= singular_name %>_path, :class => "action new" %></li>
+  </ul>
+<%% end -%>
+
+<table class="index">
+  <tr>
+<% for attribute in attributes -%>
+    <th><%= attribute.column.human_name %></th>
+<% end -%>
+    <th>&nbsp;</th>
+  </tr>
+<%% for <%= singular_name %> in @<%= plural_name %> %>
+  <tr>
+<% for attribute in attributes -%>
+    <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
+<% end -%>
+    <td class="actions">
+      <%%= link_to 'Show', <%= singular_name %>, :class => 'action show' %> |
+      <%%= link_to 'Edit', edit_<%= singular_name %>_path(<%= singular_name %>), :class => 'action edit' %> |
+      <%%= link_to 'Destroy', <%= singular_name %>, :confirm => 'Are you sure?', :method => :delete, :class => 'action destroy' %>
+    </td>
+  </tr>
+<%% end %>
+</table>
+<%%= will_paginate @<%= plural_name %> %>

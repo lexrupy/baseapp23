@@ -1,0 +1,22 @@
+<% content_for :header do -%>
+  Application Settings
+<% end -%>
+<% content_for :sidebar do -%>
+  <p>These are site-wide settings. They will be used through-out your application.</p>
+  <p>To add new settings, simple create a new row in the 'settings' table.</p>
+<% end -%>
+<% form_tag :action => 'update' do %>
+  <h3>General</h3>
+  <% for setting in Setting.all -%>
+    <div class="setting textfield" id="setting=<%= setting.id %>">
+      <p>
+        <strong><%= setting.label %></strong><br />
+        <small><%= setting.description %></small>
+      </p>
+      <p><%= text_field_tag("settings[#{setting.id}]", setting.value.to_s, :size => 40 ) %></p>
+    </div>
+  <% end -%>
+  <div id="submitbutton">
+    <p><%= submit_tag 'Save Settings' %></p>
+  </div>
+<% end %>

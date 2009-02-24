@@ -1,0 +1,29 @@
+<% content_for :header do -%>
+ 	<%= configatron.site_name %> Editing Account for <em><%=h @user.login %></em>
+<% end -%>
+<% content_for :sidebar do -%>
+<h2>Account status: <%= @user.state.to_s.humanize %></h2>
+<ul class="sidebar_menu">
+    <li><%= link_to_back admin_users_path, :text => 'Back to user list' %></li>
+</ul>
+<% end -%>
+<% form_for @user, :url => admin_user_url do |f| -%>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <label>Roles</label><br />
+    <ul style="list-style:none;">
+      <% for role in Role.all -%>
+        <li><%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) %> <%= role.name.humanize %></li>
+      <% end -%>
+    </ul>
+  </p>
+  <label>Access Control</label><br />
+  <div class="access_control">
+    <%= render :partial => 'admin/roles/role_access', :object => @user %>
+  </div>
+  <br />
+<%= f.submit "Confirm" %>
+<% end -%>

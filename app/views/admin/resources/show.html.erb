@@ -1,0 +1,13 @@
+<%= content_for :header, "Resource" %>
+<% content_for :sidebar do -%>
+  <ul class="sidebar_menu">
+    <li><%= link_to 'Back to resource list', admin_resources_path, :class => "action back" %></li>
+    <li><%= link_to 'Edit', edit_admin_resource_path(@resource), :class => "action edit" %></li>
+    <li><%= link_to 'Destroy', admin_resource_path(@resource), :class => "action destroy" %></li>
+  </ul>
+<% end -%>
+<table class="overview">
+  <%= cell "Identifier", h(@resource.resource) %>
+  <%= cell "Name", h(@resource.name) %>
+  <%= cell "Description", h(@resource.description) %>
+</table>

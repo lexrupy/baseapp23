@@ -1,0 +1,14 @@
+<%%= content_for :header, "<%= singular_name.humanize %>" %>
+<%% content_for :sidebar do -%>
+  <ul class="sidebar_menu">
+    <li><%%= link_to 'Back to <%= plural_name %> list', <%= plural_name %>_path, :class => "action back" %></li>
+    <li><%%= link_to 'Edit', edit_<%= singular_name %>_path(@<%= singular_name %>), :class => "action edit" %></li>
+    <li><%%= link_to 'Destroy', <%= plural_name %>_path, :class => "action destroy" %></li>
+  </ul>
+<%% end -%>
+<% for attribute in attributes -%>
+<p>
+  <b><%= attribute.column.human_name %>:</b>
+  <%%=h @<%= singular_name %>.<%= attribute.name %> %>
+</p>
+<% end -%>

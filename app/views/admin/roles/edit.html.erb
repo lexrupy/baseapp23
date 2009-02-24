@@ -1,0 +1,18 @@
+<%= content_for :header, "Editing Role Access Control" %>
+<% content_for :sidebar do %>
+  <ul class="sidebar_menu">
+    <li><%= link_to_back admin_roles_path, :text => 'Back to roles list' %></li>
+  </ul>
+<% end -%>
+<% form_for @role, :url => admin_role_path(@role) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Name" %> <%= h @role.name %>
+  </p>
+  <label>Access Control</label><br />
+  <div class="access_control">
+    <%= render :partial => 'role_access', :object => @role %>
+  </div>
+  <br />
+  <%= f.submit "Confirm" %>
+<% end %>

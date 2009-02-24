@@ -1,0 +1,15 @@
+<%= content_for :header, "Listing roles" %>
+<% content_for :additional_css do %>
+  <%= stylesheet_link_merged :nosidebar %>
+<% end -%>
+<table class="index">
+  <tr>
+    <th>Name</th>
+  </tr>
+<% for role in @roles %>
+  <tr>
+    <td><%= link_to_edit edit_admin_role_path(role), :text => h(role.name) %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @roles %>

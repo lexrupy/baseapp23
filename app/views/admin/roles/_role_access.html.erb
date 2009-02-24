@@ -1,0 +1,7 @@
+<% for res in Resource.all -%>
+  <div>
+    <%= check_box_tag "#{role_access.class.name.downcase}[resource_ids][]", res.id, role_access.resources.include?(res) %>
+    <%= res.name %><br />
+    <small><%= res.description %></small>
+  </div>
+<% end -%>

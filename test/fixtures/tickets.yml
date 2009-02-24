@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  creator_id: 1
+  assigned_to_id: 1
+  subject: MyString
+  body: MyText
+  category: MyString
+  status: MyString
+  priority: MyString
+
+two:
+  creator_id: 1
+  assigned_to_id: 1
+  subject: MyString
+  body: MyText
+  category: MyString
+  status: MyString
+  priority: MyString
