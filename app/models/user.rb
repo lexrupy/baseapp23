@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     if !self.profile.nil? && !self.profile.real_name.blank?
       self.profile.real_name
     else
-      login
+      name
     end
   end
 
@@ -65,7 +65,8 @@ class User < ActiveRecord::Base
   def has_role?(role)
     # Master User always have access to all
     list ||= self.roles.collect(&:name)
-    list.include?(role.to_s) || list.include?('admin') || self.master?
+    role = [role] unless role.is_a? Array
+    role.any? { |r| list.include?(r.to_s) } || list.include?('admin') || self.master?
   end
 
   def have_access?(resource)
