@@ -11,11 +11,11 @@ development: &local
     support_name: Support
     support_email: support@example.com
 
-    session_time_out: 5
+    session_time_out: 30
 
 production:
   <<: *local
-  session_time_out: 20
+  session_time_out: 50
 
 staging:
   <<: *local
