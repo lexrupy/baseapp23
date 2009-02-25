@@ -344,7 +344,13 @@ form label {
   font-size: 12px;
   color: #390000
 }
+
 #site_announcements p.hide {margin-top: 5px;}
+
+a.external {
+  padding: 1px 13px 1px 0px; text-decoration: underline;
+  background: URL('/images/external.png') right no-repeat;
+}
 /** Action Link Types */
 a.action {padding: 3px 3px 3px 20px}
 a.action:hover {background-color: #0054ff}

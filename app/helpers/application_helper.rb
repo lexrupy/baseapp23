@@ -56,6 +56,10 @@ module ApplicationHelper
 
   # Link Helpers
 
+  def link_to_ext(text, path, options={})
+    link_to text, path, options.reverse_merge(:class => "external")
+  end
+
   def link_to_action(action, path, options={})
     text = options.delete(:text) || MAPPED_ACTION_TEXT[action.to_sym]
     link_to text, path, options.reverse_merge(:class => "action #{action.to_s}")
