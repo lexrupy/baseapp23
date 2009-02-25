@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   layout 'login'
 
-  skip_before_filter :authorize_user, :only => [:new, :create]
+  skip_before_filter :authorize_user, :only => [:new, :create, :destroy]
 
   def new
     @user_session = UserSession.new
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user_session.destroy
+    current_user_session.destroy unless current_user_session.nil?
     redirect_to new_session_url
   end
 
