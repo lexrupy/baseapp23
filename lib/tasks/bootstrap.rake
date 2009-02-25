@@ -16,9 +16,9 @@ namespace :db do
   namespace :bootstrap do
     desc "Load fixtures from db/bootstrap into the database"
     task :load => :environment do
-      %w(support guest).each { |r| Role.create(:name => r) }
+      %w(admin support).each { |r| Role.create(:name => r) }
       # Create admin role and user
-      admin_role = Role.create(:name => 'admin')
+      admin_role = Role.find_by_name('admin')
       user = User.create do |u|
         u.login = 'admin'
         u.name = "Administrator"
