@@ -2,6 +2,7 @@ class CreateProfiles < ActiveRecord::Migration
   def self.up
     create_table :profiles do |t|
       t.references :user
+      t.string :nick_name
       t.string :real_name
       t.string :location
       t.string :website

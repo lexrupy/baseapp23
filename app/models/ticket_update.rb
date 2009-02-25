@@ -9,7 +9,7 @@ class TicketUpdate < ActiveRecord::Base
   after_create :update_ticket
 
   def user_change
-    user.nil? ? "" : user.name
+    user.nil? ? "" : user.login
   end
 
   private
@@ -18,14 +18,14 @@ class TicketUpdate < ActiveRecord::Base
     if ticket.assigned_to_id != assigned_to_id
       unless assigned_to_id.blank?
         u = User.find(assigned_to_id)
-        user_name = u.name
+        user_name = u.login
       else
         user_name = "Unassigned"
       end
       if ticket.assigned_to.nil?
         self.assigned_change = "Ticket assigned to <strong>#{user_name}</strong>" unless u.nil?
       else
-        self.assigned_change = "Ticket reassigned from <strong>#{ticket.assigned_to.name}</strong> to <strong>#{user_name}</strong>" unless u.nil?
+        self.assigned_change = "Ticket reassigned from <strong>#{ticket.assigned_to.login}</strong> to <strong>#{user_name}</strong>" unless u.nil?
       end
     end
     if ticket.status != status && !status.blank?

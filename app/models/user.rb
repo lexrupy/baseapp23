@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :login, :case_sensitive => false
 #  validates_format_of     :login, :with => RE_LOGIN_OK, :message => MSG_LOGIN_BAD
 #  validates_format_of     :name,  :with => RE_NAME_OK, :message => MSG_NAME_BAD, :allow_nil => true
-  validates_length_of     :name,  :maximum => 100
   validates_presence_of   :email
   validates_length_of     :email, :within => 6..100
   validates_uniqueness_of :email, :case_sensitive => false
@@ -53,10 +52,10 @@ class User < ActiveRecord::Base
   end
 
   def exibition_name
-    if !self.profile.nil? && !self.profile.real_name.blank?
-      self.profile.real_name
+    if !self.profile.nil? && (!self.profile.nick_name.blank? || !self.profile.real_name.blank?)
+      self.profile.nick_name.blank? ? self.profile.real_name : self.profile.nick_name
     else
-      name
+      login
     end
   end
 
@@ -126,10 +125,6 @@ class User < ActiveRecord::Base
     @activated = true
     self.activated_at = Time.now.utc
     self.deleted_at = nil
-  end
-
-  def name
-    self[:name].blank? ? login : self[:name]
   end
 
   protected

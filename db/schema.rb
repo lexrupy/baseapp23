@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
+    t.string   "nick_name"
     t.string   "real_name"
     t.string   "location"
     t.string   "website"
@@ -91,7 +92,6 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",                :limit => 100, :default => ""
     t.string   "email",               :limit => 100
     t.string   "login",               :limit => 40,                         :null => false
     t.string   "crypted_password",                                          :null => false

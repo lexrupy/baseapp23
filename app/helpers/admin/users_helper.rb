@@ -1,4 +1,5 @@
 module Admin::UsersHelper
+
   def role_list(user)
     roles = user.roles.collect{ |r| r.name.humanize }
     roles.join " | "

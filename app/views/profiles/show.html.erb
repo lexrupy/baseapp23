@@ -2,7 +2,6 @@
   <% content_for :header do -%>
     Profile not be found
   <% end -%>
-
   <p>The profile you requested does not exist.</p>
 <% else -%>
   <% content_for :header do -%>
@@ -12,10 +11,7 @@
       Profile for <%= @user.login %>
     <% end -%>
   <% end -%>
-
   <%= render :partial => 'profiles/my_account' if current_user == @user %>
-
   <%= render :partial => 'profiles/account_details' if current_user == @user %>
-
   <%= render :partial => 'profiles/profile_details' %>
 <% end -%>

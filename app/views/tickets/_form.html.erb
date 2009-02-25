@@ -16,7 +16,7 @@
   <table>
     <tr>
       <td><%= f.label :assigned_to_id, "Assigned to" %></td>
-      <td width='42%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :name, {:prompt => '--unassigned--'} %></td>
+      <td width='42%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :login, {:prompt => '--unassigned--'} %></td>
       <td><%= f.label :category %></td>
       <td><%= f.select :category, string_array_for_select(Ticket::CATEGORIES) %></td>
     </tr>
