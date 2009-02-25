@@ -99,20 +99,9 @@ ul {
   background: #fff url(/images/right-bg.png) right repeat-y;
   margin-bottom:0;
 }
-#left .col .head {
-  color: #204ca0;
-  font-weight: normal;
-  background-color: #e7ecff;
-  padding: 0.7em 1em;
-  margin: 0 8px 5px 0;
-  font-size: 1.3em;
-}
-#left .col #screen {
-  padding: 0 1.5em 1.5em;
-}
 #left .col .flash {
   padding: 0.7em 1em;
-  margin: 1em 1.5em;
+  margin: 0px 13px 4px 4px;
   font-weight: bold;
 }
 #left .col .notice {
@@ -126,6 +115,17 @@ ul {
 #left .col .warning {
   color: #ee9a00;
   background-color: #fff1c0;
+}
+#left .col .head {
+  color: #204ca0;
+  font-weight: normal;
+  background-color: #e7ecff;
+  padding: 0.7em 1em;
+  margin: 0 8px 5px 0;
+  font-size: 1.3em;
+}
+#left .col #screen {
+  padding: 0 1.5em 1.5em;
 }
 #left .bottom {
   background: url(/images/bottom-bg.png) top right no-repeat;
@@ -205,6 +205,7 @@ ul {
 }
 /** Footer */
 #footer {
+  margin-top: 20px;
   padding: 0 0 0 3em;
   color: #b5aea1;
   font-size: 0.8em;
