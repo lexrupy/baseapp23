@@ -22,6 +22,9 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(params[:ticket])
     @ticket.creator = current_user
     if @ticket.save
+      unless @ticket.assigned_mail.nil?
+        TicketMailer.deliver_create_ticket(@ticket)
+      end
       flash[:notice] = 'Ticket was successfully created.'
       redirect_to @ticket
     else
@@ -54,6 +57,7 @@ class TicketsController < ApplicationController
       @ticket_update.ticket = @ticket
       @ticket_update.user = current_user
       if @ticket_update.save
+        TicketMailer.deliver_update_ticket(@ticket_update)
         flash[:notice] = 'Ticket was successfully updated.'
         redirect_to @ticket
       else
@@ -76,3 +80,4 @@ class TicketsController < ApplicationController
     redirect_to tickets_url
   end
 end
+

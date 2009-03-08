@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>Ticket:</th>
+    <td><%= @ticket_update.ticket.ticket_id %></td>
+  </tr>
+<% unless @ticket_update.status_change.blank? -%>
+  <tr>
+    <th>Status:</th>
+    <td><%= @ticket_update.status_change %></td>
+  </tr>
+<% end -%>
+<% unless @ticket_update.category_change.blank? -%>
+  <tr>
+    <th>Category:</th>
+    <td><%= @ticket_update.category_change %></td>
+  </tr>
+<% end -%>
+<% unless @ticket_update.priority_change.blank? -%>
+  <tr>
+    <th>Priority:</th>
+    <td><%= @ticket_update.priority_change %></td>
+  </tr>
+<% end -%>
+</table>
+<hr />
+<%= textilize @ticket_update.body %>
+

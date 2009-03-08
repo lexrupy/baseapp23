@@ -23,19 +23,19 @@ class TicketUpdate < ActiveRecord::Base
         user_name = "Unassigned"
       end
       if ticket.assigned_to.nil?
-        self.assigned_change = "Ticket assigned to <strong>#{user_name}</strong>" unless u.nil?
+        self.assigned_change = "#{user_name}" unless u.nil?
       else
-        self.assigned_change = "Ticket reassigned from <strong>#{ticket.assigned_to.login}</strong> to <strong>#{user_name}</strong>" unless u.nil?
+        self.assigned_change = "#{ticket.assigned_to.login} => #{user_name}" unless u.nil?
       end
     end
     if ticket.status != status && !status.blank?
-      self.status_change = "Status changed from <strong>#{ticket.status}</strong> to <strong>#{status}</strong>"
+      self.status_change = "#{ticket.status} => #{status}"
     end
     if ticket.category != category && !category.blank?
-      self.category_change = "Category changed from <strong>#{ticket.category}</strong> to <strong>#{category}</strong>"
+      self.category_change = "#{ticket.category} => #{category}"
     end
     if ticket.priority != priority && !priority.blank?
-      self.priority_change = "Priority changed from <strong>#{ticket.priority}</strong> to <strong>#{priority}</strong>"
+      self.priority_change = "#{ticket.priority} => #{priority}"
     end
   end
 
@@ -48,3 +48,4 @@ class TicketUpdate < ActiveRecord::Base
     ticket.update_attributes(attrs)
   end
 end
+

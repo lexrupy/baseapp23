@@ -22,8 +22,8 @@
   <tr>
     <th width="10%">#Ticket</th>
     <th width="8%">Priority</th>
-    <th width="64%">Subject</th>
-    <th width="10%">Category</th>
+    <th width="56%">Subject</th>
+    <th width="18%">Category</th>
     <th width="8%">Status</th>
   </tr>
 <% for ticket in @tickets %>
@@ -37,3 +37,4 @@
 <% end %>
 </table>
 <%= will_paginate @tickets %>
+

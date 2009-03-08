@@ -15,3 +15,20 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# Delivery method :test, :smtp, :sendmail
+config.action_mailer.delivery_method = :test
+
+config.action_mailer.smtp_settings = {
+  :tls => true,
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => 'example.com',
+  :authentication => :plain,
+  :user_name => "support@example.com",
+  :password => "0caaf24ab1a0c33440c06afe99df986365b0781f"
+}
+
+
+#config.gem "lexrupy-rails-footnotes",  :lib => "rails-footnotes", :source => "http://gems.github.com"
+

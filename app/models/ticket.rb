@@ -2,6 +2,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
   belongs_to :assigned_to, :class_name => "User"
   has_many :ticket_updates
+  has_and_belongs_to_many :users
   CATEGORIES      = %w(defect improvement)
   CATEGORY_NAMES  = %w(Defect Improvement)
   PRIORITIES      = %w(low normal high)
@@ -36,6 +37,20 @@ class Ticket < ActiveRecord::Base
     values
   end
 
+  def assigned_email
+    unless assigned_to.nil? || assigned_to.email.blank?
+      return nil
+    end
+    assigned_to.profile.notify_ticket_update ? assigned_to.email : nil
+  end
+
+  def watching_emails
+    emails = self.users.all(
+      :include => :profile,
+      :conditions => ['profiles.notify_ticket_update = ?', true]).collect(&:email)
+    emails.compact
+  end
+
   def status_name
     Ticket::STATUS_NAMES[Ticket::STATUS.index(status)]
   end
@@ -48,3 +63,4 @@ class Ticket < ActiveRecord::Base
     Ticket::CATEGORY_NAMES[Ticket::CATEGORIES.index(category)]
   end
 end
+

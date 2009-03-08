@@ -6,6 +6,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :real_name
       t.string :location
       t.string :website
+      t.boolean :notify_ticket_update
       t.timestamps
     end
   end
@@ -14,3 +15,4 @@ class CreateProfiles < ActiveRecord::Migration
     drop_table :profiles
   end
 end
+

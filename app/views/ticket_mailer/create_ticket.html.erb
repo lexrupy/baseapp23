@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>Ticket:</th>
+    <td><%= @ticket.ticket_id %></td>
+  </tr>
+  <tr>
+    <th>Reported by:</th>
+    <td><%= @ticket.creator.profile.nick_name %></td>
+  </tr>
+  <tr>
+    <th>Status:</th>
+    <td><%= @ticket.status %></td>
+  </tr>
+  <tr>
+    <th>Category:</th>
+    <td><%= @ticket.category %></td>
+  </tr>
+  <tr>
+    <th>Priority:</th>
+    <td><%= @ticket.priority %></td>
+  </tr>
+</table>
+<hr />
+<%= @ticket.subject %>
+<hr />
+<%= textilize @ticket.body %>
+

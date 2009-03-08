@@ -11,9 +11,16 @@ class CreateTickets < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    create_table :tickets_users, :id => false do |t|
+      t.references :ticket
+      t.references :user
+    end
   end
 
   def self.down
     drop_table :tickets
+    drop_table :tickets_users
   end
 end
+

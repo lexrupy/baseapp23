@@ -11,6 +11,8 @@ development: &local
     support_name: Support
     support_email: support@example.com
 
+    ticket_email: issues@example.com
+
     session_time_out: 30
 
 production:
@@ -22,3 +24,4 @@ staging:
 
 test:
   <<: *local
+
