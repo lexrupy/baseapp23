@@ -81,7 +81,15 @@ label {
   color: #ee9a00;
   background-color: #fff1c0;
 }
+
+ul.errors {
+  padding: 10px 30px;
+  border: 1px solid #FF5959;
+  background-color: #FFE3E3;
+}
+
 /** Footer */
 #footer {
   display: none;
 }
+

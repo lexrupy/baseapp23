@@ -103,9 +103,12 @@ class UsersController < ApplicationController
           else
             @user.password = new_password
             @user.password_confirmation = new_password_confirmation
-            @user.save
-            flash[:notice] = "Your password has been updated."
-            redirect_to profile_url(@user)
+            if @user.save
+              flash[:notice] = "Your password has been updated."
+              redirect_to profile_url(@user)
+            else
+              render 'edit_password'
+            end
           end
         else
           flash[:error] = "Your new password and it's confirmation don't match."
@@ -178,3 +181,4 @@ class UsersController < ApplicationController
     render :action => :new
   end
 end
+
