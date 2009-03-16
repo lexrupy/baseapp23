@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <ul class="sidebar_menu">
-    <li><%= link_to 'Back', tickets_path, :class => "action back" %></li>
+    <li><%= link_to_back @ticket %></li>
   </ul>
 <% end -%>
 <% form_for(@ticket) do |f| %>
@@ -18,11 +18,11 @@
       <td><%= f.label :assigned_to_id, "Assigned to" %></td>
       <td width='42%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :login, {:prompt => '--unassigned--'} %></td>
       <td><%= f.label :category %></td>
-      <td><%= f.select :category, string_array_for_select(Ticket::CATEGORIES) %></td>
+      <td><%= f.select :category, string_array_for_select(Ticket::CATEGORIES, Ticket::CATEGORY_NAMES) %></td>
     </tr>
     <tr>
       <td><%= f.label :priority %></td>
-      <td><%= f.select :priority, string_array_for_select(Ticket::PRIORITIES) %></td>
+      <td><%= f.select :priority, string_array_for_select(Ticket::PRIORITIES, Ticket::PRIORITY_NAMES) %></td>
       <td><%= f.label :status %></td>
       <td><%= f.select :status, @ticket.status_for_select %></td>
     </tr>

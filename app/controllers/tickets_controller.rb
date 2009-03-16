@@ -1,4 +1,7 @@
 class TicketsController < ApplicationController
+
+  require_role :admin, :only => [:edit, :destroy]
+
   def index
     conditions = {}
     finder = params[:status].blank? ? Ticket : Ticket.scoped_by_status(params[:status])
@@ -22,7 +25,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(params[:ticket])
     @ticket.creator = current_user
     if @ticket.save
-      unless @ticket.assigned_mail.nil?
+      unless @ticket.assigned_email.nil?
         TicketMailer.deliver_create_ticket(@ticket)
       end
       flash[:notice] = 'Ticket was successfully created.'

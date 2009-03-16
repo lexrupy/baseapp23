@@ -76,18 +76,19 @@ class User < ActiveRecord::Base
     @have_access[resource.to_s] ||= begin
       res = Resource.find_by_resource(resource)
       return_value = false
-      # if acl is not defined, everibody have access by default
+      # if acl is not defined, everybody have access by default
       if res.nil?
         return_value = true
       else
         # grant acces from user acls
-        if resource_ids.include? res.id
+        if resource_ids.include?(res.id)
           return_value = true
         else
           # verify if user is in a role that have access to that resource
-          roles.each do |r|
-            return_value = true if r.resource_ids.include? res.id
-          end
+#          roles.each do |r|
+#            return_value = true if r.resource_ids.include? res.id
+#          end
+          return_value = roles.any?{ |r| r.resource_ids.include?(res.id) }
         end
       end
       return_value
@@ -140,3 +141,4 @@ class User < ActiveRecord::Base
     5.seconds
   end
 end
+

@@ -3,7 +3,8 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   filter_parameter_logging :password, :password_confirmation
-  helper_method :s, :current_user_session, :current_user, :logged_in?, :admin_layout?
+  helper_method :s, :current_user_session, :current_user,
+                :logged_in?, :admin_layout?, :authorized?
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -60,10 +61,13 @@ class ApplicationController < ActionController::Base
   def authorized?(resource=nil)
     if current_user
       if resource.nil?
-        ctrl_name = self.class.controller_path.gsub(/\//,":")
+        ctrl_name = self.class.controller_name_for_authorization
         resource = "#{ctrl_name}-#{action_name}"
       end
-      current_user.have_access? resource
+#      current_user.roles.any? do |role|
+#        available_resources_for_role(role).include?(resource)
+#      end
+      current_user.have_access?(resource)
     else
       false
     end
@@ -81,11 +85,36 @@ class ApplicationController < ActionController::Base
   end
 
   def self.require_role(role, options={})
-    instance_variable_set :"@user_#{role.to_s}_role", role
+    # Configure the security resources
+    resources = @security_resources || {}
+    resources[role] ||= {}
+    resources[role] = resources[role].merge(:except => options[:except].to_a, :only => options[:only].to_a)
+    instance_variable_set(:"@security_resources", resources)
+    # Thefine the filter method
+    instance_variable_set(:"@user_#{role.to_s}_role", role)
     define_method("check_#{role.to_s}_role") do
       return not_found unless current_user.has_role?(self.class.instance_variable_get(:"@user_#{role.to_s}_role"))
     end
     before_filter :"check_#{role.to_s}_role", options
+  end
+
+  def available_resources_for_role(role)
+    resources = self.class.instance_variable_get(:"@security_resources")
+    valid_methods = self.class.public_instance_methods(false)
+
+    unless resources[role].nil?
+      only, except = resources[role][:only].map {|m| m.to_s }, resources[role][:except].map {|m| m.to_s }
+      valid_methods = valid_methods.select { |m| !only.include?(m) } unless only.blank?
+      valid_methods = valid_methods.select { |m| except.include?(m) } unless except.blank?
+    end
+
+    valid_methods.inject([]) do |res, method|
+      res << "#{self.class.controller_name_for_authorization}-#{method}"
+    end
+  end
+
+  def self.controller_name_for_authorization
+    controller_path.gsub(/\//,":")
   end
 
   def store_location

@@ -14,6 +14,9 @@ class Admin::RolesController < ApplicationController
   end
 
   def update
+    # Normalize params if they're empty
+    params[:role] ||= {}
+    params[:role][:resource_ids] ||= []
     @role = Role.find(params[:id])
     if @role.update_attributes(params[:role])
       flash[:notice] = 'Role was successfully updated.'
@@ -24,3 +27,4 @@ class Admin::RolesController < ApplicationController
   end
 
 end
+

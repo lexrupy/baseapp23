@@ -39,40 +39,84 @@ module ApplicationHelper
     link_to(name, url, html_options)
   end
 
+  # Admin?
+  #
   # Return true if the currently logged in user is an admin
   def admin?
     logged_in? && current_user.has_role?(:admin)
   end
 
-  # Return true if current selected layout is the admin layout
-  def admin_layout?
-    @current_layout_selected == 'admin'
-  end
-
-  # Write a secure email adress
+  # Secure mail to.
+  #
+  # Generate a javascript encoded mail_to link
   def secure_mail_to(email)
     mail_to email, nil, :encode => 'javascript'
   end
 
-  # Link Helpers
-
+  # Link to External
+  #
+  # provides a link_to External resource, this is a more generic link_to with
+  # adding a "external" css class to the link. all other options are the same as
+  # a regular link_to
   def link_to_ext(text, path, options={})
     link_to text, path, options.reverse_merge(:class => "external")
   end
 
+
+  # Link to action.
+  #
+  # Create a link to an specified kind of action to a resource, and observe if
+  # user have access to that resource before generate the link.
+  #
+  # +action+ specifies the kind of action, if fact it only affects the visual style of the link (Text and CSS)
+  # +path+ is just the same path as passed to a regular link_to helper.
+  # +options+ the options hash, all options for link_to helper are available
+  #
+  # Valid Additional Options:
+  #
+  # +text+ Specifies the text to be displayed on link, if ommited the text will be chosen according to de <tt>action</tt>
+  # +resource+ Specifies the security resource of link mannualy
+  #
   def link_to_action(action, path, options={})
+    # Calculate Resource Name from path
+    unless resource = options.delete(:resource)
+      new_path = path.is_a?(String) ? path.sub(%r{^\w+://#{request.host}(?::\d+)?}, "").split("?", 2)[0] : path
+      url = url_for(new_path)
+      path_hash = ActionController::Routing::Routes.recognize_path(url.split('?').first, :method => options[:method] || :get)
+      resource = "#{path_hash[:controller].gsub(/\//,":")}-#{path_hash[:action]}"
+    end
+    show_text = options.delete(:show_text)
     text = options.delete(:text) || MAPPED_ACTION_TEXT[action.to_sym]
-    link_to text, path, options.reverse_merge(:class => "action #{action.to_s}")
+    if authorized?(resource)
+      link_to text, path, options.reverse_merge(:class => "action #{action.to_s}")
+    else
+      show_text ? text : "&nbsp;"
+    end
   end
 
+  # Link to show.
+  #
+  # A shortcut for a link_to_action(:show, object_path, options)
   def link_to_show(path, options={})
     link_to_action(:show, path, options)
   end
 
+  # Link to destroy.
+  #
+  # A shortcut for a link_to_action(:destroy, object_path, {:method => :delete})
   def link_to_destroy(path, options={})
     link_to_action(:destroy, path, options.reverse_merge(:confirm => 'Are you sure?', :method => :delete))
   end
 
+  # Link to new.
+  #
+  # A shortcut for a link_to_action(:new, objects_path, options)
+  #
+  # +path+ The path also accepts a Model ClassName
+  # Example:
+  # link_to_new(User)
+  # Will Generate:
+  # <a href="/users/new" class="action new">New user</a>
   def link_to_new(path, options={})
     if path.is_a? Class
       options[:text] ||= "New #{path.class_name.downcase}"
@@ -81,6 +125,9 @@ module ApplicationHelper
     link_to_action(:new, path, options)
   end
 
+  # Link to edit.
+  #
+  # A shortcut for a link_to_action(:edit, object_path, options)
   def link_to_edit(path, options={})
     unless path.is_a? String
       path = edit_polymorphic_path(path)
@@ -88,14 +135,25 @@ module ApplicationHelper
     link_to_action(:edit, path, options)
   end
 
+  # Link to go.
+  #
+  # A shortcut for a link_to_action(:go, object_path, options)
   def link_to_go(path, options={})
     link_to_action(:go, path, options)
   end
 
+
+  # Link to search.
+  #
+  # A shortcut for a link_to_action(:search, object_path, options)
   def link_to_search(path, options={})
     link_to_action(:search, path, options)
   end
 
+
+  # Link to back.
+  #
+  # A shortcut for a link_to_action(:back, object_path, options)
   def link_to_back(path, options={})
     link_to_action(:back, path, options)
   end
@@ -113,19 +171,40 @@ module ApplicationHelper
     </tr>"
   end
 
-  def string_array_for_select(options)
-    options.map { |o| [o.to_s.humanize, o.to_s] }
+  # String array for select.
+  #
+  # If you pass an array of strings and generate an array with the humanized form to be used in selects
+  #
+  # Example:
+  # >> string_array_for_select(['john','alexandre','mike','stuart'])
+  # => [["John", "john"], ["Alexandre", "alexandre"], ["Mike", "mike"], ["Stuart", "stuart"]]
+  # If you pass a second array with the names they will be zipped into one array
+  #
+  # Example:
+  # >> string_array_for_select(['first','second','third'],['Level One','Level Two','Level Three'])
+  # => [["Level One", "first"], ["Level Two", "second"], ["Level Three", "third"]]
+  def string_array_for_select(options, names=nil)
+    names.nil? ? options.map { |o| [o.to_s.humanize, o.to_s] } : names.zip(options)
   end
 
+  # Render Tabs.
+  #
+  # Render the set of tabs according with the current layout
   def render_tabs
     render :partial => admin_layout? ? 'admin/shared/tabs' : 'shared/tabs'
   end
 
+  # Active Announcements
+  #
+  # Return the list of currently active announcements of the site
   def active_announcements
     @active_announcements ||= Admin::Announcement.current_announcements(session[:announcement_hide_time])
   end
 
-  #DRY flash messages
+  # Flash Message.
+  #
+  # A DRY flash message generator, just generate all available flash messages
+  # inside styled divs and returns
   def flash_message
     messages = ""
     flash.each do |key, value|
@@ -134,3 +213,4 @@ module ApplicationHelper
     messages
   end
 end
+
