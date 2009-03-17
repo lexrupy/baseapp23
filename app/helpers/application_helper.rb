@@ -76,6 +76,7 @@ module ApplicationHelper
   #
   # +text+ Specifies the text to be displayed on link, if ommited the text will be chosen according to de <tt>action</tt>
   # +resource+ Specifies the security resource of link mannualy
+  # +show_text+ If set to true, when user not authorized to access this link, a span with text link will be output instead of link
   #
   def link_to_action(action, path, options={})
     # Calculate Resource Name from path
@@ -83,14 +84,17 @@ module ApplicationHelper
       new_path = path.is_a?(String) ? path.sub(%r{^\w+://#{request.host}(?::\d+)?}, "").split("?", 2)[0] : path
       url = url_for(new_path)
       path_hash = ActionController::Routing::Routes.recognize_path(url.split('?').first, :method => options[:method] || :get)
-      resource = "#{path_hash[:controller].gsub(/\//,":")}-#{path_hash[:action]}"
+      controller_class = "#{path_hash[:controller]}Controller".camelize.constantize
+      authorize_options = {:controller => controller_class, :action => path_hash[:action]}
+    else
+      authorize_options = {:resource => resource}
     end
     show_text = options.delete(:show_text)
     text = options.delete(:text) || MAPPED_ACTION_TEXT[action.to_sym]
-    if authorized?(resource)
+    if authorized?(authorize_options)
       link_to text, path, options.reverse_merge(:class => "action #{action.to_s}")
     else
-      show_text ? text : "&nbsp;"
+      show_text ? "<span class=\"disabled_link #{action.to_s}\">#{text}</span>" : "&nbsp;"
     end
   end
 

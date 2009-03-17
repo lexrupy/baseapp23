@@ -1,5 +1,4 @@
 class TicketsController < ApplicationController
-
   require_role :admin, :only => [:edit, :destroy]
 
   def index
@@ -48,8 +47,6 @@ class TicketsController < ApplicationController
   def ticket_update
     @ticket = Ticket.find(params[:id])
     @ticket_update = TicketUpdate.new(params[:ticket_update])
-    logger.debug(@ticket.to_yaml)
-    logger.debug(@ticket_update.to_yaml)
     if (@ticket_update.body.blank? &&
         @ticket_update.status == @ticket.status &&
         @ticket_update.priority == @ticket.priority &&

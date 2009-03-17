@@ -12,13 +12,12 @@ class User < ActiveRecord::Base
   validates_length_of     :login, :within => 3..40
   validates_uniqueness_of :login, :case_sensitive => false
 #  validates_format_of     :login, :with => RE_LOGIN_OK, :message => MSG_LOGIN_BAD
-#  validates_format_of     :name,  :with => RE_NAME_OK, :message => MSG_NAME_BAD, :allow_nil => true
   validates_presence_of   :email
   validates_length_of     :email, :within => 6..100
   validates_uniqueness_of :email, :case_sensitive => false
 #  validates_format_of     :email, :with => RE_EMAIL_OK, :message => MSG_EMAIL_BAD
 
-  after_create :create_profile
+  after_create :configure_user
 
   include AASM
   aasm_column :state
@@ -62,10 +61,11 @@ class User < ActiveRecord::Base
   # has_role? simply needs to return true or false whether a user has a role or not.
   # It may be a good idea to have "admin" roles return true always
   def has_role?(role)
-    # Master User always have access to all
+    # User master always have access to all
+    # Given a nil role or a blank list also retun access granted
+    return true if role.blank?
     list ||= self.roles.collect(&:name)
-    role = [role] unless role.is_a? Array
-    role.any? { |r| list.include?(r.to_s) } || list.include?('admin') || self.master?
+    role.to_a.any? { |r| list.include?(r.to_s) } || list.include?('admin') || self.master?
   end
 
   def have_access?(resource)
@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
     return true if self.master?
     # cache the acl hash
     @have_access ||= {}
+    # add some caching...
     @have_access[resource.to_s] ||= begin
       res = Resource.find_by_resource(resource)
       return_value = false
@@ -85,9 +86,6 @@ class User < ActiveRecord::Base
           return_value = true
         else
           # verify if user is in a role that have access to that resource
-#          roles.each do |r|
-#            return_value = true if r.resource_ids.include? res.id
-#          end
           return_value = roles.any?{ |r| r.resource_ids.include?(res.id) }
         end
       end
@@ -130,9 +128,15 @@ class User < ActiveRecord::Base
 
   protected
 
-  def create_profile
+  def configure_user
     # Give the user a profile
     self.profile = Profile.create
+    # Set the default role
+    if role = Role.find_by_name(DEFAULT_USER_ROLE)
+      self.roles = [role]
+    else
+      raise "[BASEAPP ERROR]: Default Role '#{DEFAULT_USER_ROLE}' does not exist."
+    end
   end
 
   def session_time_out

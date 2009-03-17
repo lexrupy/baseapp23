@@ -16,7 +16,7 @@ namespace :db do
   namespace :bootstrap do
     desc "Load default bootstrap data into the database"
     task :load => :environment do
-      %w(admin support).each { |r| Role.create(:name => r) }
+      %w(admin user support).each { |r| Role.create(:name => r) }
       # Create admin role and user
       admin_role = Role.find_by_name('admin')
       user = User.create do |u|
@@ -33,3 +33,4 @@ namespace :db do
     end
   end
 end
+

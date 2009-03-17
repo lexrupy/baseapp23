@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.string  :email,                 :limit => 100
-      t.string  :login, :limit => 40,   :null => false
+      t.string  :login, :limit => 100,  :null => false
       t.string  :crypted_password,      :null => false
       t.string  :password_salt,         :null => false
       t.string  :persistence_token,     :null => false
@@ -26,3 +26,4 @@ class CreateUsers < ActiveRecord::Migration
     drop_table :users
   end
 end
+

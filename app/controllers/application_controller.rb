@@ -58,16 +58,22 @@ class ApplicationController < ActionController::Base
     !current_user_session.nil?
   end
 
-  def authorized?(resource=nil)
+  def authorized?(options={})
     if current_user
-      if resource.nil?
-        ctrl_name = self.class.controller_name_for_authorization
-        resource = "#{ctrl_name}-#{action_name}"
+      ctrl = self.class
+      action = action_name
+      unless options[:resource].blank?
+        resource = "#{ctrl.controller_name_for_authorization}-#{action}"
+      else
+        unless options[:controller].blank?
+          if options[:action].blank?
+            raise "[BASEAPP ERROR] You need to define an action when authorizing via controller"
+          end
+          action = options[:action]
+          ctrl = options[:controller]
+        end
       end
-#      current_user.roles.any? do |role|
-#        available_resources_for_role(role).include?(resource)
-#      end
-      current_user.have_access?(resource)
+      current_user.has_role?(ctrl.required_roles_for_method(action)) && current_user.have_access?(resource)
     else
       false
     end
@@ -88,7 +94,10 @@ class ApplicationController < ActionController::Base
     # Configure the security resources
     resources = @security_resources || {}
     resources[role] ||= {}
-    resources[role] = resources[role].merge(:except => options[:except].to_a, :only => options[:only].to_a)
+    resources[role] = resources[role].merge(
+      :except => options[:except].to_a.map {|m| m.to_s },
+      :only => options[:only].to_a.map {|m| m.to_s }
+    )
     instance_variable_set(:"@security_resources", resources)
     # Thefine the filter method
     instance_variable_set(:"@user_#{role.to_s}_role", role)
@@ -98,21 +107,43 @@ class ApplicationController < ActionController::Base
     before_filter :"check_#{role.to_s}_role", options
   end
 
-  def available_resources_for_role(role)
-    resources = self.class.instance_variable_get(:"@security_resources")
-    valid_methods = self.class.public_instance_methods(false)
-
-    unless resources[role].nil?
-      only, except = resources[role][:only].map {|m| m.to_s }, resources[role][:except].map {|m| m.to_s }
-      valid_methods = valid_methods.select { |m| !only.include?(m) } unless only.blank?
-      valid_methods = valid_methods.select { |m| except.include?(m) } unless except.blank?
-    end
-
-    valid_methods.inject([]) do |res, method|
-      res << "#{self.class.controller_name_for_authorization}-#{method}"
+  # Required roles for method
+  #
+  # Return the roles required for execute the given method in this controller
+  # +method+ The method to test what roles are required
+  def self.required_roles_for_method(method)
+    if resources = @security_resources
+      roles ||= begin
+        resources.keys.select do |role|
+          unless resources[role].nil?
+            except, only = resources[role][:except], resources[role][:only]
+            if except.blank? && only.blank?
+              true
+            else
+              # INFO: Only supports one of "except" or "only" at time
+              except.blank? ? only.include?(method.to_s) : !except.include?(method.to_s)
+            end
+          end
+        end
+      end
+    else
+      []
     end
   end
 
+  helper_method :required_roles_for_method
+
+  # Required roles for method
+  #
+  # Alias for self.required_roles_for_method
+  def required_roles_for_method(method)
+    self.class.required_roles_for_method(method)
+  end
+
+  # Controller Name for Authorization
+  #
+  # Return the controller name formatted for authorization
+  # admin/users => admin:users
   def self.controller_name_for_authorization
     controller_path.gsub(/\//,":")
   end
