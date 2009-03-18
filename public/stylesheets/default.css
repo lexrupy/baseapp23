@@ -324,6 +324,7 @@ table th {
 }
 #submitbutton {margin: 0.8em; text-align: right}
 .sidebar_info { background-color: #fff; border: 1px solid #ffb734}
+.sidebar_menu .separator { height:2px; }
 
 #left .col .search_form { display: inline; float: right }
 
@@ -373,3 +374,4 @@ a.yes {background: URL('/images/yes.png') left no-repeat}
 a.user {background: URL('/images/user.png') left no-repeat}
 a.settings {background: URL('/images/settings.png') left no-repeat}
 /**/
+
