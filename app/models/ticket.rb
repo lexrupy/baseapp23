@@ -38,7 +38,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def assigned_email
-    unless assigned_to.nil? || assigned_to.email.blank?
+    if assigned_to.nil? || assigned_to.email.blank?
       return nil
     end
     assigned_to.profile.notify_ticket_update ? assigned_to.email : nil
