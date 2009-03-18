@@ -1,6 +1,9 @@
 <%% content_for :sidebar do %>
   <ul class="sidebar_menu">
-    <li><%%= link_to 'Back to <%= singular_name %> list', <%= plural_name %>_path, :class => "action back" %></li>
+    <li><%%= link_to_back <%= plural_name %>_path, :text => 'Back to <%= plural_name %> list' %></li>
+    <%% unless @<%= singular_name %>.new_record?  %>
+    <li><%%= link_to_show @<%= singular_name %> %></li>
+    <%% end -%>
   </ul>
 <%% end -%>
 <%% form_for(@<%= singular_name %>) do |f| %>
@@ -15,3 +18,4 @@
   <%%= f.submit "Confirm" %>
 </p>
 <%% end %>
+

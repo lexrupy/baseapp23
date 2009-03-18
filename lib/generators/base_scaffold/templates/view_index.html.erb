@@ -1,7 +1,7 @@
 <%%= content_for :header, "Listing <%= plural_name %>" %>
 <%% content_for :sidebar do %>
   <ul class="sidebar_menu">
-    <li><%%= link_to 'New <%= singular_name %>', new_<%= singular_name %>_path, :class => "action new" %></li>
+    <li><%%= link_to_new <%= class_name %> %></li>
   </ul>
 <%% end -%>
 
@@ -18,11 +18,12 @@
     <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
 <% end -%>
     <td class="actions">
-      <%%= link_to 'Show', <%= singular_name %>, :class => 'action show' %> |
-      <%%= link_to 'Edit', edit_<%= singular_name %>_path(<%= singular_name %>), :class => 'action edit' %> |
-      <%%= link_to 'Destroy', <%= singular_name %>, :confirm => 'Are you sure?', :method => :delete, :class => 'action destroy' %>
+      <%%= link_to_show <%= singular_name %> %> |
+      <%%= link_to_edit <%= singular_name %> %> |
+      <%%= link_to_destroy <%= singular_name %> %>
     </td>
   </tr>
 <%% end %>
 </table>
 <%%= will_paginate @<%= plural_name %> %>
+
