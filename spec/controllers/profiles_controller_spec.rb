@@ -2,9 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ProfilesController do
 
-  #Delete this example and add some real ones
-  it "should use ProfilesController" do
-    controller.should be_an_instance_of(ProfilesController)
-  end
+  it "should show the users profile information"
+  it "should let user to change his profile details"
+  it "should update the user profile information"
 
 end
+

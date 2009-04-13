@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "notify_ticket_update"
   end
 
   create_table "resources", :force => true do |t|
@@ -89,6 +90,11 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.string   "priority",       :default => "normal"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tickets_users", :id => false, :force => true do |t|
+    t.integer "ticket_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|

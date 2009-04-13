@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
     admin.resources :announcements
     admin.resources :resources
-    admin.resources :roles
+    admin.resources :roles, :except => [:new, :show, :destroy]
     admin.resources :users, :member => { :suspend   => :put,
                                          :unsuspend => :put,
                                          :activate  => :put,
@@ -52,3 +52,4 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
+

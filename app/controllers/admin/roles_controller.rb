@@ -5,9 +5,9 @@ class Admin::RolesController < ApplicationController
     @roles = Role.paginate(:page => params[:page], :per_page => 10)
   end
 
-  def show
-    @role = Role.find(params[:id])
-  end
+#  def show
+#    @role = Role.find(params[:id])
+#  end
 
   def edit
     @role = Role.find(params[:id])
