@@ -185,6 +185,7 @@ class ApplicationController < ActionController::Base
     define_method("check_#{role.to_s}_role") do
       return not_found unless current_user.has_role?(self.class.instance_variable_get(:"@user_#{role.to_s}_role"))
     end
+    private :"check_#{role.to_s}_role"
     before_filter :"check_#{role.to_s}_role", options
   end
 
