@@ -126,6 +126,14 @@ class User < ActiveRecord::Base
     self.deleted_at = nil
   end
 
+  def state_name(state=nil)
+    self.class.state_name(state || self.state)
+  end
+
+  def self.state_name(state)
+    human_attribute_name("state_names.#{state}")
+  end
+
   protected
 
   def configure_user

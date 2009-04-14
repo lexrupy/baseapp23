@@ -1,11 +1,12 @@
 <ul>
   <% if Setting.count > 0 %>
-  <li style="float: right;"><%= tab_to "Settings", [{:controller => "admin/settings"}] %></li>
+  <li style="float: right;"><%= tab_to t('.settings', :defaults => "Settings"), [{:controller => "admin/settings"}] %></li>
   <% end %>
-  <li style="float: right;"><%= tab_to "Roles", [{:controller => "admin/roles"}] %></li>
-  <li style="float: right;"><%= tab_to "Security Resources", [{:controller => "admin/resources"}] %></li>
-  <li style="float: right;"><%= tab_to "Announcements", [{:controller => "admin/announcements"}] %></li>
+  <li style="float: right;"><%= tab_to t('.roles', :defaults => "Roles"), [{:controller => "admin/roles"}] %></li>
+  <li style="float: right;"><%= tab_to t('.security_resources', :defaults => "Security Resources"), [{:controller => "admin/resources"}] %></li>
+  <li style="float: right;"><%= tab_to t('.announcements', :defaults => "Announcements"), [{:controller => "admin/announcements"}] %></li>
 
-  <li><%= tab_to "Dashboard", [{:controller => "admin/dashboard"}] %></li>
-  <li><%= tab_to "Users", [{:controller => "admin/users"}] %></li>
+  <li><%= tab_to t('.dashboard', :defaults => "Dashboard"), [{:controller => "admin/dashboard"}] %></li>
+  <li><%= tab_to t('.users', :defaults => "Users"), [{:controller => "admin/users"}] %></li>
 </ul>
+

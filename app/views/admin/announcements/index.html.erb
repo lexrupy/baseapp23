@@ -1,4 +1,4 @@
-<%= content_for :header, "Listing announcements" %>
+<%= content_for :header, t('.header', :default => 'Listing announcements') %>
 <% content_for :additional_css do %>
   <%= stylesheet_link_merged :nosidebar %>
 <% end -%>
@@ -6,9 +6,9 @@
 <br />
 <table class="index">
   <tr>
-    <th width="50%">Title</th>
-    <th>Starts at</th>
-    <th>Ends at</th>
+    <th width="50%"><%= Admin::Announcement.human_attribute_name('title') %></th>
+    <th><%= Admin::Announcement.human_attribute_name('starts_at') %></th>
+    <th><%= Admin::Announcement.human_attribute_name('ends_at') %></th>
     <th>&nbsp;</th>
   </tr>
 <% for announcement in @announcements %>
@@ -25,3 +25,4 @@
 <% end %>
 </table>
 <%= will_paginate @announcements %>
+

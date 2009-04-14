@@ -6,29 +6,29 @@
 <% form_for(@ticket) do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :subject %><br />
+    <%= f.label :subject, Ticket.human_attribute_name('subject') %><br />
     <%= f.text_field :subject, :size => 50 %>
   </p>
   <p>
-    <%= f.label :body %><br />
+    <%= f.label :body, Ticket.human_attribute_name('body') %><br />
     <%= f.text_area :body, :cols => 75, :rows => 10 %>
   </p>
   <table>
     <tr>
-      <td><%= f.label :assigned_to_id, "Assigned to" %></td>
+      <td><%= f.label :assigned_to_id, Ticket.human_attribute_name('assigned_to_id') %></td>
       <td width='42%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :login, {:prompt => '--unassigned--'} %></td>
-      <td><%= f.label :category %></td>
-      <td><%= f.select :category, string_array_for_select(Ticket::CATEGORIES, Ticket::CATEGORY_NAMES) %></td>
+      <td><%= f.label :category, Ticket.human_attribute_name('category') %></td>
+      <td><%= f.select :category, @ticket.categories_for_select %></td>
     </tr>
     <tr>
-      <td><%= f.label :priority %></td>
-      <td><%= f.select :priority, string_array_for_select(Ticket::PRIORITIES, Ticket::PRIORITY_NAMES) %></td>
-      <td><%= f.label :status %></td>
+      <td><%= f.label :priority, Ticket.human_attribute_name('priority') %></td>
+      <td><%= f.select :priority, @ticket.priorities_for_select %></td>
+      <td><%= f.label :status, Ticket.human_attribute_name('status') %></td>
       <td><%= f.select :status, @ticket.status_for_select %></td>
     </tr>
   </table>
   <p>
-    <%= f.submit "Confirm" %>
+    <%= f.submit t('.submit', :default => "Confirm") %>
   </p>
 <% end %>
 

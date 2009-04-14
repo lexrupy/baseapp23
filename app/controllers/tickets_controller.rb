@@ -27,7 +27,7 @@ class TicketsController < ApplicationController
       unless @ticket.assigned_email.nil?
         TicketMailer.deliver_create_ticket(@ticket)
       end
-      flash[:notice] = 'Ticket was successfully created.'
+      flash[:notice] = t('tickets.create.flash.notice', :default => 'Ticket was successfully created.')
       redirect_to @ticket
     else
       render :action => "new"
@@ -37,7 +37,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(params[:ticket])
-      flash[:notice] = 'Ticket was successfully updated.'
+      flash[:notice] = t('tickets.update.flash.notice', :default => 'Ticket was successfully updated.')
       redirect_to @ticket
     else
       render :action => "edit"
@@ -58,10 +58,10 @@ class TicketsController < ApplicationController
       @ticket_update.user = current_user
       if @ticket_update.save
         TicketMailer.deliver_update_ticket(@ticket_update)
-        flash[:notice] = 'Ticket was successfully updated.'
+        flash[:notice] = t('tickets.ticket_update.flash.notice', :default => 'Ticket was successfully updated.')
         redirect_to @ticket
       else
-        flash[:error] = 'Fill all required fields.'
+        flash[:error] = t('tickets.ticket_update.flash.errors', :default => 'Fill all required fields.')
         render :action => "show"
       end
     end

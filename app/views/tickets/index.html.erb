@@ -1,12 +1,15 @@
-<%= content_for :header, "Listing Tickets" %>
+<%= content_for :header, t('.header', :default => "Listing Tickets") %>
 <% content_for :sidebar do -%>
   <div class="sidebar_info">
-    <p>Before submit a ticket, check if the the issue has not already been reported</p>
+    <p><%= t('.sidebar_info', :default => 'Before submit a ticket, check if the issue has not already been reported') %></p>
   </div>
   <ul class="sidebar_menu">
-    <li><%= link_to_search tickets_path, :text => "View all tickets" %></li>
+    <li><%= link_to_search tickets_path, :text => t('.view_all_tickets', :default => "View all tickets") %></li>
     <% Ticket::STATUS.each do |st| -%>
-    <li><%= link_to_search tickets_path(:status => st), :text => "View #{st} tickets" %></li>
+    <li><%= link_to_search tickets_path(:status => st),
+          :text => t('.view_tickets_by_status',
+          :status => Ticket.human_attribute_name("status_names.#{st}").to_s.downcase.pluralize,
+          :default => "View #{st} tickets") %></li>
     <% end -%>
   </ul>
 <% end -%>
@@ -16,15 +19,15 @@
     <%= hidden_field_tag "status", params[:status] %>
   <% end -%>
   <%= text_field_tag "query", params[:query] %>
-  <%= submit_tag 'Search', :name => nil %>
+  <%= submit_tag t('.search', :default => 'Search'), :name => nil %>
 <% end -%><br />
 <table class="index">
   <tr>
-    <th width="10%">#Ticket</th>
-    <th width="8%">Priority</th>
-    <th width="56%">Subject</th>
-    <th width="18%">Category</th>
-    <th width="8%">Status</th>
+    <th width="10%">#<%= Ticket.human_name %></th>
+    <th width="8%"><%= Ticket.human_attribute_name('priority') %></th>
+    <th width="56%"><%= Ticket.human_attribute_name('subject') %></th>
+    <th width="18%"><%= Ticket.human_attribute_name('category') %></th>
+    <th width="8%"><%= Ticket.human_attribute_name('status') %></th>
   </tr>
 <% for ticket in @tickets %>
   <tr>

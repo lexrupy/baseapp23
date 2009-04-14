@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   def reset_password
     @user = User.find(params[:id])
     @user.reset_password!
-    flash[:notice] = "A new password has been sent to the user by email."
+    flash[:notice] = t('admin.users.reset_password.flash.notice', :default => "A new password has been sent to the user by email.")
     redirect_to admin_user_path(@user)
   end
 
@@ -79,7 +79,7 @@ class Admin::UsersController < ApplicationController
     @user.role_ids = params[:user][:role_ids]
     @user.resource_ids = params[:user][:resource_ids]
     if @user.save
-      flash[:notice] = "User was successfully updated."
+      flash[:notice] = t('admin.users.update.flash.notice', :default => "User was successfully updated.")
       redirect_to admin_user_url(@user)
     else
       render :action => "edit"
@@ -89,7 +89,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.register!
-      flash[:notice] = "User was successfully created."
+      flash[:notice] = t('admin.users.create.flash.notice', :default => "User was successfully created.")
       redirect_to admin_user_url(@user)
     else
       render :action => "new"

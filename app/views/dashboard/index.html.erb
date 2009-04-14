@@ -1,5 +1,5 @@
 <% content_for :header do -%>
-  My <%= configatron.site_name %>
+  <%= t('.header', :site_name => configatron.site_name, :default => "My #{configatron.site_name}") %>
 <% end -%>
 <% content_for :sidebar do -%>
   <h2>Sidebar</h2>

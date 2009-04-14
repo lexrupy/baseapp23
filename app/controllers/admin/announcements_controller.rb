@@ -20,7 +20,7 @@ class Admin::AnnouncementsController < ApplicationController
   def create
     @announcement = Admin::Announcement.new(params[:admin_announcement])
     if @announcement.save
-      flash[:notice] = 'Announcement was successfully created.'
+      flash[:notice] = t('admin.announcements.create.flash.notice', :default => 'Announcement was successfully created.')
       redirect_to @announcement
     else
       render :action => "new"
@@ -30,7 +30,7 @@ class Admin::AnnouncementsController < ApplicationController
   def update
     @announcement = Admin::Announcement.find(params[:id])
     if @announcement.update_attributes(params[:admin_announcement])
-      flash[:notice] = 'Announcement was successfully updated.'
+      flash[:notice] = t('admin.announcements.update.flash.notice', :default => 'Announcement was successfully updated.')
       redirect_to @announcement
     else
       render :action => "edit"
@@ -43,3 +43,4 @@ class Admin::AnnouncementsController < ApplicationController
     redirect_to admin_announcements_url
   end
 end
+

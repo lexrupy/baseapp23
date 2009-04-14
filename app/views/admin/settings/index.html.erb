@@ -1,12 +1,12 @@
 <% content_for :header do -%>
-  Application Settings
+  <%= t('.header', :default => 'Application Settings') %>
 <% end -%>
 <% content_for :sidebar do -%>
-  <p>These are site-wide settings. They will be used through-out your application.</p>
-  <p>To add new settings, simple create a new row in the 'settings' table.</p>
+  <p><%= t('.sidebar.message1', :default => 'These are site-wide settings. They will be used throughout your application.') %></p>
+  <p><%= t('.sidebar.message2', :default => 'To add new settings, simple create a new row in the \'settings\' table.') %></p>
 <% end -%>
 <% form_tag :action => 'update' do %>
-  <h3>General</h3>
+  <h3><%= t('.general', :default => 'General') %></h3>
   <% for setting in Setting.all -%>
     <div class="setting textfield" id="setting=<%= setting.id %>">
       <p>
@@ -17,6 +17,7 @@
     </div>
   <% end -%>
   <div id="submitbutton">
-    <p><%= submit_tag 'Save Settings' %></p>
+    <p><%= submit_tag t('.submit', :default => 'Save Settings') %></p>
   </div>
 <% end %>
+
