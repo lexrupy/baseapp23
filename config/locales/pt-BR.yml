@@ -256,7 +256,7 @@ pt-BR:
       user_session:
         login: login
         email: email
-        passwword: senha
+        password: senha
         remember_me: lembrar
 
 
