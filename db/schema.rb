@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.boolean  "notify_ticket_update"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "notify_ticket_update"
   end
 
   create_table "resources", :force => true do |t|

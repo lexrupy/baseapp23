@@ -30,5 +30,5 @@ config.action_mailer.smtp_settings = {
 }
 
 
-#config.gem "lexrupy-rails-footnotes",  :lib => "rails-footnotes", :source => "http://gems.github.com"
+config.gem "lexrupy-rails-footnotes", :lib => "rails-footnotes", :version => ">=3.4.1", :source => "http://gems.github.com"
 

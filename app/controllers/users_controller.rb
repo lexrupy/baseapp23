@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     render :layout => 'login'
   end
 
+  # TODO: This method and the method above needs merge
   def forgot_password
     if request.put?
       @user = User.find_by_login_or_email(params[:email_or_login])
