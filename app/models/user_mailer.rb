@@ -1,31 +1,31 @@
 class UserMailer < ActionMailer::Base
   def signup_notification(user)
     setup_email(user)
-    @subject    += 'Please activate your new account'
+    @subject    += I18n.t("mailer.user.signup_notification", :default => 'Please activate your new account')
     @body[:url]  = "http://#{configatron.site_url}/activate/#{user.perishable_token}"
   end
 
   def reset_password(user)
     setup_email(user)
-    @subject += "Your password has been reset"
+    @subject += I18n.t("mailer.user.reset_password", :default => "Your password has been reset")
     @body[:url]  = "http://#{configatron.site_url}/login"
   end
 
   def forgot_password(user)
     setup_email(user)
-    @subject += "Forgotten password instructions"
+    @subject += I18n.t("mailer.user.forgot_password", :default => "Forgotten password instructions")
     @body[:url]  = "http://#{configatron.site_url}/users/reset_password/#{user.perishable_token}"
   end
 
   def forgot_login(user)
     setup_email(user)
-    @subject += "Forgotten account login"
+    @subject += I18n.t("mailer.user.forgot_login", :default => "Forgotten account login")
     @body[:url]  = "http://#{configatron.site_url}/login"
   end
 
   def activation(user)
     setup_email(user)
-    @subject    += 'Your account has been activated!'
+    @subject    += I18n.t("mailer.user.activation", :default => 'Your account has been activated!')
     @body[:url]  = "http://#{configatron.site_url}/"
   end
 

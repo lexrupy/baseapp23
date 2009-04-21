@@ -199,7 +199,7 @@ pt-BR:
         name: Nome
         description: Descrição
       ticket:
-        creator_id: Criador
+        creator_id: Reportado por
         assigned_to_id: Atribuído para
         subject: Assunto
         body: Descrição
@@ -273,6 +273,18 @@ pt-BR:
     security:
       session_expired: Sua sessão expirou por inatividade.
       unauthorized_access: Você precisa estar logado para acessar esta página!
+
+  mailer:
+    user:
+      signup_notification: Por favor ative sua nova conta.
+      reset_password: Sua senha foi resetada!
+      forgot_password: Instruções sobre recuperação de senha.
+      forgot_login: Instruções sobre recuperação de login.
+      activation: Sua conta foi ativada!
+    ticket:
+      create_ticket: "Ticket {{ticket_id}} criado."
+      update_ticket: "Ticket {{ticket_id}} atualizado."
+
   shared:
     global_links:
       dashboard: Dashboard
