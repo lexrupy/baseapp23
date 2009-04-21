@@ -10,7 +10,7 @@
 <%%= f.error_messages %>
 <% for attribute in attributes -%>
 <p>
-  <%%= f.label :<%= attribute.name %>,  <%= singular_name %>.human_attribute_name('<%= attribute.name %>') %><br />
+  <%%= f.label :<%= attribute.name %>,  <%= class_name %>.human_attribute_name('<%= attribute.name %>') %><br />
   <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
 </p>
 <% end %>
