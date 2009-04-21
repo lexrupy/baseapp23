@@ -484,12 +484,12 @@ pt-BR:
       message: Por favor informe seu novo endereço de email abaixo. Após verifique-o para ter certeza que está correto, pois você pode precisar dele posteriormente para obter sua senha.
       submit: Atualizar meu email
       or: ou
-      back: esquecer disso
+      back: deixar isso pra lá
     edit_password:
       header: Atualizar minha senha
       submit: Atualizar minha senha
       or: ou
-      back: esquecer disso
+      back: deixar isso pra lá
       current_password:
         title: Sua senha atual
         message: Para prevenir abusos, por favor informe sua senha atual.
