@@ -11,7 +11,7 @@ def do_login
   controller.stubs(:current_user_session).returns(session_mock)
   controller.stubs(:authorize_user).returns(true)
   # TODO: Inspect what reason I don't realize this method is needed
-  controller.stubs(:mocha_mock_url).returns('http://test.host')
+  #controller.stubs(:mocha_mock_url).returns('http://test.host')
 end
 
 def do_authorize

@@ -19,6 +19,7 @@ describe TicketsController do
       get :index
       assigns[:tickets].should == [mock_ticket]
     end
+
   end
 
   describe "responding to GET show" do

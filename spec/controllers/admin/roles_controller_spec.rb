@@ -8,6 +8,7 @@ describe Admin::RolesController do
 
   before :each do
     do_authorize
+    controller.stubs(:local_request?).returns(true)
   end
 
   describe "responding to GET index" do
@@ -17,21 +18,21 @@ describe Admin::RolesController do
       get :index
       assigns[:roles].should == [mock_role]
     end
+
   end
 
-  describe "responding to GET show" do
+  describe "Inaccecible actions" do
+
+    before(:each) {rescue_action_in_public!}
 
     it "should not respond to show action" do
       get :show
-      response.should == '' #be_not_found
+      response.status.should =~ /404/
     end
-  end
-
-  describe "responding to GET new" do
 
     it "should not respond to new action" do
       get :new
-      response.should be_not_found
+      response.status.should =~ /404/
     end
 
   end
