@@ -1,23 +1,24 @@
 <% (@user.password = @user.password_confirmation = nil) rescue nil %>
 <% content_for :header do -%>
-  Create a new <%= configatron.site_name %> account
+  <%= t('.header', :site_name => configatron.site_name, :default => "Create a new #{configatron.site_name} account") %>
 <% end -%>
 <% form_for :user, :url => users_path do |f| -%>
   <fieldset id="oldfashioned_form">
-    <legend>Your Details</legend>
-    <p><label for="login">Login</label><br/>
+    <legend><%= t('.details', :default => 'Your Details') %></legend>
+    <p><label for="login"><%= User.human_attribute_name('login') %></label><br/>
     <%= f.text_field :login %></p>
-    <p><label for="email">Email</label><br/>
+    <p><label for="email"><%= User.human_attribute_name('email') %></label><br/>
     <%= f.text_field :email %></p>
-    <p><label for="password">Password</label><br/>
+    <p><label for="password"><%= User.human_attribute_name('password') %></label><br/>
     <%= f.password_field :password %></p>
-    <p><label for="password_confirmation">Confirm Password</label><br/>
+    <p><label for="password_confirmation"><%= User.human_attribute_name('password_confirmation') %></label><br/>
     <%= f.password_field :password_confirmation %></p>
   </fieldset>
   <ul>
-    <li><%= link_to "Already signed up? Login now!", login_url %></li>
+    <li><%= link_to t('.already_signed_up', :default => "Already signed up? Login now!"), login_url %></li>
   </ul>
   <div id="submitbutton">
-    <p><%= submit_tag 'Sign up' %></p>
+    <p><%= submit_tag t('.submit', :default => 'Sign up') %></p>
   </div>
 <% end %>
+

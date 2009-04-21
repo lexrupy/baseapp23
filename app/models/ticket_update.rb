@@ -20,7 +20,7 @@ class TicketUpdate < ActiveRecord::Base
         u = User.find(assigned_to_id)
         user_name = u.login
       else
-        user_name = "Unassigned"
+        user_name = self.class.human_attribute_name("unassigned", :default => "Unassigned")
       end
       if ticket.assigned_to.nil?
         self.assigned_change = "#{user_name}" unless u.nil?

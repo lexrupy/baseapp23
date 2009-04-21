@@ -4,11 +4,8 @@ class Ticket < ActiveRecord::Base
   has_many :ticket_updates
   has_and_belongs_to_many :users
   CATEGORIES      = %w(defect improvement)
-  CATEGORY_NAMES  = %w(Defect Improvement)
   PRIORITIES      = %w(low normal high)
-  PRIORITY_NAMES  = %w(Low Normal High)
   STATUS          = %w(open accepted resolved canceled reopened)
-  STATUS_NAMES    = %w(Open Accepted Resolved Canceled Reopened)
 
   def ticket_id
     "##{id.to_s.rjust(5,'0')}"
@@ -31,10 +28,26 @@ class Ticket < ActiveRecord::Base
     }
     Ticket::STATUS.each_with_index do |s, i|
       if valid_status[current].include?(s) || s == current
-        values << [Ticket::STATUS_NAMES[i], s]
+        values << [self.status_name(s), s]
       end
     end
     values
+  end
+
+  def categories_for_select
+    returning [] do |values|
+      Ticket::CATEGORIES.each do |cat|
+        values << [self.category_name(cat), cat]
+      end
+    end
+  end
+
+  def priorities_for_select
+    returning [] do |values|
+      Ticket::PRIORITIES.each do |cat|
+        values << [self.priority_name(cat), cat]
+      end
+    end
   end
 
   def assigned_email
@@ -51,16 +64,16 @@ class Ticket < ActiveRecord::Base
     emails.compact
   end
 
-  def status_name
-    Ticket::STATUS_NAMES[Ticket::STATUS.index(status)]
+  def status_name(status=nil)
+    self.class.human_attribute_name("status_names.#{status || self.status}")
   end
 
-  def priority_name
-    Ticket::PRIORITY_NAMES[Ticket::PRIORITIES.index(priority)]
+  def priority_name(priority=nil)
+    self.class.human_attribute_name("priority_names.#{priority || self.priority}")
   end
 
-  def category_name
-    Ticket::CATEGORY_NAMES[Ticket::CATEGORIES.index(category)]
+  def category_name(category=nil)
+    self.class.human_attribute_name("category_names.#{category || self.category}")
   end
 end
 

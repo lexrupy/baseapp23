@@ -19,7 +19,7 @@ class Admin::RolesController < ApplicationController
     params[:role][:resource_ids] ||= []
     @role = Role.find(params[:id])
     if @role.update_attributes(params[:role])
-      flash[:notice] = 'Role was successfully updated.'
+      flash[:notice] = t('admin.roles.update.flash.notice', :default => 'Role was successfully updated.')
       redirect_to admin_roles_path
     else
       render :action => "edit"

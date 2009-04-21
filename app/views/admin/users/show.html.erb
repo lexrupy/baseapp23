@@ -1,12 +1,14 @@
 <% content_for :header do -%>
- 	<%= configatron.site_name %> Account for <em><%=h @user.login %></em>
+  <%= t('.header', :site_name => configatron.site_name, :user_login => h(@user.login),
+       :default => "#{configatron.site_name} Account for <em>#{h @user.login}</em>") %>
 <% end -%>
 <% content_for :sidebar do -%>
-<h2>Account status: <%= @user.state.to_s.humanize %></h2>
+<h2><%= t('.sidebar_status', :state => @user.state_name,
+        :default => "Account status: #{@user.state_name}") %></h2>
 <ul class="sidebar_menu">
-    <li><%= link_to_back admin_users_path, :text => 'Back to user list' %></li>
+    <li><%= link_to_back admin_users_path, :text => t('.back', :default => 'Back to user list') %></li>
     <li><%= link_to_edit edit_admin_user_path(@user) %></li>
-    <li><strong>Actions</strong></li>
+    <li><strong><%= t('.actions', :default => 'Actions') %></strong></li>
     <li><%= link_to_activate_user(@user) %></li>
     <li><%= link_to_suspend_user(@user) %></li>
     <li><%= link_to_unsuspend_user(@user) %></li>
@@ -15,17 +17,17 @@
 </ul>
 <% end -%>
 <table class="overview">
-  <%= cell "Login", h(@user.login) %>
-  <%= cell "User ID", h(@user.id) %>
+  <%= cell User.human_attribute_name('login'), h(@user.login) %>
+  <%= cell User.human_attribute_name('id'), h(@user.id) %>
   <%= cell_separator %>
-  <%= cell "Email", h(@user.email) %>
-  <%= cell "Password", "#{"*"*8} <small>#{link_to_if !@user.deleted?, "send new password", reset_password_admin_user_url(@user), :method => :put}</small>" %>
+  <%= cell User.human_attribute_name('email'), h(@user.email) %>
+  <%= cell User.human_attribute_name('password'), "#{"*"*8} <small>#{link_to_if !@user.deleted?, t('.send_new_password_link', :default => 'send new password'), reset_password_admin_user_url(@user), :method => :put}</small>" %>
   <%= cell_separator %>
-  <%= cell "Account created", @user.created_at.to_s(:long) %>
-  <%= cell "Last updated", @user.updated_at.to_s(:long) %>
+  <%= cell User.human_attribute_name('created_at'), @user.created_at.to_s(:long) %>
+  <%= cell User.human_attribute_name('updated_at'), @user.updated_at.to_s(:long) %>
   <%= cell_separator %>
   <% unless @user.roles.blank? -%>
-    <%= cell "Current roles", role_list(@user) %>
+    <%= cell t('.current_roles', :default => 'Current roles'), role_list(@user) %>
   <% end -%>
 </table>
 

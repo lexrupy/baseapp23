@@ -1,0 +1,599 @@
+pt-BR:
+  # formatos de data e hora
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %B"
+      long: "%d de %B de %Y"
+      only_day: "%d"
+
+    day_names: [Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado]
+    abbr_day_names: [Dom, Seg, Ter, Qua, Qui, Sex, Sáb]
+    month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
+    abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
+    order: [:day, :month, :year]
+
+  time:
+    formats:
+      default: "%A, %d de %B de %Y, %H:%M hs"
+      time: "%H:%M hs"
+      short: "%d/%m, %H:%M hs"
+      long: "%A, %d de %B de %Y, %H:%M hs"
+      only_second: "%S"
+      datetime:
+        formats:
+          default: "%Y-%m-%dT%H:%M:%S%Z"
+    am: ''
+    pm: ''
+
+  # date helper distancia em palavras
+  datetime:
+    distance_in_words:
+      half_a_minute: 'meio minuto'
+      less_than_x_seconds:
+        one: 'menos de 1 segundo'
+        other: 'menos de {{count}} segundos'
+
+      x_seconds:
+        one: '1 segundo'
+        other: '{{count}} segundos'
+
+      less_than_x_minutes:
+        one: 'menos de um minuto'
+        other: 'menos de {{count}} minutos'
+
+      x_minutes:
+        one: '1 minuto'
+        other: '{{count}} minutos'
+
+      about_x_hours:
+        one: 'aproximadamente 1 hora'
+        other: 'aproximadamente {{count}} horas'
+
+      x_days:
+        one: '1 dia'
+        other: '{{count}} dias'
+
+      about_x_months:
+        one: 'aproximadamente 1 mês'
+        other: 'aproximadamente {{count}} meses'
+
+      x_months:
+        one: '1 mês'
+        other: '{{count}} meses'
+
+      about_x_years:
+        one: 'aproximadamente 1 ano'
+        other: 'aproximadamente {{count}} anos'
+
+      over_x_years:
+        one: 'mais de 1 ano'
+        other: 'mais de {{count}} anos'
+
+  # numeros
+  number:
+    format:
+      precision: 3
+      separator: ','
+      delimiter: '.'
+    currency:
+      format:
+        unit: 'R$'
+        precision: 2
+        format: '%u %n'
+        separator: ','
+        delimiter: '.'
+    percentage:
+      format:
+        delimiter: '.'
+    precision:
+      format:
+        delimiter: '.'
+    human:
+      format:
+        precision: 1
+        delimiter: '.'
+  support:
+    array:
+      words_connector: ', '
+      two_words_connector: ' e '
+      last_word_connector: ' e '
+
+  # Active Record
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "{{model}} não pôde ser salvo: 1 erro"
+          other: "{{model}} não pôde ser salvo: {{count}} erros."
+        body: "Por favor, cheque os seguintes campos:"
+      messages:
+        inclusion: "não está incluso na lista"
+        exclusion: "não está disponível"
+        invalid: "não é válido"
+        confirmation: "não bate com a confirmação"
+        accepted: "precisa ser aceito"
+        empty: "não pode ser vazio"
+        blank: "não pode ser vazio"
+        too_long: "é muito longo (não mais do que {{count}} caracteres)"
+        too_short: "é muito curto (não menos do que {{count}} caracteres)"
+        wrong_length: "não é do tamanho correto (precisa ter {{count}} caracteres)"
+        taken: "não está disponível"
+        not_a_number: "não é um número"
+        greater_than: "precisa ser maior do que {{count}}"
+        greater_than_or_equal_to: "precisa ser maior ou igual a {{count}}"
+        equal_to: "precisa ser igual a {{count}}"
+        less_than: "precisa ser menor do que {{count}}"
+        less_than_or_equal_to: "precisa ser menor ou igual a {{count}}"
+        odd: "precisa ser ímpar"
+        even: "precisa ser par"
+
+    models:
+      user:
+        one: Usuário
+        other: Usuários
+      'admin/announcement':
+        one: Anúncio
+        other: Anúncios
+      profile:
+        one: Perfil
+        other: Perfis
+      resource:
+        one: Recurso
+        other: Recursos
+      role:
+        one: Papel
+        other: Papéis
+      setting:
+        one: Configuração
+        other: Configurações
+      ticket:
+        one: Ticket
+        other: Tickets
+      ticket_update:
+        one: Atualização de Ticket
+        other: Atualizações de Ticket
+
+    attributes:
+      user:
+        id: ID
+        email: Email
+        login: Login
+        password: Senha
+        password_confirmation: Confirmação de senha
+        login_count: Qtde de logins
+        state: Estado
+        current_login_ip: IP do login atual
+        last_login_ip: IP do último login
+        current_login_at: Login atual em
+        last_login_at: Último login em
+        activated_at: Ativado em
+        deleted_at: Excluído em
+        created_at: Criado em
+        updated_at: Última atualização
+        master: Master
+        state_names:
+          active: Ativo
+          suspended: Suspendido
+          pending: Pendente
+          deleted: Excluído
+      setting:
+        label: Label
+        identifier: Identificador
+        description: Descrição
+        field_type: Tipo de campo
+        value: Valor
+      profile:
+        user_id: Usuário
+        nick_name: Apelido
+        real_name: Nome real
+        location: Localização
+        website: Website
+        notify_ticket_update: Notificar atualizações em tickets
+        created_at: Conta criada em
+        updated_at: Última atualização
+      role:
+        name: Nome
+      resource:
+        resource: Identificador
+        name: Nome
+        description: Descrição
+      ticket:
+        creator_id: Reportado por
+        assigned_to_id: Atribuído para
+        subject: Assunto
+        body: Descrição
+        category: Categoria
+        status: Situação
+        priority: Prioridade
+        created_at: Criado em
+        updated_at: Atualizado em
+        category_names:
+          defect: Defeito
+          improvement: Melhoria
+        priority_names:
+          low: Baixo
+          normal: Normal
+          high: Alto
+        status_names:
+          open: Aberto
+          accepted: Aceito
+          resolved: Resolvido
+          canceled: Cancelado
+          reopened: Reaberto
+      ticket_update:
+        ticket_id: Ticket
+        user_id: Usuário
+        assigned_change: Atribuído
+        status_change: Situação
+        category_change: Categoria
+        priority_change: Prioridade
+        body: Descrição
+        unassigned: Não atribuído
+      'admin/announcement':
+        title: Título
+        message: Mensagem
+        starts_at: Inicia em
+        ends_at: Termina em
+
+
+  authlogic:
+    error_messages:
+      login_blank: não pode ser vazio
+      login_not_found: não existe
+      login_invalid: deve conter apenas letras, números, espaços, e os caracteres .-_@.
+      consecutive_failed_logins_limit_exceeded: Limite de falhas consecutivas de login excedido, a conta está desativada.
+      email_invalid: não é um endereço de email válido.
+      password_blank: não pode ser vazio
+      password_invalid: não é válido
+      not_active: Sua conta não está ativa
+      not_confirmed: Sua conta não está confirmada
+      not_approved: Sua conta não está aprovada
+      no_authentication_details: Você não forneceu quaisquer informações para a autenticação.
+    models:
+      user_session: UserSession
+    attributes:
+      user_session:
+        login: login
+        email: email
+        password: senha
+        remember_me: lembrar
+
+
+  app:
+    actions:
+      new: Novo
+      destroy: Excluir
+      destroy_confirmation: Você tem certeza?
+      search: Pesquisar
+      edit: Editar
+      show: Ver
+      go: Ir
+      back: Voltar
+    security:
+      session_expired: Sua sessão expirou por inatividade.
+      unauthorized_access: Você precisa estar logado para acessar esta página!
+
+  mailer:
+    user:
+      signup_notification: Por favor ative sua nova conta.
+      reset_password: Sua senha foi resetada!
+      forgot_password: Instruções sobre recuperação de senha.
+      forgot_login: Instruções sobre recuperação de login.
+      activation: Sua conta foi ativada!
+    ticket:
+      create_ticket: "Ticket {{ticket_id}} criado."
+      update_ticket: "Ticket {{ticket_id}} atualizado."
+
+  shared:
+    global_links:
+      dashboard: Dashboard
+      my_account: Minha conta
+      administration: Administração
+      logout: Sair
+      sign_up: Inscrever-se
+      login: Entrar
+    footer:
+      by: por
+      copyright: Copyright ©
+    tabs:
+      tickets: Tickets
+      dashboard: Dashboard
+
+
+  admin:
+    shared:
+      tabs:
+        settings: Configurações
+        roles: Papéis
+        security_resources: Recursos de segurança
+        announcements: Anúncios
+        dashboard: Dashboard
+        users: Usuários
+
+    dashboard:
+      index:
+        header: "Administração {{site_name}}"
+      sidebar:
+        users:
+          title: Usuários
+          link: Gerenciar contas de usuário
+        settings:
+          title: Configurações
+          link: Gerenciar configurações
+
+    settings:
+      index:
+        header: Configurações da Aplicação
+        sidebar:
+          message1: Estas configurações são específicas do site. Elas podem ser usadas em toda a sua aplicação.
+          message2: Para adicionar novas configurações é só adicionar novos registros na tabela 'settings'.
+        submit: Salvar alterações
+        general: Geral
+      update:
+        flash:
+          notice: As configurações foram salvas com sucesso.
+
+    announcements:
+      index:
+        header: Listando anúncios
+      new:
+        header: Novo anúncio
+      edit:
+        header: Alterando anúncio
+      form:
+        back: Voltar para a lista de anúncios
+        submit: Confirmar
+      show:
+        header: Anúncio
+        back: Voltar para a lista de anúncios
+      create:
+        flash:
+          notice: Anúncio foi salvo com sucesso.
+      update:
+        flash:
+          notice: Anúncio foi atualizado com sucesso.
+
+    resources:
+      index:
+        header: Listando recursos
+      new:
+        header: Novo recurso
+      edit:
+        header: Alterando recurso
+      form:
+        back: Voltar para a lista de recursos
+        submit: Confirmar
+        resource_help: "Para um <strong>Action Resource</strong>, o identificador deve ter o formato: <strong>namespace:controller-action</strong>"
+      show:
+        header: Recurso
+        back: Voltar para a lista de recursos
+      create:
+        flash:
+          notice: Recurso foi salvo com sucesso.
+      update:
+        flash:
+          notice: Recurso foi atualizado com sucesso.
+
+    roles:
+      index:
+        header: Listando papéis
+      edit:
+        header: Alterando Controle de Acesso do Papel
+        access_control: Controle de acesso
+        submit: Confirmar
+        back: Voltar para a lista de papéis
+      update:
+        flash:
+          notice: Papel foi atualizado com sucesso.
+
+    users:
+      index:
+        header: "Usuários {{site_name}}"
+        view_all_users: Todos os usuários
+        view_users_by_state: "Somente usuários {{state}}"
+      new:
+        header: "Criar uma nova conta"
+        submit: Confirmar
+        sidebar:
+          title: Esta conta não será ativada por padrão!
+          message: O usuário receberá um email com instruções de ativação. Se você quer ativar a conta, poderá fazer isto manualmente mais tarde.
+      edit:
+        header: "Alterando conta do usuário {{user_login}}"
+        sidebar_status: "Situação da conta: {{state}}"
+        roles: Papéis
+        access_control: Controle de acesso
+        submit: Confirmar
+        back: Voltar para a lista de usuários
+      show:
+        header: "Conta do usuário {{user_login}}"
+        sidebar_status: "Situação da conta: {{state}}"
+        current_roles: Papéis
+        actions: Ações
+        send_new_password_link: enviar nova senha
+        back: Voltar para a lista de usuários
+      actions:
+        suspend: Suspender
+        unsuspend: Reativar
+        activate: Ativar
+        purge: Remover definitivamente
+        purge_confirmation: Tem certeza que deseja remover definitivamente esta conta e todos os dados associados a ela?
+      reset_password:
+        flash:
+          notice: Uma nova senha foi enviada para o usuário por email.
+      create:
+        flash:
+          notice: Usuário criado com sucesso.
+      update:
+        flash:
+          notice: Usuário atualizado com sucesso.
+
+
+  dashboard:
+    index:
+      header: "Minha {{site_name}}"
+
+  profiles:
+    account_details:
+      account_details: Informações da conta
+      change: alterar
+    my_account:
+      my_account: Minha conta
+      update_profile: Atualizar meu perfil
+      change_email: Alterar meu endereço de email
+      change_password: Alterar minha senha
+      change_avatar: Como posso alterar meu avatar?
+      delete_account: Excluir conta
+      delete_account_confirmation: "Tem certeza que deseja marcar sua conta para exclusão? Todos os dados ligados a sua conta no {{site_name}} serão removidos de nosso sistema. \n\nESTA AÇÃO NÃO PODE SER DESFEITA!\n\nObrigado por usar {{site_name}}. Esperamos vê-lo novamente em breve!"
+      gravatar:
+        link_name: Gravatar
+        link_sign_up: Inscreva-se agora
+        how_to: "{{site_name}} utiliza o {{gravatar_link}} para obter avatares dos usuários, com base em seus endereços de email."
+        sign_up: "{{gravatar_link}} é livre para uso. {{gravatar_sign_up_link}} se você ainda não usa o {{gravatar_link}}."
+    profile_details:
+      profile: Perfil
+      update_profile: Atualizar meu perfil
+    profile_not_found:
+      header: Perfil não encontrado
+      text: O perfil que você requisitou não existe.
+    show:
+      my_account: Minha conta
+      profile_for: Perfil de
+    edit:
+      header: Alterando meu perfil
+      submit: Salvar alterações
+    update:
+      flash:
+        notice: Seu perfil foi salvo com sucesso.
+
+  sessions:
+    new:
+      sign_up: Inscreva-se para uma conta agora
+      having_trouble: Tendo problemas ao acessar o sistema?
+      submit: "Entrar &raquo;"
+
+  users:
+    new:
+      header: "Crie uma nova conta no {{site_name}}"
+      details: Seus dados
+      submit: Inscrever-se
+      already_signed_up: Já está registrado? Efetue o login agora!
+    edit_email:
+      header: Atualizar meu endereço de email
+      title: Seu novo endereço de email
+      message: Por favor informe seu novo endereço de email abaixo. Após verifique-o para ter certeza que está correto, pois você pode precisar dele posteriormente para obter sua senha.
+      submit: Atualizar meu email
+      or: ou
+      back: esquecer disso
+    edit_password:
+      header: Atualizar minha senha
+      submit: Atualizar minha senha
+      or: ou
+      back: esquecer disso
+      current_password:
+        title: Sua senha atual
+        message: Para prevenir abusos, por favor informe sua senha atual.
+      new_password:
+        title: Sua nova senha
+        message: Por favor informe sua nova senha (e a confirmação) abaixo.
+    troubleshooting:
+      header: O que está acontecendo?
+      message: "Parece que você está tendo problemas para acessar {{site_name}}. O que está acontecendo?"
+      forgot_password: Eu não lembro minha senha
+      forgot_login: Eu esqueci meu login, mas sei meu email
+      forgot_clueless: Eu não lembro meu login, email ou senha
+      back: "&laquo; Voltar"
+    forgot_password:
+      header: Recuperação de Senha
+      submit: "Recuperar minha senha &raquo;"
+      back: "&laquo; Voltar"
+      user:
+        active:
+          message1: "Um email contendo instruções foi enviado para você em <em>{{user_email}}</em>."
+          message2: Por favor siga as instruções no email para recuperar a senha de sua conta.
+        inactive:
+          message1: A sua conta atualmente não está ativa. Você não pode resetar sua senha com a conta inativada.
+          message2: "Por favor entre em contato com {{support_name}} através do email {{support_email}}"
+      no_user:
+        message: Por favor entre com o login ou endereço de email associado a sua conta. Nós enviaremos um email para você com instruções brevemente.
+        login_or_email: Seu login ou endereço de email
+      flash:
+        error: Nenhuma conta encontrada com o login ou endereço de email informado.
+    forgot_login:
+      header: Recuperação de Login
+      submit: "Recuperar meu login &raquo;"
+      back: "&laquo; Voltar"
+      user:
+        message: "Um email contendo o login de sua conta do {{site_name}} foi enviado para você em <em>{{user_email}}</em>."
+        login_now: "Efetuar login agora &raquo;"
+      no_user:
+        message: "Por favor entre com o endereço de email associado a sua conta. Nós enviaremos um email para você com instruções brevemente."
+        email_address: Seu endereço de email
+      flash:
+        error: Nenhuma conta encontrada com o endereço de email informado.
+    clueless:
+      header: Amnésia de Conta
+      message1: "Você indicou que não se lembra dos dados de sua conta no {{site_name}}."
+      message2: "Nós não podemos ajudá-lo diretamente a recuperar sua conta. Por favor entre em contato com {{support_name}} através do email {{support_email}} para obter mais ajuda."
+      message3: "Se você não possui dados importantes em sua conta, pode optar por {{register_account_link}}."
+      back: "&laquo; Voltar"
+      register_account_link: registrar uma nova conta
+    activate:
+      flash:
+        notice: Inscrição completa! Por favor faça o login para continuar.
+        error:
+          activation_code_blank: O código de ativação estava em branco. Por favor siga a URL a partir do seu e-mail.
+          activation_code_invalid: Não conseguimos encontrar um usuário com esse código de ativação -- cheque seu e-mail? Ou talvez você já tenha ativado sua conta -- tente efetuar o login.
+    update_email:
+      flash:
+        notice: Seu endereço de email foi atualizado.
+        error:
+          not_updated: Seu endereço de email não pode ser atualizado.
+          another_user_email: Você não pode atualizar o endereço de email de outro usuário!
+    update_password:
+      flash:
+        notice: Sua senha foi atualizada.
+        error:
+          blank_password: Você não pode definir uma senha em branco.
+          confirmation_does_not_match: Sua nova senha e a confirmação não batem.
+          current_password_invalid: Sua senha atual está incorreta. Sua senha não foi atualizada.
+          another_user_password: Você não pode atualizar a senha de outro usuário!
+    destroy:
+      flash:
+        notice: Sua conta foi removida.
+    successful_creation:
+      flash:
+        notice: Obrigado por inscrever-se. Estamos lhe enviando um email com seu código de ativação.
+    failed_creation:
+      flash:
+        error: Desculpe, ocorreu um erro ao criar sua conta.
+
+  tickets:
+    index:
+      header: Listando tickets
+      sidebar_info: Antes de enviar um ticket, verifique se o problema já não foi reportado
+      search: Pesquisar
+      view_all_tickets: Ver todos os tickets
+      view_tickets_by_status: "Ver tickets {{status}}"
+    new:
+      header: Novo ticket
+    edit:
+      header: Alterando ticket
+    form:
+      submit: Confirmar
+    show:
+      at: em
+      back: Voltar para a lista de tickets
+      submit: Confirmar
+      assigned_to_prompt: --não atribuído--
+    create:
+      flash:
+        notice: O Ticket foi criado com sucesso.
+    update:
+      flash:
+        notice: O Ticket foi atualizado com sucesso.
+    ticket_update:
+      flash:
+        notice: O Ticket foi atualizado com sucesso.
+        error: Preencha todos os campos requeridos.
+

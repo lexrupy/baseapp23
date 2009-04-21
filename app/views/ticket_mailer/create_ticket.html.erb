@@ -1,22 +1,22 @@
 <table>
   <tr>
-    <th>Ticket:</th>
+    <th><%= Ticket.human_name %>:</th>
     <td><%= @ticket.ticket_id %></td>
   </tr>
   <tr>
-    <th>Reported by:</th>
+    <th><%= Ticket.human_attribute_name('creator_id') %>:</th>
     <td><%= @ticket.creator.profile.nick_name %></td>
   </tr>
   <tr>
-    <th>Status:</th>
+    <th><%= Ticket.human_attribute_name('status') %>:</th>
     <td><%= @ticket.status %></td>
   </tr>
   <tr>
-    <th>Category:</th>
+    <th><%= Ticket.human_attribute_name('category') %>:</th>
     <td><%= @ticket.category %></td>
   </tr>
   <tr>
-    <th>Priority:</th>
+    <th><%= Ticket.human_attribute_name('priority') %>:</th>
     <td><%= @ticket.priority %></td>
   </tr>
 </table>
