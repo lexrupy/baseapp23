@@ -19,8 +19,9 @@ class Admin::SettingsController < ApplicationController
         setting.update_attribute(:value, value)
       end
 
-      flash[:notice] = "Settings have been saved."
+      flash[:notice] = t('admin.settings.update.flash.notice', :default => "Settings have been saved.")
     end
     redirect_to :action => :index
   end
 end
+

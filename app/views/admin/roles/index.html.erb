@@ -1,10 +1,10 @@
-<%= content_for :header, "Listing roles" %>
+<%= content_for :header, t('.header', :defaul => "Listing roles") %>
 <% content_for :additional_css do %>
   <%= stylesheet_link_merged :nosidebar %>
 <% end -%>
 <table class="index">
   <tr>
-    <th>Name</th>
+    <th><%= Role.human_attribute_name('name') %></th>
   </tr>
 <% for role in @roles %>
   <tr>
@@ -13,3 +13,4 @@
 <% end %>
 </table>
 <%= will_paginate @roles %>
+

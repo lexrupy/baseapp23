@@ -1,17 +1,18 @@
 <% if @profile.nil? -%>
   <% content_for :header do -%>
-    Profile not be found
+    <%= t 'profiles.profile_not_found.header', :default => 'Profile not be found' %>
   <% end -%>
-  <p>The profile you requested does not exist.</p>
+  <p><%= t 'profiles.profile_not_found.text', :default => 'The profile you requested does not exist.' %></p>
 <% else -%>
   <% content_for :header do -%>
     <% if current_user == @user -%>
-      My Account
+      <%= t '.my_account', :default => 'My account' %>
     <% else -%>
-      Profile for <%= @user.login %>
+      <%= t '.profile_for', :default => 'Profile for' %> <%= @user.login %>
     <% end -%>
   <% end -%>
   <%= render :partial => 'profiles/my_account' if current_user == @user %>
   <%= render :partial => 'profiles/account_details' if current_user == @user %>
   <%= render :partial => 'profiles/profile_details' %>
 <% end -%>
+

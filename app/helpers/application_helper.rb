@@ -80,6 +80,7 @@ module ApplicationHelper
   #
   def link_to_action(action, path, options={})
     # Calculate Resource Name from path
+    path = options.delete(:url) || path
     unless resource = options.delete(:resource)
       new_path = path.is_a?(String) ? path.sub(%r{^\w+://#{request.host}(?::\d+)?}, "").split("?", 2)[0] : path
       url = url_for(new_path)
@@ -90,7 +91,7 @@ module ApplicationHelper
       authorize_options = {:resource => resource}
     end
     show_text = options.delete(:show_text)
-    text = options.delete(:text) || MAPPED_ACTION_TEXT[action.to_sym]
+    text = options.delete(:text) || t("app.actions.#{action}")
     if authorized?(authorize_options)
       link_to text, path, options.reverse_merge(:class => "action #{action.to_s}")
     else
@@ -109,7 +110,9 @@ module ApplicationHelper
   #
   # A shortcut for a link_to_action(:destroy, object_path, {:method => :delete})
   def link_to_destroy(path, options={})
-    link_to_action(:destroy, path, options.reverse_merge(:confirm => 'Are you sure?', :method => :delete))
+    link_to_action(:destroy, path,
+      options.reverse_merge(:confirm => t('app.actions.destroy_confirmation', :default => 'Are you sure?'),
+      :method => :delete))
   end
 
   # Link to new.
@@ -123,8 +126,8 @@ module ApplicationHelper
   # <a href="/users/new" class="action new">New user</a>
   def link_to_new(path, options={})
     if path.is_a? Class
-      options[:text] ||= "New #{path.class_name.downcase}"
-      path = new_polymorphic_path(path) unless path.is_a? String
+      options[:text] ||= t("app.actions.new", :default => "New") + ' ' + path.try(:human_name).to_s.downcase
+      path = options.delete(:url) || new_polymorphic_path(path) unless path.is_a? String
     end
     link_to_action(:new, path, options)
   end
@@ -134,7 +137,7 @@ module ApplicationHelper
   # A shortcut for a link_to_action(:edit, object_path, options)
   def link_to_edit(path, options={})
     unless path.is_a? String
-      path = edit_polymorphic_path(path)
+      path = options.delete(:url) || edit_polymorphic_path(path)
     end
     link_to_action(:edit, path, options)
   end
@@ -196,6 +199,10 @@ module ApplicationHelper
   # Render the set of tabs according with the current layout
   def render_tabs
     render :partial => admin_layout? ? 'admin/shared/tabs' : 'shared/tabs'
+  end
+
+  def render_footer
+    render :partial => 'shared/footer'
   end
 
   # Active Announcements

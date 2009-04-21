@@ -1,23 +1,23 @@
 <% content_for :header do -%>
-  <%= configatron.site_name %> Users
+  <%= t('.header', :site_name => configatron.site_name, :default => "#{configatron.site_name} Users") %>
 <% end -%>
 <% content_for :sidebar do -%>
   <ul class="sidebar_menu">
-    <li><%= link_to_search admin_users_url, :text => "All users" %></li>
-    <li><%= link_to_search active_admin_users_url, :text => "Active users only" %></li>
-    <li><%= link_to_search suspended_admin_users_url, :text => "Suspended users only" %></li>
-    <li><%= link_to_search pending_admin_users_url, :text => "Pending users only" %></li>
-    <li><%= link_to_search deleted_admin_users_url, :text => "Deleted users only" %></li>
+    <li><%= link_to_search admin_users_url, :text => t('.view_all_users', :default => "All users") %></li>
+    <li><%= link_to_search active_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('active').to_s.downcase.pluralize, :default => "Active users only") %></li>
+    <li><%= link_to_search suspended_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('suspended').to_s.downcase.pluralize, :default => "Suspended users only") %></li>
+    <li><%= link_to_search pending_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('pending').to_s.downcase.pluralize, :default => "Pending users only") %></li>
+    <li><%= link_to_search deleted_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('deleted').to_s.downcase.pluralize, :default => "Deleted users only") %></li>
   </ul>
 <% end -%>
-<span style="float:left;margin-top:5px;"><%= link_to_new new_admin_user_path, :text => 'New user' %></span>
+<span style="float:left;margin-top:5px;"><%= link_to_new User, :url => new_admin_user_path %></span>
 <br />
 <table class="index">
   <tr>
-  <th>ID</th>
-  <th>Login</th>
-  <th>Email</th>
-  <th>Status</th>
+  <th><%= User.human_attribute_name('id') %></th>
+  <th><%= User.human_attribute_name('login') %></th>
+  <th><%= User.human_attribute_name('email') %></th>
+  <th><%= User.human_attribute_name('state') %></th>
   </tr>
 <% # TODO: (base_app) Add some sort of search feature to easily find users %>
 <% for user in @users %>
@@ -25,7 +25,7 @@
   <td><%=h user.id %></td>
   <td><%= link_to_show admin_user_url(user), :text => h(user.login) %></td>
   <td><%=h user.email %></td>
-  <td><%=h user.state %></td>
+  <td><%=h user.state_name %></td>
     <td class="actions">
     <%= link_to_activate_user(user) %>
     <%= link_to_suspend_user(user) %>
@@ -36,3 +36,4 @@
 <% end %>
 </table>
 <%= will_paginate @users %>
+

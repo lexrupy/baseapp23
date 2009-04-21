@@ -1,27 +1,28 @@
 <% content_for :sidebar do %>
   <ul class="sidebar_menu">
-    <li><%= link_to_back admin_announcements_path, :text => 'Back to announcement list' %></li>
+    <li><%= link_to_back admin_announcements_path, :text => t('.back', :default => 'Back to announcement list') %></li>
   </ul>
 <% end -%>
 <% form_for @announcement, :url => announcement_form_path(@announcement) do |f| %>
 <%= f.error_messages %>
 <p>
-  <%= f.label :title %><br />
+  <%= f.label :title, Admin::Announcement.human_attribute_name('title') %><br />
   <%= f.text_field :title, :size => 40 %>
 </p>
 <p>
-  <%= f.label :message %><br />
+  <%= f.label :message, Admin::Announcement.human_attribute_name('message') %><br />
   <%= f.text_area :message, :rows => 10, :cols => 80 %>
 </p>
 <p>
-  <%= f.label :starts_at %><br />
+  <%= f.label :starts_at, Admin::Announcement.human_attribute_name('starts_at') %><br />
   <%= f.datetime_select :starts_at %>
 </p>
 <p>
-  <%= f.label :ends_at %><br />
+  <%= f.label :ends_at, Admin::Announcement.human_attribute_name('ends_at') %><br />
   <%= f.datetime_select :ends_at %>
 </p>
 <p>
-  <%= f.submit "Confirm" %>
+  <%= f.submit t('.submit', :default => "Confirm") %>
 </p>
 <% end %>
+

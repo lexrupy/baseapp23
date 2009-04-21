@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.string   "real_name"
     t.string   "location"
     t.string   "website"
+    t.boolean  "notify_ticket_update"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,9 +92,14 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.datetime "updated_at"
   end
 
+  create_table "tickets_users", :id => false, :force => true do |t|
+    t.integer "ticket_id"
+    t.integer "user_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",               :limit => 100
-    t.string   "login",               :limit => 40,                         :null => false
+    t.string   "login",               :limit => 100,                        :null => false
     t.string   "crypted_password",                                          :null => false
     t.string   "password_salt",                                             :null => false
     t.string   "persistence_token",                                         :null => false

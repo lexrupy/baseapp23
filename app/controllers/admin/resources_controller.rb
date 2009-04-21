@@ -20,7 +20,7 @@ class Admin::ResourcesController < ApplicationController
   def create
     @resource = Resource.new(params[:resource])
     if @resource.save
-      flash[:notice] = 'Resource was successfully created.'
+      flash[:notice] = t('admin.resources.create.flash.notice', :default => 'Resource was successfully created.')
       redirect_to admin_resource_path(@resource)
     else
       render :action => "new"
@@ -30,7 +30,7 @@ class Admin::ResourcesController < ApplicationController
   def update
     @resource = Resource.find(params[:id])
     if @resource.update_attributes(params[:resource])
-      flash[:notice] = 'Resource was successfully updated.'
+      flash[:notice] = t('admin.resources.update.flash.notice', :default => 'Resource was successfully updated.')
       redirect_to admin_resource_path(@resource)
     else
       render :action => "edit"
@@ -43,3 +43,4 @@ class Admin::ResourcesController < ApplicationController
     redirect_to admin_resources_url
   end
 end
+

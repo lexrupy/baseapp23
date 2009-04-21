@@ -1,8 +1,9 @@
-<h2>User management</h2>
+<h2><%= t('.users.title', :default => 'User management') %></h2>
 <ul>
-  <li><%= link_to "Manage user accounts", admin_users_url, :class => 'action user' %></li>
+  <li><%= link_to t('.users.link', :default => "Manage user accounts"), admin_users_url, :class => 'action user' %></li>
 </ul>
-<h2>Settings</h2>
+<h2><%= t('.settings.title', :default => 'Settings') %></h2>
 <ul>
-  <li><%= link_to "Manage #{configatron.site_name} settings", admin_settings_url, :class => 'action settings' %></li>
+  <li><%= link_to t('.settings.link', :default => "Manage #{configatron.site_name} settings"), admin_settings_url, :class => 'action settings' %></li>
 </ul>
+
