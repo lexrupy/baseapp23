@@ -8,7 +8,7 @@
 <table class="index">
   <tr>
 <% for attribute in attributes -%>
-    <th><%= attribute.column.human_name %></th>
+    <th><%= class_name %>.human_attribute_name('<%= attribute.name %>')</th>
 <% end -%>
     <th>&nbsp;</th>
   </tr>

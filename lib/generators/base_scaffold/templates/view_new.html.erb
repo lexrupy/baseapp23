@@ -1,2 +1,3 @@
-<%%= content_for :header, "New <%= singular_name.humanize %>" %>
+<%%= content_for :header, t('.header', :default => "New <%= singular_name.humanize %>") %>
 <%%= render :partial => 'form' %>
+

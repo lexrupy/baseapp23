@@ -18,7 +18,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def create
     @<%= file_name %> = <%= class_name %>.new(params[:<%= file_name %>])
     if @<%= file_name %>.save
-      flash[:notice] = '<%= class_name %> was successfully created.'
+      flash[:notice] = t('<%= class_name.downcase %>.create.flash.notice', :default => '<%= class_name %> was successfully created.')
       redirect_to @<%= file_name %>
     else
       render :action => "new"
@@ -28,7 +28,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     @<%= file_name %> = <%= class_name %>.find(params[:id])
     if @<%= file_name %>.update_attributes(params[:<%= file_name %>])
-      flash[:notice] = '<%= class_name %> was successfully updated.'
+      flash[:notice] = t('<%= class_name.downcase %>.update.flash.notice', :default => '<%= class_name %> was successfully updated.')
       redirect_to @<%= file_name %>
     else
       render :action => "edit"
@@ -41,3 +41,4 @@ class <%= controller_class_name %>Controller < ApplicationController
     redirect_to <%= table_name %>_url
   end
 end
+
