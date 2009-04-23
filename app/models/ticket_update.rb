@@ -17,7 +17,33 @@ class TicketUpdate < ActiveRecord::Base
   end
 
   def attribute_updated?
-    TicketUpdate.updateable_attributes.any? { |attrib| ! self.send(attrib.to_sym).blank?  }
+    TicketUpdate.updateable_attributes.any? { |attrib| ! self[attrib.to_sym].blank?  }
+  end
+
+  ['status', 'category', 'priority'].each do |attribute|
+    define_method("#{attribute}_change") do
+      unless self["#{attribute}_change".to_sym].blank?
+        old_value, new_value = self["#{attribute}_change".to_sym].split(' => ')
+        changed_from = self.class.human_attribute_name('changed_from', :default => 'changed from')
+        old_value = Ticket.human_attribute_name("#{attribute}_names.#{old_value}", :default => old_value)
+        new_value = Ticket.human_attribute_name("#{attribute}_names.#{new_value}", :default => new_value)
+        to = self.class.human_attribute_name('to', :default => 'to')
+        "#{changed_from} _#{old_value}_ #{to} _#{new_value}_"
+      end
+    end
+  end
+
+  def assigned_change
+    unless self[:assigned_change].blank?
+      old_value, new_value = self[:assigned_change].split(' => ')
+      changed_from = self.class.human_attribute_name('changed_from', :default => 'changed from')
+      to = self.class.human_attribute_name('to', :default => 'to')
+      if new_value.nil?
+        "#{to} _#{old_value}_"
+      else
+        "#{changed_from} _#{old_value}_ #{to} _#{new_value}_"
+      end
+    end
   end
 
   private

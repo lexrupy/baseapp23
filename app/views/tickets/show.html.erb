@@ -52,7 +52,7 @@
           <ul>
             <% TicketUpdate.updateable_attributes.each do |attrib| -%>
               <% unless update.send(attrib).blank? -%>
-                <li><span class="changed_title"><%= TicketUpdate.human_attribute_name(attrib) %>:</span> <span class="changed_value"><%= sanitize update.send(attrib) %></span></li>
+                <li><span class="changed_title"><%= TicketUpdate.human_attribute_name(attrib) %>:</span> <span class="changed_value"><%= textilize_without_paragraph update.send(attrib) %></span></li>
               <% end -%>
             <% end -%>
           </ul>

@@ -230,6 +230,8 @@ pt-BR:
         priority_change: Prioridade
         body: Descrição
         unassigned: Não atribuído
+        changed_from: alterado de
+        to: para
       'admin/announcement':
         title: Título
         message: Mensagem
