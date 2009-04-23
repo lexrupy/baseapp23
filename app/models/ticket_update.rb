@@ -12,6 +12,14 @@ class TicketUpdate < ActiveRecord::Base
     user.nil? ? "" : user.login
   end
 
+  def self.updateable_attributes
+    ['assigned_change', 'status_change', 'category_change', 'priority_change']
+  end
+
+  def attribute_updated?
+    TicketUpdate.updateable_attributes.any? { |attrib| ! self.send(attrib.to_sym).blank?  }
+  end
+
   private
 
   def adjust_data

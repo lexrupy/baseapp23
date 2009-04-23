@@ -1,27 +1,63 @@
-#ticket { border: 1px solid #d5d55e; padding: 10px; background-color: #ffffcc }
+/* Ticket body
+#ticket { width: 560px } */
 #ticket span.ticket_id {
-  float: left; padding: 0;
-  width: 100px; font-size: 18px;
-  color: #4e3300; font-weight: bold;
+  float: left; margin: 4px;
+  font-size: 20px;
+  color: #000000; font-weight: bolder;
 }
-#ticket span.right { margin-left: 120px; margin-top: 5px }
-#ticket p { margin: 10px 3px 10px 3px; padding: 0 }
 #ticket .ticket_body {
-  border: 1px solid #eded9a;
-  margin: 0; padding: 5px;
+  border: 1px solid #e5e5d9;
+  border-right-color: #6d6d49;
+  border-bottom-color: #6d6d49;
+  margin: 12px 0 0 0; padding: 5px;
   background-color: #ffffe0;
 }
-#ticket .ticket_body p { margin: 3px }
+#ticket div.ticket_subject {
+  font-weight:bolder;
+  font-size: 16px;
+  padding: 1px 0 2px 0;
+  width: 100%;
+  border-bottom: 1px solid #e0e0ae;
+}
+#ticket .ticket_header p {
+  color: #666635;
+  font-size: smaller;
+  margin: 12px 3px 8px 3px;
+  border-bottom: 1px solid #f2f2d5
+}
+/* Ticket update history */
+#ticket .ticket_body .ticket_header p span.value { color: #000000 }
+#ticket .ticket_body .ticket_header p span.left { float:left; width:200px; }
+#ticket .ticket_body .ticket_header p span.right { margin-left: 120px; }
+#ticket .ticket_body .description_title { color: #666635; border-bottom: 1px solid #e0e0ae }
+#ticket .ticket_description p { margin: 10px 3px 3px 3px }
 
-#updates_ticket { border: 1px dotted #8c5b00; padding: 10px; margin-top: 5px; background-color: #ffffe6 }
+#updates_ticket {
+  border: 1px solid #d9d9d9;
+  border-right-color: #4c4c4c;
+  border-bottom-color: #4c4c4c;
+  padding: 5px;
+  margin-top: 5px;
+  font-size: small;
+}
+
+#updates_ticket .ticket_update_entry .ticket_update_header {
+  margin-top: 10px;
+  padding-bottom: 5px;
+  color: #999999;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+#updates_ticket .ticket_update_entry li { list-style-type: circle }
+#updates_ticket .ticket_update_entry li .changed_title { font-weight: bold }
+#updates_ticket .ticket_update_entry li .changed_value { font-style: italic }
 #updates_ticket .ticket_body {
-  border: 1px solid #eded9a;
   margin: 0; padding: 5px;
   background-color: #fffff5;
 }
-#updates_ticket p { margin: 10px 3px 10px 3px; padding: 0 }
+
 #updates_ticket .ticket_body p { margin: 3px }
-#updates_ticket hr { border: 0; border-bottom: 1px solid #f9be50 }
+#update_ticket_form { width: 560px }
 
 /* Other options */
 table.lista_tickets {
@@ -45,3 +81,4 @@ table.lista_tickets td.reaberto { color: #b641ff }
 table.lista_tickets tr.concluido td { text-decoration: line-through }
 table.lista_tickets tr.cancelado td { text-decoration: line-through }
 table.lista_tickets tr.reaberto td { font-style: oblique }
+

@@ -582,8 +582,11 @@ pt-BR:
     form:
       submit: Confirmar
     show:
-      at: em
+      by: por
       back: Voltar para a lista de tickets
+      opened: Aberto a
+      last_modified: Ultima alteração a
+      description: Descrição
       submit: Confirmar
       assigned_to_prompt: --não atribuído--
     create:
