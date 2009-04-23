@@ -1,7 +1,7 @@
 <% content_for :sidebar do -%>
   <h2><%= t '.my_account', :default => 'My account' %></h2>
   <div class="avatar96">
-    <%= gravatar_for @user, :size => 96 %>
+    <%= display_avatar(@user, :size => 96) %>
   </div>
   <ul class="sidebar_menu">
     <li><%= link_to_edit edit_profile_url(current_user), :text => t('.update_profile', :default => "Update my profile") %></li>

@@ -224,11 +224,14 @@ module ApplicationHelper
     messages
   end
 
-
   def paginate(collection, options={})
     next_label = t('plugins.will_paginate.next_label', :default => 'Next »')
     previous_label = t('plugins.will_paginate.previous_label', :default => '« Previous')
     will_paginate collection, options.reverse_merge(:prev_label => previous_label, :next_label => next_label)
+  end
+
+  def display_avatar(user, options={})
+    gravatar_for user, options.reverse_merge(:alt => 'Avatar')
   end
 
 end
