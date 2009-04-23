@@ -1,4 +1,5 @@
 <% if logged_in? %>
+  <%= gravatar_for current_user, :size => 24 %>
   <strong><%= current_user.display_name %></strong> |
   <%= link_to t('.dashboard', :default => 'Dashboard'), root_url %> |
   <%= link_to t('.my_account', :default => 'My Account'), profile_url(current_user) %> |

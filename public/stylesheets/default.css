@@ -38,16 +38,14 @@ ul {
 }
 #global_links {
   float: right;
+  margin-top: 0;
+  padding-top: 0;
   font-size: 0.8em;
   color: #e3fdff;
 }
-#global_links a {
-  color: #e3fdff;
-}
-#global_links a:hover {
-  color: #00a8c6;
-  background-color: #e3fdff;
-}
+#global_links .gravatar { vertical-align: top; margin: 0; padding: 0 }
+#global_links a { color: #e3fdff }
+#global_links a:hover { color: #00a8c6; background-color: #e3fdff }
 #tabs {
   clear: left;
   padding: 0;
@@ -323,6 +321,8 @@ table th {
   color: #ddd;
 }
 #submitbutton {margin: 0.8em; text-align: right}
+
+.gravatar { border: 1px solid #a6a6a6 }
 .sidebar_info { background-color: #fff; border: 1px solid #ffb734}
 .sidebar_menu .separator { height:2px; }
 

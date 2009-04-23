@@ -1,27 +1,29 @@
 <% content_for :sidebar do -%>
-<h2><%= t '.my_account', :default => 'My account' %></h2>
-<ul class="sidebar_menu">
-  <li><%= link_to_edit edit_profile_url(current_user), :text => t('.update_profile', :default => "Update my profile") %></li>
-</ul>
-<ul class="sidebar_menu">
-  <li><%= link_to_edit edit_email_user_url(@user), :text => t('.change_email', :default => "Change my email address") %></li>
-  <li><%= link_to_edit edit_password_user_url(@user), :text => t('.change_password', :default => "Change my password") %></li>
-</ul>
-<% unless admin? -%>
-<ul class="sidebar_menu">
-  <li><%= link_to_destroy current_user, :text => t('.delete_account', :default => "Delete my account"),
-          :confirm => t('.delete_account_confirmation', :site_name => configatron.site_name, :default => "Are you sure you want to schedule your account for deletion? All data linked to your account on #{configatron.site_name} will be removed from our systems.\n\nTHIS ACTION CANNOT BE UNDONE!\n\nThanks for using #{configatron.site_name}. We hope to see you again soon!")%></li>
-</ul>
+  <h2><%= t '.my_account', :default => 'My account' %></h2>
+  <div class="avatar96">
+    <%= gravatar_for @user, :size => 96 %>
+  </div>
+  <ul class="sidebar_menu">
+    <li><%= link_to_edit edit_profile_url(current_user), :text => t('.update_profile', :default => "Update my profile") %></li>
+  </ul>
+  <ul class="sidebar_menu">
+    <li><%= link_to_edit edit_email_user_url(@user), :text => t('.change_email', :default => "Change my email address") %></li>
+    <li><%= link_to_edit edit_password_user_url(@user), :text => t('.change_password', :default => "Change my password") %></li>
+  </ul>
+  <% unless admin? -%>
+  <ul class="sidebar_menu">
+    <li><%= link_to_destroy current_user, :text => t('.delete_account', :default => "Delete my account"),
+            :confirm => t('.delete_account_confirmation', :site_name => configatron.site_name, :default => "Are you sure you want to schedule your account for deletion? All data linked to your account on #{configatron.site_name} will be removed from our systems.\n\nTHIS ACTION CANNOT BE UNDONE!\n\nThanks for using #{configatron.site_name}. We hope to see you again soon!")%></li>
+  </ul>
+  <% end -%>
+  <p>
+    <strong><%= t '.change_avatar', :default => 'How do I change my avatar?' %></strong>
+  </p>
+  <p>
+    <%= t '.gravatar.how_to', :site_name => configatron.site_name, :gravatar_link => link_to_gravatar,
+          :default => "#{configatron.site_name} uses #{link_to_gravatar} to retrieve user avatars, based on their e-mail address." %>
+    <br />
+    <%= t '.gravatar.sign_up', :site_name => configatron.site_name, :gravatar_link => link_to_gravatar, :gravatar_sign_up_link => link_to_gravatar_sign_up,
+          :default => "#{link_to_gravatar} is free to use. #{link_to_gravatar_sign_up} if you don't use #{link_to_gravatar} already." %>
+  </p>
 <% end -%>
-<p>
-  <strong><%= t '.change_avatar', :default => 'How do I change my avatar?' %></strong>
-</p>
-<p>
-  <%= t '.gravatar.how_to', :site_name => configatron.site_name, :gravatar_link => link_to_gravatar,
-        :default => "#{configatron.site_name} uses #{link_to_gravatar} to retrieve user avatars, based on their e-mail address." %>
-  <br />
-  <%= t '.gravatar.sign_up', :site_name => configatron.site_name, :gravatar_link => link_to_gravatar, :gravatar_sign_up_link => link_to_gravatar_sign_up,
-        :default => "#{link_to_gravatar} is free to use. #{link_to_gravatar_sign_up} if you don't use #{link_to_gravatar} already." %>
-</p>
-<% end -%>
-

@@ -1,3 +1,11 @@
+General
+-------
+
+Update Will Paginate Version
+Reintroduce Gravatar
+
+
+
 ROTEIRO TESTES
 
 1. TESTAR REGISTRO DE USUARIOS
