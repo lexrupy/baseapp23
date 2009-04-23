@@ -31,7 +31,6 @@
 #ticket .ticket_body .ticket_header p span.right { margin-left: 120px; }
 #ticket .ticket_body .description_title { color: #666635; border-bottom: 1px solid #e0e0ae }
 #ticket .ticket_description p { margin: 10px 3px 3px 3px }
-
 #updates_ticket {
   border: 1px solid #d9d9d9;
   border-right-color: #4c4c4c;
@@ -40,26 +39,19 @@
   margin-top: 5px;
   font-size: small;
 }
-
 #updates_ticket .ticket_update_entry .ticket_update_header {
   margin-top: 10px;
   padding-bottom: 5px;
   color: #999999;
   border-bottom: 1px solid #d9d9d9;
 }
-
 #updates_ticket .ticket_update_entry li { list-style-type: circle }
 #updates_ticket .ticket_update_entry li .changed_title { font-weight: bold }
 #updates_ticket .ticket_update_entry li .changed_value { font-style: italic }
-#updates_ticket .ticket_body {
-  margin: 0; padding: 5px;
-  background-color: #fffff5;
-}
-
+#updates_ticket .ticket_body { margin: 0; padding: 5px; background-color: #fffff5 }
 #updates_ticket .ticket_body p { margin: 3px }
-#update_ticket_form { width: 560px }
-
-/* Other options */
+#update_ticket_form { width: 560px; margin-top: 16px }
+/* Ticket listing (Index) */
 table.lista_tickets {
   margin: 1.2em 0; width: 100%;
   border-collapse: collapse;
