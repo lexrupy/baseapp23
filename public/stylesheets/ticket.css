@@ -22,55 +22,35 @@
 #ticket .ticket_header p {
   color: #666635;
   font-size: smaller;
-  margin: 12px 3px 8px 3px;
-  border-bottom: 1px solid #f2f2d5
+  margin: 14px 3px 8px 3px;
+  border-bottom: 1px solid #f7f7da
 }
 /* Ticket update history */
 #ticket .ticket_body .ticket_header p span.value { color: #000000 }
 #ticket .ticket_body .ticket_header p span.left { float:left; width:200px; }
 #ticket .ticket_body .ticket_header p span.right { margin-left: 120px; }
 #ticket .ticket_body .description_title { color: #666635; border-bottom: 1px solid #e0e0ae }
-#ticket .ticket_description p { margin: 10px 3px 3px 3px }
+.ticket_description p { margin: 10px 3px 3px 3px }
+.ticket_description a { /* Same as a.external :S someone knows how to map this?*/
+  padding: 1px 13px 1px 0px;
+  background: URL('/images/external.png') right no-repeat;
+}
+.ticket_description a:hover { text-decoration: underline; color: #0054ff }
 #updates_ticket {
-  border: 1px solid #ededed;
+  border: 1px solid #cccccc;
   border-right-color: #545454;
   border-bottom-color: #545454;
-  padding: 5px;
+  padding: 10px 5px;
   margin-top: 5px;
   font-size: small;
 }
 #updates_ticket .ticket_update_entry .ticket_update_header {
   margin-top: 10px;
   padding-bottom: 5px;
-  color: #999999;
-  border-bottom: 1px solid #d9d9d9;
+  color: #666666;
+  border-bottom: 1px solid #cccccc;
 }
 #updates_ticket .ticket_update_entry li { list-style-type: circle }
 #updates_ticket .ticket_update_entry li .changed_title { font-weight: bold }
-/*#updates_ticket .ticket_update_entry li .changed_value { font-style: italic } */
-#updates_ticket .ticket_body { margin: 0; padding: 5px; background-color: #fffff5 }
-#updates_ticket .ticket_body p { margin: 3px }
 #update_ticket_form { width: 560px; margin-top: 16px }
-/* Ticket listing (Index) */
-table.lista_tickets {
-  margin: 1.2em 0; width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #d3dbff;
-}
-table.lista_tickets th { text-align: left; padding: 5px; border: 1px solid #d3dbff; background-color: #f5f6fa }
-table.lista_tickets td {
-  vertical-align: center; text-align: left;
-  color: black; font-size: 12px;
-  padding: 5px; border: 1px solid #d3dbff
-}
-table.lista_tickets td.ticket_status { text-align: center }
-table.lista_tickets td.novo { color: #ff418c }
-table.lista_tickets td.andamento { color: #ffa500 }
-table.lista_tickets td.cancelado { color: #ff0000 }
-table.lista_tickets td.analise { color: #a4ff41 }
-table.lista_tickets td.concluido { color: #4161ff }
-table.lista_tickets td.reaberto { color: #b641ff }
-table.lista_tickets tr.concluido td { text-decoration: line-through }
-table.lista_tickets tr.cancelado td { text-decoration: line-through }
-table.lista_tickets tr.reaberto td { font-style: oblique }
 

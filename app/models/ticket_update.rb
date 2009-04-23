@@ -52,14 +52,14 @@ class TicketUpdate < ActiveRecord::Base
     if ticket.assigned_to_id != assigned_to_id
       unless assigned_to_id.blank?
         u = User.find(assigned_to_id)
-        user_name = u.login
+        user_name = u.display_name
       else
         user_name = self.class.human_attribute_name("unassigned", :default => "Unassigned")
       end
       if ticket.assigned_to.nil?
         self.assigned_change = "#{user_name}" unless u.nil?
       else
-        self.assigned_change = "#{ticket.assigned_to.login} => #{user_name}" unless u.nil?
+        self.assigned_change = "#{ticket.assigned_to.display_name} => #{user_name}" unless u.nil? || (u.id == ticket.assigned_to_id)
       end
     end
     if ticket.status != status && !status.blank?

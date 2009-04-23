@@ -5,26 +5,27 @@ class Ticket < ActiveRecord::Base
   has_and_belongs_to_many :users
   CATEGORIES      = %w(defect improvement)
   PRIORITIES      = %w(low normal high)
-  STATUS          = %w(open accepted resolved canceled reopened)
+  STATUS          = %w(open accepted resolved canceled reopened duplicated)
 
   def ticket_id
     "##{id.to_s.rjust(5,'0')}"
   end
 
   def new_update
-    ticket_updates.build(:category => self.category, :status => self.status, :priority => self.priority)
+    ticket_updates.build(:category => self.category, :status => self.status, :priority => self.priority, :assigned_to_id => self.assigned_to_id)
   end
 
   def status_for_select
     values = []
     current = status || 'new'
     valid_status = {
-      'new'     => ['open'],
-      'open'    => ['accepted', 'resolved', 'canceled'],
-      'accepted'=> ['resolved', 'canceled'],
-      'resolved'=> ['reopened'],
-      'canceled'=> ['reopened'],
-      'reopened'=> ['resolved', 'canceled']
+      'new'        => ['open', 'duplicated'],
+      'open'       => ['accepted', 'resolved', 'canceled', 'duplicated'],
+      'accepted'   => ['resolved', 'canceled', 'duplicated'],
+      'resolved'   => ['reopened'],
+      'canceled'   => ['reopened'],
+      'reopened'   => ['resolved', 'canceled', 'duplicated'],
+      'duplicated' => ['accepted', 'resolved', 'canceled', 'reopened']
     }
     Ticket::STATUS.each_with_index do |s, i|
       if valid_status[current].include?(s) || s == current
@@ -64,6 +65,10 @@ class Ticket < ActiveRecord::Base
     emails.compact
   end
 
+  def not_updated_yet?
+    self.created_at == self.updated_at
+  end
+
   def status_name(status=nil)
     self.class.human_attribute_name("status_names.#{status || self.status}")
   end
@@ -75,5 +80,6 @@ class Ticket < ActiveRecord::Base
   def category_name(category=nil)
     self.class.human_attribute_name("category_names.#{category || self.category}")
   end
+
 end
 

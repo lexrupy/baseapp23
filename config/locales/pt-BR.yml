@@ -99,6 +99,12 @@ pt-BR:
       two_words_connector: ' e '
       last_word_connector: ' e '
 
+  # Plugins
+  plugins:
+    will_paginate:
+      previous_label: '« Anterior'
+      next_label: 'Próxima »'
+
   # Active Record
   activerecord:
     errors:
@@ -221,6 +227,7 @@ pt-BR:
           resolved: Resolvido
           canceled: Cancelado
           reopened: Reaberto
+          duplicated: Duplicado
       ticket_update:
         ticket_id: Ticket
         user_id: Usuário

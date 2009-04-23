@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
     transitions :from => :suspended, :to => :passive
   end
 
-  def exibition_name
+  def display_name
     if !self.profile.nil? && (!self.profile.nick_name.blank? || !self.profile.real_name.blank?)
       self.profile.nick_name.blank? ? self.profile.real_name : self.profile.nick_name
     else

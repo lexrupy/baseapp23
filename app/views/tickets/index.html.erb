@@ -24,9 +24,9 @@
 <table class="index">
   <tr>
     <th width="10%">#<%= Ticket.human_name %></th>
-    <th width="8%"><%= Ticket.human_attribute_name('priority') %></th>
-    <th width="56%"><%= Ticket.human_attribute_name('subject') %></th>
-    <th width="18%"><%= Ticket.human_attribute_name('category') %></th>
+    <th width="10%"><%= Ticket.human_attribute_name('priority') %></th>
+    <th width="62%"><%= Ticket.human_attribute_name('subject') %></th>
+    <th width="10%"><%= Ticket.human_attribute_name('category') %></th>
     <th width="8%"><%= Ticket.human_attribute_name('status') %></th>
   </tr>
 <% for ticket in @tickets %>
@@ -39,5 +39,4 @@
   </tr>
 <% end %>
 </table>
-<%= will_paginate @tickets %>
-
+<%= paginate @tickets %>

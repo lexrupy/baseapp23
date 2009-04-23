@@ -5,7 +5,7 @@ class TicketsController < ApplicationController
     conditions = {}
     finder = params[:status].blank? ? Ticket : Ticket.scoped_by_status(params[:status])
     conditions = ["subject like ?", "%#{params[:query]}%"] unless params[:query].blank?
-    @tickets = finder.paginate(:page => params[:page], :per_page => 10, :conditions => conditions)
+    @tickets = finder.paginate(:page => params[:page], :per_page => 10, :conditions => conditions, :order => 'created_at DESC')
   end
 
   def show

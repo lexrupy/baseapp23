@@ -16,11 +16,11 @@
     <div class="ticket_header">
       <p>
         <span class="left"><%= "#{t('.opened', :default => 'Opened')} #{distance_of_time_in_words(@ticket.created_at, Time.now)}" %></span>
-        <span class="right"><%= "#{t('.last_modified', :default => 'Last modified')} #{distance_of_time_in_words(@ticket.updated_at, Time.now)}" %></span>
+        <span class="right"><%= @ticket.not_updated_yet? ? "&nbsp;" : "#{t('.last_modified', :default => 'Last modified')} #{distance_of_time_in_words(@ticket.updated_at, Time.now)}" %></span>
       </p>
       <p>
-        <span class="left"><%= Ticket.human_attribute_name('creator_id') %>: <span class="value"><%= h(@ticket.creator.exibition_name) if @ticket.creator %></span></span>
-        <span class="right"><%= Ticket.human_attribute_name('assigned_to_id') %>:  <span class="value"><%= h(@ticket.assigned_to.exibition_name) if @ticket.assigned_to %></span></span>
+        <span class="left"><%= Ticket.human_attribute_name('creator_id') %>: <span class="value"><%= h(@ticket.creator.display_name) if @ticket.creator %></span></span>
+        <span class="right"><%= Ticket.human_attribute_name('assigned_to_id') %>:  <span class="value"><%= h(@ticket.assigned_to.display_name) if @ticket.assigned_to %></span></span>
       </p>
       <p>
         <span class="left"><%= Ticket.human_attribute_name('priority') %>: <span class="value"><%= @ticket.priority_name %></span></span>
@@ -58,7 +58,7 @@
           </ul>
         <% end -%>
         <% unless update.body.blank? -%>
-          <div class="ticket_body"><%= textilize update.body %></div>
+          <div class="ticket_description"><%= textilize update.body %></div>
         <% end -%>
       </div>
     <% end -%>
@@ -69,7 +69,7 @@
   <table>
     <tr>
       <td><%= f.label :assigned_to_id, Ticket.human_attribute_name('assigned_to_id') %></td>
-      <td width='45%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :exibition_name, {:prompt => t('.assigned_to_prompt', :default => '--unassigned--')} %></td>
+      <td width='45%'><%= f.collection_select :assigned_to_id, Profile.support_users, :id, :display_name, {:prompt => t('.assigned_to_prompt', :default => '--unassigned--')} %></td>
       <td><%= f.label :category, Ticket.human_attribute_name('category') %></td>
       <td><%= f.select :category, @ticket.categories_for_select %></td>
     </tr>
@@ -89,4 +89,3 @@
   </p>
 <% end -%>
 </div>
-

@@ -1,12 +1,11 @@
 <% if logged_in? %>
- 	<strong><%= current_user.exibition_name %></strong> |
-	<%= link_to t('.dashboard', :default => 'Dashboard'), root_url %> |
-	<%= link_to t('.my_account', :default => 'My Account'), profile_url(current_user) %> |
-	<% if admin? -%>
-	<%= link_to t('.administration', :default => 'Administration'), admin_root_url %> | <% end -%>
-	<%= link_to t('.logout', :default => 'Log out'), logout_url, :method => :delete %>
+  <strong><%= current_user.display_name %></strong> |
+  <%= link_to t('.dashboard', :default => 'Dashboard'), root_url %> |
+  <%= link_to t('.my_account', :default => 'My Account'), profile_url(current_user) %> |
+  <% if admin? -%>
+  <%= link_to t('.administration', :default => 'Administration'), admin_root_url %> | <% end -%>
+  <%= link_to t('.logout', :default => 'Log out'), logout_url, :method => :delete %>
 <% else %>
-	<%= link_to t('.sign_up', :default => 'Sign up'), signup_url %> |
-	<%= link_to t('.login', :default => 'Log in'), login_url %>
+  <%= link_to t('.sign_up', :default => 'Sign up'), signup_url %> |
+  <%= link_to t('.login', :default => 'Log in'), login_url %>
 <% end %>
-
