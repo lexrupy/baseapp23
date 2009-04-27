@@ -51,6 +51,7 @@ class BaseScaffoldGenerator < Rails::Generator::NamedBase
       #m.directory(File.join('test/unit', class_path))
       #m.directory(File.join('test/unit/helpers', class_path))
       m.directory(File.join('spec/controllers', controller_class_path))
+      m.directory(File.join('spec/routing', controller_class_path))
       m.directory(File.join('spec/models', class_path))
       m.directory(File.join('spec/helpers', class_path))
       m.directory File.join('spec/fixtures', class_path)
@@ -73,7 +74,7 @@ class BaseScaffoldGenerator < Rails::Generator::NamedBase
       )
 
 
-      m.template 'routing_spec.rb',   File.join('spec/controllers', controller_class_path, "#{controller_file_name}_routing_spec.rb")
+      m.template 'routing_spec.rb',   File.join('spec/routing', controller_class_path, "#{controller_file_name}_routing_spec.rb")
       m.template 'controller_spec.rb',File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
       m.template 'helper.rb',         File.join('app/helpers',     controller_class_path, "#{controller_file_name}_helper.rb")
 
@@ -145,3 +146,4 @@ module Rails
     end
   end
 end
+
