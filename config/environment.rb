@@ -25,7 +25,8 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "mocha"
   config.gem "rubyist-aasm", :lib => "aasm"
-  config.gem "RedCloth", :lib => 'redcloth'
+  config.gem "RedCloth", :lib => "redcloth"
+
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
