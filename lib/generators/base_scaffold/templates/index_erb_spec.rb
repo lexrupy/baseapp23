@@ -5,6 +5,7 @@ describe "/<%= table_name %>/index.html.erb" do
   include <%= controller_class_name %>Helper
 
   before(:each) do
+    assigns[:controller].stubs(:authorized?).returns(true)
     assigns[:<%= table_name %>] = [
 <% [1,2].each_with_index do |id, model_index| -%>
       stub_model(<%= class_name %><%= output_attributes.empty? ? (model_index == 1 ? ')' : '),') : ',' %>
@@ -16,6 +17,7 @@ describe "/<%= table_name %>/index.html.erb" do
 <% end -%>
 <% end -%>
     ]
+    assigns[:<%= table_name %>].stubs(:page_count).returns(1)
   end
 
   it "renders a list of <%= table_name %>" do

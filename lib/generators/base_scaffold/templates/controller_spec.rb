@@ -2,13 +2,17 @@ require File.expand_path(File.dirname(__FILE__) + '<%= '/..' * class_nesting_dep
 
 describe <%= controller_class_name %>Controller do
 
+  before(:each) do
+    do_authorize
+  end
+
   def mock_<%= file_name %>(stubs={})
     @mock_<%= file_name %> ||= mock_model(<%= class_name %>, stubs)
   end
 
   describe "GET index" do
     it "assigns all <%= table_name.pluralize %> as @<%= table_name.pluralize %>" do
-      <%= class_name %>.expects(:find).with(:all).returns([mock_<%= file_name %>])
+      expects_paginate(<%= class_name %>, paginate_results(mock_<%= file_name %>))
       get :index
       assigns[:<%= table_name %>].should == [mock_<%= file_name %>]
     end

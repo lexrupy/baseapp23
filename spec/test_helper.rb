@@ -19,3 +19,17 @@ def do_authorize
   controller.stubs(:authorized?).returns(true)
 end
 
+def expects_paginate(klass, results, options={})
+  klass.expects(:paginate).with(
+    options.reverse_merge(:page => nil, :per_page => 10)
+  ).returns(results)
+end
+
+def paginate_results(results)
+  @paginate_results ||= begin
+     res = [results]
+     res.stubs(:page_count).returns(1)
+     res
+   end
+end
+
