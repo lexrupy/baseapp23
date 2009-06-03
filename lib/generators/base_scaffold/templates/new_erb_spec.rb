@@ -13,8 +13,8 @@ describe "/<%= table_name %>/new.html.erb" do
     )
   end
 
-  it "should render new form" do
-    render "/<%= table_name %>/new.html.erb"
+  it "renders new <%= table_name.singularize %> form" do
+    render
 
     response.should have_tag("form[action=?][method=post]", <%= table_name %>_path) do
 <% for attribute in output_attributes -%>
@@ -23,3 +23,4 @@ describe "/<%= table_name %>/new.html.erb" do
     end
   end
 end
+

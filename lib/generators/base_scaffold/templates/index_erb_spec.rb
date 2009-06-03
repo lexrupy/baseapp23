@@ -18,10 +18,11 @@ describe "/<%= table_name %>/index.html.erb" do
     ]
   end
 
-  it "should render list of <%= table_name %>" do
-    render "/<%= table_name %>/index.html.erb"
+  it "renders a list of <%= table_name %>" do
+    render
 <% for attribute in output_attributes -%>
     response.should have_tag("tr>td", <%= attribute.default_value %>.to_s, 2)
 <% end -%>
   end
 end
+

@@ -13,10 +13,11 @@ describe "/<%= table_name %>/show.html.erb" do
 <% end -%>
   end
 
-  it "should render attributes in <p>" do
-    render "/<%= table_name %>/show.html.erb"
+  it "renders attributes in <p>" do
+    render
 <% for attribute in output_attributes -%>
     response.should have_text(/<%= Regexp.escape(attribute.default_value).gsub(/^"|"$/, '')%>/)
 <% end -%>
   end
 end
+

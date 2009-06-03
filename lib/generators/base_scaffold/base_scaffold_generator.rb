@@ -73,13 +73,13 @@ class BaseScaffoldGenerator < Rails::Generator::NamedBase
         'controller.rb', File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
       )
 
-
-      m.template 'routing_spec.rb',   File.join('spec/routing', controller_class_path, "#{controller_file_name}_routing_spec.rb")
-      m.template 'controller_spec.rb',File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
       m.template 'helper.rb',         File.join('app/helpers',     controller_class_path, "#{controller_file_name}_helper.rb")
 
-
+      # Specs
+      m.template 'routing_spec.rb',   File.join('spec/routing', controller_class_path, "#{controller_file_name}_routing_spec.rb")
+      m.template 'controller_spec.rb',File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
       m.template 'model_spec.rb',     File.join('spec/models', class_path, "#{file_name}_spec.rb")
+      m.template 'helper_spec.rb',    File.join('spec/helpers', class_path, "#{controller_file_name}_helper_spec.rb")
 
       # View specs
       m.template "edit_erb_spec.rb",  File.join('spec/views', controller_class_path, controller_file_name, "edit.html.erb_spec.rb")

@@ -13,8 +13,8 @@ describe "/<%= table_name %>/edit.html.erb" do
     )
   end
 
-  it "should render edit form" do
-    render "/<%= table_name %>/edit.html.erb"
+  it "renders the edit <%= table_name.singularize %> form" do
+    render
 
     response.should have_tag("form[action=#{<%= file_name %>_path(@<%= file_name %>)}][method=post]") do
 <% for attribute in output_attributes -%>
@@ -23,3 +23,4 @@ describe "/<%= table_name %>/edit.html.erb" do
     end
   end
 end
+
