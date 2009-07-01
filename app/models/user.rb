@@ -65,7 +65,8 @@ class User < ActiveRecord::Base
     # Given a nil role or a blank list also retun access granted
     return true if role.blank?
     list ||= self.roles.collect(&:name)
-    role.to_a.any? { |r| list.include?(r.to_s) } || list.include?('admin') || self.master?
+    role.is_a?(Array) ? rolelist = role : rolelist = [role]
+    rolelist.any? { |r| list.include?(r.to_s) } || list.include?('admin') || self.master?
   end
 
   def have_access?(resource)
