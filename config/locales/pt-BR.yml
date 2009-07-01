@@ -267,8 +267,6 @@ pt-BR:
         email: email
         password: senha
         remember_me: lembrar
-
-
   app:
     actions:
       new: Novo

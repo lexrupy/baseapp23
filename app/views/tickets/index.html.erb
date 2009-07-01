@@ -31,7 +31,7 @@
   </tr>
 <% for ticket in @tickets %>
   <tr>
-    <td><%= link_to_show ticket, :text => h(ticket.ticket_id) %></td>
+    <td><%= link_to_show ticket, :text => h(ticket.ticket_id), :show_text => true %></td>
     <td><%=h ticket.priority_name %></td>
     <td><%=h ticket.subject %></td>
     <td><%=h ticket.category_name %></td>
@@ -40,3 +40,4 @@
 <% end %>
 </table>
 <%= paginate @tickets %>
+

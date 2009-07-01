@@ -23,7 +23,6 @@ Rails::Initializer.run do |config|
   config.gem "capistrano-ext", :lib => "capistrano"
   config.gem "configatron"
   config.gem "authlogic"
-  config.gem "mocha"
   config.gem "rubyist-aasm", :lib => "aasm"
   config.gem "RedCloth", :lib => "redcloth"
 

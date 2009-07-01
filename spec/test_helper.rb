@@ -1,6 +1,8 @@
+require 'authlogic/test_case'
 
 # Stubs the controller authorize_user method to behave like an authenticated user
 def do_login
+  activate_authlogic
   # TODO: Create a mock user
   user_mock = mock('User')
   user_mock.stubs(:has_role? => true, :have_access? => true)
