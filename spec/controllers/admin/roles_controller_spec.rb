@@ -8,7 +8,6 @@ describe Admin::RolesController do
 
   before :each do
     do_authorize
-    controller.stubs(:local_request?).returns(true)
   end
 
   describe "responding to GET index" do
@@ -23,127 +22,95 @@ describe Admin::RolesController do
 
   describe "Inaccecible actions" do
 
-    before(:each) {rescue_action_in_public!}
-
     it "should not respond to show action" do
+      Role.expects(:find).never
       get :show
-      response.status.should =~ /404/
+      response.body == ''
     end
 
     it "should not respond to new action" do
+      Role.expects(:create).never
       get :new
-      response.status.should =~ /404/
+      response.body == ''
     end
 
   end
 
-#  describe "responding to GET edit" do
+  describe "responding to GET edit" do
 
-#    it "should expose the requested role as @role" do
-#      Role.stubs(:find).with("37").returns(mock_role)
-#      get :edit, :id => "37"
-#      assigns[:role].should equal(mock_role)
-#    end
+    it "should expose the requested role as @role" do
+      Role.stubs(:find).with("37").returns(mock_role)
+      get :edit, :id => "37"
+      assigns[:role].should equal(mock_role)
+    end
 
-#  end
+  end
 
-#  describe "responding to POST create" do
+  describe "responding to POST create" do
 
-#    describe "with valid params" do
+      it "should redirect to the created role" do
+        Role.expects(:create).never
+        post :create, :role => {}
+      end
 
-#      it "should expose a newly created role as @role" do
-#        Role.stubs(:new).with({'these' => 'params'}).returns(mock_role(:save => true))
-#        post :create, :role => {:these => 'params'}
-#        assigns(:role).should equal(mock_role)
-#      end
+  end
 
-#      it "should redirect to the created role" do
-#        Role.stubs(:new).returns(mock_role(:save => true))
-#        post :create, :role => {}
-#        response.should redirect_to(role_url(mock_role))
-#      end
+  describe "responding to PUT udpate" do
 
-#    end
+    describe "with valid params" do
 
-#    describe "with invalid params" do
+      it "should update the requested role" do
+        Role.stubs(:find).with("37").returns(mock_role)
+        mock_role.expects(:update_attributes).with({'these' => 'params', 'resource_ids' => []})
+        put :update, :id => "37", :role => {:these => 'params'}
+      end
 
-#      it "should expose a newly created but unsaved role as @role" do
-#        Role.stubs(:new).with({'these' => 'params'}).returns(mock_role(:save => false))
-#        post :create, :role => {:these => 'params'}
-#        assigns(:role).should equal(mock_role)
-#      end
+      it "should expose the requested role as @role" do
+        Role.stubs(:find).returns(mock_role(:update_attributes => true))
+        put :update, :id => "1"
+        assigns(:role).should equal(mock_role)
+      end
 
-#      it "should re-render the 'new' template" do
-#        Role.stubs(:new).returns(mock_role(:save => false))
-#        post :create, :role => {}
-#        response.should render_template('new')
-#      end
+      it "should redirect to the role" do
+        Role.stubs(:find).returns(mock_role(:update_attributes => true))
+        put :update, :id => "1"
+        response.should redirect_to(admin_roles_path)
+      end
 
-#    end
+    end
 
-#  end
+    describe "with invalid params" do
 
-#  describe "responding to PUT udpate" do
+      it "should update the requested role" do
+        Role.stubs(:find).with("37").returns(mock_role)
+        mock_role.stubs(:update_attributes).with({'these' => 'params', 'resource_ids' => []})
+        put :update, :id => "37", :role => {:these => 'params'}
+      end
 
-#    describe "with valid params" do
+      it "should expose the role as @role" do
+        Role.stubs(:find).returns(mock_role(:update_attributes => false))
+        put :update, :id => "1"
+        assigns(:role).should equal(mock_role)
+      end
 
-#      it "should update the requested role" do
-#        Role.stubs(:find).with("37").returns(mock_role)
-#        mock_role.stubs(:update_attributes).with({'these' => 'params'})
-#        put :update, :id => "37", :role => {:these => 'params'}
-#      end
+      it "should re-render the 'edit' template" do
+        Role.stubs(:find).returns(mock_role(:update_attributes => false))
+        put :update, :id => "1"
+        response.should render_template('edit')
+      end
 
-#      it "should expose the requested role as @role" do
-#        Role.stubs(:find).returns(mock_role(:update_attributes => true))
-#        put :update, :id => "1"
-#        assigns(:role).should equal(mock_role)
-#      end
+    end
 
-#      it "should redirect to the role" do
-#        Role.stubs(:find).returns(mock_role(:update_attributes => true))
-#        put :update, :id => "1"
-#        response.should redirect_to(role_url(mock_role))
-#      end
+  end
 
-#    end
+  describe "responding to DELETE destroy" do
 
-#    describe "with invalid params" do
+    it "should not destroy the requested role" do
+      Role.expects(:find).with('37').never
+      delete :destroy, :id => "37"
+    end
 
-#      it "should update the requested role" do
-#        Role.stubs(:find).with("37").returns(mock_role)
-#        mock_role.stubs(:update_attributes).with({'these' => 'params'})
-#        put :update, :id => "37", :role => {:these => 'params'}
-#      end
-
-#      it "should expose the role as @role" do
-#        Role.stubs(:find).returns(mock_role(:update_attributes => false))
-#        put :update, :id => "1"
-#        assigns(:role).should equal(mock_role)
-#      end
-
-#      it "should re-render the 'edit' template" do
-#        Role.stubs(:find).returns(mock_role(:update_attributes => false))
-#        put :update, :id => "1"
-#        response.should render_template('edit')
-#      end
-
-#    end
-
-#  end
-
-#  describe "responding to DELETE destroy" do
-
-#    it "should not destroy the requested role" do
-#      delete :destroy, :id => "37"
-#      response.should be_not_found
-#    end
-
-#    it "should redirect to the roles list" do
-#      delete :destroy, :id => "1"
-#      response.should be_not_found
-#    end
-
-#  end
+  end
 
 end
 
