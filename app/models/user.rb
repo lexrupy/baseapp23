@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   def session_time_out
     time = configatron.session_time_out.to_i
     time.minutes
-    5.seconds
+    #5.seconds
   end
 end
 

@@ -88,8 +88,8 @@ describe Admin::UsersController do
 
     def stubs_user
       mcuser = mock_user(:save => true)
-      mcuser.expects(:"role_ids=").with([1])
-      mcuser.expects(:"resource_ids=").with([1])
+      mcuser.expects(:"role_ids=").with(['[1]'])
+      mcuser.expects(:"resource_ids=").with(['[1]'])
       User.stubs(:find).returns(mcuser)
       mcuser
     end
@@ -98,18 +98,18 @@ describe Admin::UsersController do
 
       it "should update the requested user" do
         stubs_user
-        put :update, :user => {:role_ids => [1], :resource_ids => [1]}
+        put :update, :id => 1, :user => {:role_ids => ['[1]'], :resource_ids => ['[1]']}
       end
 
       it "should expose the requested user as @user" do
         stubs_user
-        put :update, :user => {:role_ids => [1], :resource_ids => [1]}
+        put :update, :id => 1, :user => {:role_ids => ['[1]'], :resource_ids => ['[1]']}
         assigns(:user).should equal(mock_user)
       end
 
       it "should redirect to the user" do
         stubs_user
-        put :update, :user => {:role_ids => [1], :resource_ids => [1]}
+        put :update, :id => 1, :user => {:role_ids => ['[1]'], :resource_ids => ['[1]']}
         response.should redirect_to(admin_user_url(mock_user))
       end
 
@@ -119,7 +119,7 @@ describe Admin::UsersController do
 
       it "should re-render the 'edit' template" do
         stubs_user.stubs(:save).returns(false)
-        put :update, :user => {:role_ids => [1], :resource_ids => [1]}
+        put :update, :id => 1, :user => {:role_ids => ['[1]'], :resource_ids => ['[1]']}
         response.should render_template('edit')
       end
 
