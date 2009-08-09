@@ -5,6 +5,8 @@ class CreateSettings < ActiveRecord::Migration
       t.string :identifier
       t.text   :description
       t.string :field_type, :default => 'string'
+      t.string :select_options
+      t.string :select_titles
       t.text   :value
 
       t.timestamps
@@ -15,3 +17,4 @@ class CreateSettings < ActiveRecord::Migration
     drop_table :settings
   end
 end
+

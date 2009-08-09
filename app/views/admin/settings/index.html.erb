@@ -7,13 +7,18 @@
 <% end -%>
 <% form_tag :action => 'update' do %>
   <h3><%= t('.general', :default => 'General') %></h3>
+
   <% for setting in Setting.all -%>
     <div class="setting textfield" id="setting=<%= setting.id %>">
       <p>
         <strong><%= setting.label %></strong><br />
         <small><%= setting.description %></small>
       </p>
-      <p><%= text_field_tag("settings[#{setting.id}]", setting.value.to_s, :size => 40 ) %></p>
+      <% if setting.field_type == 'select' -%>
+        <%= select_tag "settings[#{setting.id}]", options_for_select(setting.select_titles.split(',').zip(setting.select_options.split(',')), setting.value.to_s) %>
+      <% else -%>
+        <p><%= text_field_tag("settings[#{setting.id}]", setting.value.to_s, :size => 40 ) %></p>
+      <% end -%>
     </div>
   <% end -%>
   <div id="submitbutton">

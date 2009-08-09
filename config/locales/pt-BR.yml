@@ -337,6 +337,13 @@ pt-BR:
           message2: Para adicionar novas configurações é só adicionar novos registros na tabela 'settings'.
         submit: Salvar alterações
         general: Geral
+        markup_engine: Tipo de formatação
+        markup_engine_description: selecione o tipo de formatação a ser utilizado nas caixas de texto longas, por exemplo, a descrição de um ticket.
+
+        option_markdown: Markdown
+        option_textile: Textile
+        option_simple: Simples
+
       update:
         flash:
           notice: As configurações foram salvas com sucesso.
@@ -435,6 +442,9 @@ pt-BR:
         flash:
           notice: Usuário atualizado com sucesso.
 
+  layout:
+    announcement:
+      hide_announcement: Ocultar esta mensagem
 
   dashboard:
     index:
@@ -588,6 +598,7 @@ pt-BR:
       header: Alterando ticket
     form:
       submit: Confirmar
+      assigned_to_prompt: --não atribuído--
     show:
       by: por
       back: Voltar para a lista de tickets

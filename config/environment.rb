@@ -20,11 +20,11 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem "capistrano-ext", :lib => "capistrano"
   config.gem "configatron"
   config.gem "authlogic"
   config.gem "rubyist-aasm", :lib => "aasm"
   config.gem "RedCloth", :lib => "redcloth"
+  config.gem "maruku"
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).

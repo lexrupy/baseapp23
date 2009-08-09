@@ -14,9 +14,9 @@
   <% unless active_announcements.empty? -%>
     <div id="site_announcements">
       <% for announcement in active_announcements -%>
-        <div class="announcement"><%= textilize announcement.message %></div>
+        <div class="announcement"><%= simple_format announcement.message %></div>
       <% end -%>
-      <p class='hide'><%= link_to_remote 'Hide this message', :url => "/javascripts/hide_announcement.js" %></p>
+      <p class='hide'><%= link_to_remote t('layout.announcement.hide_announcement', :default => 'Hide this message'), :url => "/javascripts/hide_announcement.js" %></p>
     </div>
   <% end -%>
   <div id="header">
