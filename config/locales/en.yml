@@ -26,3 +26,14 @@ en:
           
       am: 'am'
       pm: 'pm'
+      
+  app:
+    actions:
+      new: New
+      destroy: Delete
+      destroy_confirmation: Are you sure?
+      search: Search
+      edit: Edit
+      show: Show
+      go: Go
+      back: Back
