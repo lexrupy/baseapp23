@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   end
 
   def self.state_name(state)
-    human_attribute_name("state_names.#{state}")
+    ::I18n.t :"activerecord.attributes.user.state_names.#{state}", :default => state.to_s.humanize
   end
 
   protected
@@ -154,4 +154,3 @@ class User < ActiveRecord::Base
     #5.seconds
   end
 end
-
