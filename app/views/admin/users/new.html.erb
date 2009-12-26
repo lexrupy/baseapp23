@@ -1,5 +1,5 @@
 <% content_for :header do -%>
-  <%= t('.header', :site_name => configatron.site_name, :default => "Create a new #{configatron.site_name} account") %>
+  <%= t('.header', :site_name => APP_CONFIG.site_name, :default => "Create a new #{APP_CONFIG.site_name} account") %>
 <% end -%>
 <% content_for :sidebar do -%>
 <ul class="sidebar_menu">

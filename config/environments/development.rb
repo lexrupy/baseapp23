@@ -29,6 +29,6 @@ config.action_mailer.smtp_settings = {
   :password => "0caaf24ab1a0c33440c06afe99df986365b0781f"
 }
 
-
-config.gem "lexrupy-rails-footnotes", :lib => "rails-footnotes", :version => ">=3.4.1", :source => "http://gems.github.com"
-
+if RUBY_PLATFORM =~ /darwin/
+  config.gem "rails-footnotes" 
+end

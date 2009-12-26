@@ -1,6 +1,6 @@
 <% content_for :header do -%>
-  <%= t('.header', :site_name => configatron.site_name, :user_login => h(@user.login),
-       :default => "#{configatron.site_name} Account for <em>#{h @user.login}</em>") %>
+  <%= t('.header', :site_name => APP_CONFIG.site_name, :user_login => h(@user.login),
+       :default => "#{APP_CONFIG.site_name} Account for <em>#{h @user.login}</em>") %>
 <% end -%>
 <% content_for :sidebar do -%>
 <h2><%= t('.sidebar_status', :state => @user.state_name,

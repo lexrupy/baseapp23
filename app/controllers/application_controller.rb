@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   #
   # Update the expiration time according to configuration (or to 10 minutes if configuration not set)
   def update_activity_time
-    session[:expires_at] = (configatron.session_time_out.to_i || 10).minutes.from_now
+    session[:expires_at] = (APP_CONFIG.session_time_out.to_i || 10).minutes.from_now
   end
 
 

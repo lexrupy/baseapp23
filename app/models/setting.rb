@@ -3,23 +3,27 @@ class Setting < ActiveRecord::Base
   validates_uniqueness_of :label
   validates_uniqueness_of :identifier
 
-  # Story any kind of object in the value field.
+  # Store any kind of object in the value field.
   # This is nice, but you should also make it editable through admin/settings
   serialize :value
 
   def self.load(identifier)
-    identifier = identifier.to_s if identifier.is_a?(Symbol)
-    find_by_identifier(identifier)
+    find_by_identifier(identifier.to_s)
   end
 
   # Return the value for a setting
   def self.get(identifier)
-    identifier = identifier.to_s if identifier.is_a?(Symbol)
     begin
-      setting = find_by_identifier(identifier)
+      setting = find_by_identifier(identifier.to_s)
     rescue
       setting = nil
     end
     setting.nil? ? "" : setting.value
   end
+  
+  def for_select
+     select_titles.split('|').zip(select_options.split('|'))
+  end
+  
+  
 end

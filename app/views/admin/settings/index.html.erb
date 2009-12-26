@@ -6,7 +6,6 @@
   <p><%= t('.sidebar.message2', :default => 'To add new settings, simple create a new row in the \'settings\' table.') %></p>
 <% end -%>
 <% form_tag :action => 'update' do %>
-  <h3><%= t('.general', :default => 'General') %></h3>
 
   <% for setting in Setting.all -%>
     <div class="setting textfield" id="setting=<%= setting.id %>">
@@ -15,7 +14,7 @@
         <small><%= setting.description %></small>
       </p>
       <% if setting.field_type == 'select' -%>
-        <%= select_tag "settings[#{setting.id}]", options_for_select(setting.select_titles.split(',').zip(setting.select_options.split(',')), setting.value.to_s) %>
+        <%= select_tag "settings[#{setting.id}]", options_for_select(setting.for_select, setting.value.to_s) %>
       <% else -%>
         <p><%= text_field_tag("settings[#{setting.id}]", setting.value.to_s, :size => 40 ) %></p>
       <% end -%>

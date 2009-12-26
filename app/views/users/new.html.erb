@@ -1,6 +1,6 @@
 <% (@user.password = @user.password_confirmation = nil) rescue nil %>
 <% content_for :header do -%>
-  <%= t('.header', :site_name => configatron.site_name, :default => "Create a new #{configatron.site_name} account") %>
+  <%= t('.header', :site_name => APP_CONFIG.site_name, :default => "Create a new #{APP_CONFIG.site_name} account") %>
 <% end -%>
 <% form_for :user, :url => users_path do |f| -%>
   <fieldset id="oldfashioned_form">

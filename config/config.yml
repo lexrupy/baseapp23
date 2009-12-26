@@ -1,5 +1,5 @@
 # Configuration options can be accessed as
-#   configatron.site_name
+#   APP_CONFIG.site_name
 
 development: &local
     site_name: BaseApp
