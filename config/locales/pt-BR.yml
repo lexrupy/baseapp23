@@ -203,6 +203,7 @@ pt-BR:
       resource:
         resource: Identificador
         name: Nome
+        resource_group_id: Grupo
         description: Descrição
       ticket:
         creator_id: Reportado por

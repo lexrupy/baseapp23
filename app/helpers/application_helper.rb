@@ -233,6 +233,12 @@ module ApplicationHelper
   def display_avatar(user, options={})
     gravatar_for user, options.reverse_merge(:alt => 'Avatar')
   end
+  
+  def activate_first_element_of(form)
+    content_for :javascript do
+    	javascript_tag "Form.focusFirstElement('#{form}')"
+    end
+  end
 
 end
 

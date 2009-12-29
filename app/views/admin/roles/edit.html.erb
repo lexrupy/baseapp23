@@ -6,14 +6,11 @@
 <% end -%>
 <% form_for @role, :url => admin_role_path(@role) do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :name, Role.human_attribute_name('name') %> <%= h @role.name %>
-  </p>
+  <h3><%= f.label :name, Role.human_attribute_name('name') %> <%= h @role.name %></h3>
   <label><%= t('.access_control', :default => 'Access Control') %></label><br />
   <div class="access_control">
     <%= render :partial => 'role_access', :object => @role %>
-  </div>
-  <br />
+  </div><br />
   <%= f.submit t('.submit', :default => "Confirm") %>
 <% end %>
 

@@ -26,7 +26,12 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.string   "real_name"
     t.string   "location"
     t.string   "website"
-    t.boolean  "notify_ticket_update"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resource_groups", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "group_name"
   end
 
   create_table "resources_roles", :id => false, :force => true do |t|

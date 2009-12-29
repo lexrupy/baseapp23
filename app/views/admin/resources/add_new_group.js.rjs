@@ -1,0 +1,1 @@
+page.replace_html "resource_resource_group_id", options_from_collection_for_select(ResourceGroup.all, :id, :name, @resource_group.id)

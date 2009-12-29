@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.root :controller => 'dashboard', :action => 'index'
     admin.resources :settings
     admin.resources :announcements
-    admin.resources :resources
+    admin.resources :resources, :member => { :add_new_group => :post }
     admin.resources :roles, :except => [:new, :show, :destroy]
     admin.resources :users, :member => { :suspend   => :put,
                                          :unsuspend => :put,

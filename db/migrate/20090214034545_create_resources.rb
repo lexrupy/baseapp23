@@ -4,6 +4,7 @@ class CreateResources < ActiveRecord::Migration
       t.string :resource
       t.string :name
       t.string :description
+      t.references :resource_group
       t.timestamps
     end
 
@@ -11,6 +12,12 @@ class CreateResources < ActiveRecord::Migration
       t.references :resource
       t.references :role
     end
+
+    create_table :resources_users, :id => false do |t|
+      t.references :resource
+      t.references :user
+    end
+
   end
 
   def self.down

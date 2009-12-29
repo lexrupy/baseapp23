@@ -42,5 +42,11 @@ class Admin::ResourcesController < ApplicationController
     @resource.destroy
     redirect_to admin_resources_url
   end
+  
+  # Non Restful methods
+  def add_new_group
+    @resource_group = ResourceGroup.find_or_create_by_name(params[:resource_group])
+  end
+  
 end
 
