@@ -2,8 +2,8 @@
   <%= t('.header', :default => 'Login Recovery') %>
 <% end -%>
 <% unless @user.nil? %>
-  <p><%= t('.user.message', :site_name => APP_CONFIG.site_name, :user_email => @user.email,
-      :default => "An email containing your #{APP_CONFIG.site_name} account's login has been dispatched to you at <em><#{@user.email}</em>.") %></p>
+  <p><%= t('.user.message', :site_name => configatron.site_name, :user_email => @user.email,
+      :default => "An email containing your #{configatron.site_name} account's login has been dispatched to you at <em><#{@user.email}</em>.") %></p>
   <div id="submitbutton">
     <p><%= link_to t('.login_now', :default => "Login now &raquo;"), login_url %></p>
   </div>

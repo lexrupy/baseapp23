@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
     @have_access[resource.to_s] ||= begin
       res = Resource.find_by_resource(resource)
       return_value = false
-      # if acl is not defined, everybody have access by default
+      # if acl is not defined, everyone have access by default
       if res.nil?
         return_value = true
       else
@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   end
 
   def session_time_out
-    time = APP_CONFIG.session_time_out.to_i
+    time = configatron.session_time_out.to_i
     time.minutes
     #5.seconds
   end

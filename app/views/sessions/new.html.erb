@@ -1,5 +1,5 @@
 <% content_for :header do -%>
-  <%= APP_CONFIG.site_name %> Login
+  <%= configatron.site_name %> Login
 <% end -%>
 <% form_tag session_path, :id => 'new_session' do -%>
   <p><label for="login"><%= User.human_attribute_name('login') %></label><br/>

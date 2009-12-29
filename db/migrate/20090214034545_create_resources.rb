@@ -11,12 +11,6 @@ class CreateResources < ActiveRecord::Migration
       t.references :resource
       t.references :role
     end
-
-    create_table :resources_users, :id => false do |t|
-      t.references :resource
-      t.references :user
-    end
-
   end
 
   def self.down
