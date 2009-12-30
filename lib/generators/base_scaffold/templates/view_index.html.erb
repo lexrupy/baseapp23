@@ -1,7 +1,7 @@
 <%%= content_for :header, "Listing <%= plural_name %>" %>
 <%% content_for :sidebar do %>
   <ul class="sidebar_menu">
-    <li><%%= link_to_new nil, <%= class_name %> %></li>
+    <li><%%= link_to_new "New <%= singular_name.humanize %>", <%= class_name %> %></li>
   </ul>
 <%% end -%>
 
@@ -18,9 +18,9 @@
     <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
 <% end -%>
     <td class="actions">
-      <%%= link_to_show nil, <%= singular_name %> %> |
-      <%%= link_to_edit nil, <%= singular_name %> %> |
-      <%%= link_to_destroy nil, <%= singular_name %> %>
+      <%%= link_to_show t('app.actions.show', :default => "Show"), <%= singular_name %> %> |
+      <%%= link_to_edit t('app.actions.edit', :default => "Edit"), <%= singular_name %> %> |
+      <%%= link_to_destroy t('app.actions.destroy', :default => "Delete"), <%= singular_name %> %>
     </td>
   </tr>
 <%% end %>
