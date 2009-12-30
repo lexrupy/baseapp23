@@ -1,7 +1,18 @@
-<% for res in Resource.all -%>
-  <div>
-    <%= check_box_tag "#{role_access.class.name.downcase}[resource_ids][]", res.id, role_access.resources.include?(res) %>
-    <%= res.name %><br />
-    <small><%= res.description %></small>
-  </div>
+<% for grp in ResourceGroup.all -%>
+	<ul class="nostyle">
+		<li>
+			<h4><%=h grp.name %></h4>
+			<ul>
+			<% for res in grp.resources -%>
+				<li>
+				  <div>
+				    <%= check_box_tag "#{role_access.class.name.downcase}[resource_ids][]", res.id, role_access.resources.include?(res) %>
+				    <%= res.name %><br />
+				    <small><%= res.description %></small>
+				  </div>
+				<% end -%>
+				</li>
+			</ul>
+		</li>
+	</ul>
 <% end -%>

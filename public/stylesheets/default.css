@@ -323,8 +323,10 @@ table th {
 #submitbutton {margin: 0.8em; text-align: right}
 
 .gravatar { border: 1px solid #a6a6a6 }
-.sidebar_info { background-color: #fff; border: 1px solid #ffb734}
+.sidebar_info { background-color: #fff; border: 1px solid #ffb734 }
 .sidebar_menu .separator { height:2px; }
+
+ul.nostyle li { list-style: none; }
 
 #left .col .search_form { display: inline; float: right }
 
