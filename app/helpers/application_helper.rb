@@ -197,7 +197,9 @@ module ApplicationHelper
   
   # Calendar For
   #
-  # Helper to be used with date fields
+  # Helper to be used with date fields. if you are not using default english locale, you will need
+  # to parse date that user inputs.
+  #
   def calendar_for(field_id)
     include_calendar_headers_tags
     date_format = I18n.t('date.formats.default', :default => '%Y-%m-%d')
@@ -212,10 +214,9 @@ module ApplicationHelper
   def include_calendar_headers_tags
     unless @calendar_headers_tags_included
       @calendar_headers_tags_included = true
-      content_for :additional_js do
+      content_for :additional_javascript do
         javascript_include_tag('calendar/calendar') +
-        #javascript_include_tag("calendar/lang/calendar-#{current_language.to_s.downcase}.js") +
-        javascript_include_tag("calendar/lang/calendar-pt-br.js") +
+        javascript_include_tag("calendar/lang/calendar-#{I18n.locale.to_s.downcase}.js") +
         javascript_include_tag('calendar/calendar-setup') +
         stylesheet_link_tag('calendar')
       end

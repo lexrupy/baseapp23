@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(:version => 20090216045512) do
     t.string   "resource"
     t.string   "name"
     t.string   "description"
+    t.integer  "resource_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "group_name"
   end
 
   create_table "resources_roles", :id => false, :force => true do |t|
