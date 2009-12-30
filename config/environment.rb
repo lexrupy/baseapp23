@@ -24,7 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "aasm"
   config.gem "will_paginate"
-  #config.gem "RedCloth", :lib => "redcloth"
+  config.gem "RedCloth", :lib => "redcloth"
   #config.gem "maruku"
 
 

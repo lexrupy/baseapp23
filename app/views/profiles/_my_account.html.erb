@@ -4,15 +4,15 @@
     <%= display_avatar(@user, :size => 96) %>
   </div>
   <ul class="sidebar_menu">
-    <li><%= link_to_edit edit_profile_url(current_user), :text => t('.update_profile', :default => "Update my profile") %></li>
+    <li><%= link_to_edit t('.update_profile', :default => "Update my profile"), edit_profile_url(current_user) %></li>
   </ul>
   <ul class="sidebar_menu">
-    <li><%= link_to_edit edit_email_user_url(@user), :text => t('.change_email', :default => "Change my email address") %></li>
-    <li><%= link_to_edit edit_password_user_url(@user), :text => t('.change_password', :default => "Change my password") %></li>
+    <li><%= link_to_edit t('.change_email', :default => "Change my email address"), edit_email_user_url(@user) %></li>
+    <li><%= link_to_edit t('.change_password', :default => "Change my password"), edit_password_user_url(@user) %></li>
   </ul>
   <% unless admin? -%>
   <ul class="sidebar_menu">
-    <li><%= link_to_destroy current_user, :text => t('.delete_account', :default => "Delete my account"),
+    <li><%= link_to_destroy t('.delete_account', :default => "Delete my account"), current_user,
             :confirm => t('.delete_account_confirmation', :site_name => configatron.site_name, :default => "Are you sure you want to schedule your account for deletion? All data linked to your account on #{configatron.site_name} will be removed from our systems.\n\nTHIS ACTION CANNOT BE UNDONE!\n\nThanks for using #{configatron.site_name}. We hope to see you again soon!")%></li>
   </ul>
   <% end -%>

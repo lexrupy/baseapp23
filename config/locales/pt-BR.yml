@@ -378,6 +378,8 @@ pt-BR:
         header: Alterando recurso
       form:
         back: Voltar para a lista de recursos
+        new_group: Novo Grupo
+        group_name: Nome do grupo
         submit: Confirmar
         resource_help: "Para um <strong>Action Resource</strong>, o identificador deve ter o formato: <strong>namespace:controller-action</strong>"
       show:

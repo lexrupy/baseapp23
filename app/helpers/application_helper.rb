@@ -68,18 +68,19 @@ module ApplicationHelper
   # Create a link to an specified kind of action to a resource, and observe if
   # user have access to that resource before generate the link.
   #
-  # +action+ specifies the kind of action, if fact it only affects the visual style of the link (Text and CSS)
+  # 
+  # +text+ Specifies the text to be displayed on link, if <tt>nil</tt> the text will be chosen according to de <tt>action</tt>
   # +path+ is just the same path as passed to a regular link_to helper.
   # +options+ the options hash, all options for link_to helper are available
   #
   # Valid Additional Options:
-  #
-  # +text+ Specifies the text to be displayed on link, if ommited the text will be chosen according to de <tt>action</tt>
+  # +action+ specifies the kind of action, if fact it only affects the visual style of the link (Text and CSS)
   # +resource+ Specifies the security resource of link mannualy
   # +show_text+ If set to true, when user not authorized to access this link, a span with text link will be output instead of link
   #
-  def link_to_action(action, path, options={})
+  def link_to_action(text, path, options={})
     # Calculate Resource Name from path
+    action = options.delete(:action)
     path = options.delete(:url) || path
     unless resource = options.delete(:resource)
       new_path = path.is_a?(String) ? path.sub(%r{^\w+://#{request.host}(?::\d+)?}, "").split("?", 2)[0] : path
@@ -91,7 +92,7 @@ module ApplicationHelper
       authorize_options = {:resource => resource}
     end
     show_text = options.delete(:show_text)
-    text = options.delete(:text) || t("app.actions.#{action}")
+    text ||= t("app.actions.#{action}")
     if authorized?(authorize_options)
       link_to text, path, options.reverse_merge(:class => "action #{action.to_s}")
     else
@@ -102,17 +103,17 @@ module ApplicationHelper
   # Link to show.
   #
   # A shortcut for a link_to_action(:show, object_path, options)
-  def link_to_show(path, options={})
-    link_to_action(:show, path, options)
+  def link_to_show(text, path, options={})
+    link_to_action(text, path, options.reverse_merge(:action => :show))
   end
 
   # Link to destroy.
   #
   # A shortcut for a link_to_action(:destroy, object_path, {:method => :delete})
-  def link_to_destroy(path, options={})
-    link_to_action(:destroy, path,
+  def link_to_destroy(text, path, options={})
+    link_to_action(text, path,
       options.reverse_merge(:confirm => t('app.actions.destroy_confirmation', :default => 'Are you sure?'),
-      :method => :delete))
+      :method => :delete, :action => :destroy))
   end
 
   # Link to new.
@@ -124,45 +125,45 @@ module ApplicationHelper
   # link_to_new(User)
   # Will Generate:
   # <a href="/users/new" class="action new">New user</a>
-  def link_to_new(path, options={})
+  def link_to_new(text, path, options={})
     if path.is_a? Class
-      options[:text] ||= t("app.actions.new", :default => "New") + ' ' + path.try(:human_name).to_s.downcase
+      text ||= t("app.actions.new", :default => "New") + ' ' + path.try(:human_name).to_s.downcase
       path = options.delete(:url) || new_polymorphic_path(path) unless path.is_a? String
     end
-    link_to_action(:new, path, options)
+    link_to_action(text, path, options.reverse_merge(:action => :new))
   end
 
   # Link to edit.
   #
   # A shortcut for a link_to_action(:edit, object_path, options)
-  def link_to_edit(path, options={})
+  def link_to_edit(text, path, options={})
     unless path.is_a? String
       path = options.delete(:url) || edit_polymorphic_path(path)
     end
-    link_to_action(:edit, path, options)
+    link_to_action(text, path, options.reverse_merge(:action => :edit))
   end
 
   # Link to go.
   #
   # A shortcut for a link_to_action(:go, object_path, options)
-  def link_to_go(path, options={})
-    link_to_action(:go, path, options)
+  def link_to_go(text, path, options={})
+    link_to_action(text, path, options.reverse_merge(:action => :go))
   end
 
 
   # Link to search.
   #
   # A shortcut for a link_to_action(:search, object_path, options)
-  def link_to_search(path, options={})
-    link_to_action(:search, path, options)
+  def link_to_search(text, path, options={})
+    link_to_action(text, path, options.reverse_merge(:action => :search))
   end
 
 
   # Link to back.
   #
   # A shortcut for a link_to_action(:back, object_path, options)
-  def link_to_back(path, options={})
-    link_to_action(:back, path, options)
+  def link_to_back(text, path, options={})
+    link_to_action(text, path, options.reverse_merge(:action => :back))
   end
 
   def cell(label, value)
@@ -201,6 +202,9 @@ module ApplicationHelper
     render :partial => admin_layout? ? 'admin/shared/tabs' : 'shared/tabs'
   end
 
+  # Render Footer
+  #
+  # Render the default application footer partial
   def render_footer
     render :partial => 'shared/footer'
   end
@@ -231,7 +235,7 @@ module ApplicationHelper
   end
 
   def display_avatar(user, options={})
-    gravatar_for user, options.reverse_merge(:alt => 'Avatar')
+    gravatar_for user, options.reverse_merge(:alt => 'Avatar', :default => "#{configatron.site_url}/images/gravatar-80.png")
   end
   
   def activate_first_element_of(form)

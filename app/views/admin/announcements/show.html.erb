@@ -1,15 +1,15 @@
 <%= content_for :header, t('.header', :default => "Announcement") %>
 <% content_for :sidebar do -%>
   <ul class="sidebar_menu">
-    <li><%= link_to_back admin_announcements_path, :text => t('.back', :default => "Back to announcements list") %></li>
-    <li><%= link_to_destroy @announcement %></li>
+    <li><%= link_to_back t('.back', :default => "Back to announcements list"), admin_announcements_path %></li>
+    <li><%= link_to_destroy nil, @announcement %></li>
   </ul>
 <% end -%>
 <table class="overview">
   <%= cell Admin::Announcement.human_attribute_name('title'), h(@announcement.title) %>
   <%= cell Admin::Announcement.human_attribute_name('starts_at'), h(@announcement.starts_at) %>
   <%= cell Admin::Announcement.human_attribute_name('ends_at'), h(@announcement.ends_at) %>
-  <%= cell Admin::Announcement.human_attribute_name('message'), link_to_edit(@announcement) %>
+  <%= cell Admin::Announcement.human_attribute_name('message'), link_to_edit(nil, @announcement) %>
 </table>
 <div style="border:1px solid #d0d0d0;padding:5px"><%=textilize @announcement.message %></div>
 

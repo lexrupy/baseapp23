@@ -3,14 +3,14 @@
 <% end -%>
 <% content_for :sidebar do -%>
   <ul class="sidebar_menu">
-    <li><%= link_to_search admin_users_url, :text => t('.view_all_users', :default => "All users") %></li>
-    <li><%= link_to_search active_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('active').to_s.downcase.pluralize, :default => "Active users only") %></li>
-    <li><%= link_to_search suspended_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('suspended').to_s.downcase.pluralize, :default => "Suspended users only") %></li>
-    <li><%= link_to_search pending_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('pending').to_s.downcase.pluralize, :default => "Pending users only") %></li>
-    <li><%= link_to_search deleted_admin_users_url, :text => t('.view_users_by_state', :state => User.state_name('deleted').to_s.downcase.pluralize, :default => "Deleted users only") %></li>
+    <li><%= link_to_search t('.view_all_users', :default => "All users"), admin_users_url %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('active').to_s.downcase.pluralize, :default => "Active users only"), active_admin_users_url %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('suspended').to_s.downcase.pluralize, :default => "Suspended users only"), suspended_admin_users_url %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('pending').to_s.downcase.pluralize, :default => "Pending users only"), pending_admin_users_url %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('deleted').to_s.downcase.pluralize, :default => "Deleted users only"), deleted_admin_users_url %></li>
   </ul>
 <% end -%>
-<span style="float:left;margin-top:5px;"><%= link_to_new User, :url => new_admin_user_path %></span>
+<span style="float:left;margin-top:5px;"><%= link_to_new nil, User, :url => new_admin_user_path %></span>
 <br />
 <table class="index">
   <tr>
@@ -23,7 +23,7 @@
 <% for user in @users %>
   <tr>
   <td><%=h user.id %></td>
-  <td><%= link_to_show admin_user_url(user), :text => h(user.login) %></td>
+  <td><%= link_to_show h(user.login), admin_user_url(user) %></td>
   <td><%=h user.email %></td>
   <td><%=h user.state_name %></td>
     <td class="actions">

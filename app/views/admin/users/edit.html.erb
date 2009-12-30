@@ -6,7 +6,7 @@
 <h2><%= t('.sidebar_status', :state => @user.state_name,
         :default => "Account status: #{@user.state_name}") %></h2>
 <ul class="sidebar_menu">
-    <li><%= link_to_back admin_users_path, :text => t('.back', :default => 'Back to user list') %></li>
+    <li><%= link_to_back t('.back', :default => 'Back to user list'), admin_users_path %></li>
 </ul>
 <% end -%>
 <% form_for @user, :url => admin_user_url do |f| -%>

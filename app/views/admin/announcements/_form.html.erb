@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <ul class="sidebar_menu">
-    <li><%= link_to_back admin_announcements_path, :text => t('.back', :default => 'Back to announcement list') %></li>
+    <li><%= link_to_back t('.back', :default => 'Back to announcement list'), admin_announcements_path %></li>
   </ul>
 <% end -%>
 <% form_for @announcement, :url => announcement_form_path(@announcement) do |f| %>

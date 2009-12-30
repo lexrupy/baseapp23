@@ -8,7 +8,7 @@
   </tr>
 <% for role in @roles %>
   <tr>
-    <td><%= link_to_edit edit_admin_role_path(role), :text => h(role.name) %></td>
+    <td><%= link_to_edit h(role.name), edit_admin_role_path(role) %></td>
   </tr>
 <% end %>
 </table>
