@@ -18,9 +18,9 @@
     <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
 <% end -%>
     <td class="actions">
-      <%%= link_to_show <%= singular_name %> %> |
-      <%%= link_to_edit <%= singular_name %> %> |
-      <%%= link_to_destroy <%= singular_name %> %>
+      <%%= link_to_show nil, <%= singular_name %> %> |
+      <%%= link_to_edit nil, <%= singular_name %> %> |
+      <%%= link_to_destroy nil, <%= singular_name %> %>
     </td>
   </tr>
 <%% end %>
