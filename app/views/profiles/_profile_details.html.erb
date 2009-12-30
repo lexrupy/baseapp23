@@ -1,6 +1,14 @@
 <h3><%= t '.profile', :default => 'Profile' %></h3>
 
-<p><%= link_to t('.update_profile', :default => "Update my profile"), edit_profile_url(current_user) %></p>
+<% if current_user.profile.id == @profile.id -%>
+  <p><%= link_to t('.update_profile', :default => "Update my profile"), edit_profile_url(current_user) %></p>
+<% else %>
+	<% content_for :sidebar do -%>
+		<div class="avatar96">
+	    <%= display_avatar(@profile.user, :size => 96) %>
+	  </div>
+	<% end -%>
+<% end -%>
 
 <table class="overview">
   <% @profile.public_attributes.each do |column| -%>

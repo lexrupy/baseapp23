@@ -4,8 +4,7 @@ class Profile < ActiveRecord::Base
   # These fields in a profile are private, and will not be shown to other users.
   PRIVATE_FIELDS = ["id", "created_at", "updated_at", "user_id", "support"]
 
-  # TODO: Add validations, if you require any for the profile fields
-
+  # TODO: Add validations, if you require any for the profile 
   belongs_to :user
 
   # Filter out the private attributes
