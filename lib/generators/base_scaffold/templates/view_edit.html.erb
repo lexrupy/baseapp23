@@ -1,3 +1,4 @@
 <%%= content_for :header, t('.header', :default => "Editing <%= singular_name %>") %>
 <%%= render :partial => 'form' %>
+<%%= activate_first_element_of("edit_<%= singular_name %>_#{@<%= singular_name %>.id}") %>
 
