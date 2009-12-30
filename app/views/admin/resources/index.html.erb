@@ -6,6 +6,7 @@
 <br />
 <table class="index">
   <tr>
+		<th><%= Resource.human_attribute_name('resource_group_id') %></th>
     <th><%= Resource.human_attribute_name('resource') %></th>
     <th><%= Resource.human_attribute_name('name') %></th>
     <th><%= Resource.human_attribute_name('description') %></th>
@@ -13,9 +14,10 @@
   </tr>
 <% for res in @resources %>
   <tr>
+	  <td><%=h res.resource_group_name %></td>
     <td><%=h res.resource %></td>
-    <td><%=h res.name %></td>
-    <td><%=h res.description %></td>
+    <td><%=h truncate(res.name, :lenght  => 8) %></td>
+    <td><%=h truncate(res.description, :lenght => 10) %></td>
     <td class="actions">
       <%= link_to_show nil, admin_resource_path(res) %> |
       <%= link_to_edit nil, edit_admin_resource_path(res) %> |

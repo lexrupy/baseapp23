@@ -7,6 +7,7 @@
   </ul>
 <% end -%>
 <table class="overview">
+  <%= cell Resource.human_attribute_name('resource_group_id'), h(@resource.resource_group_name) %>
   <%= cell Resource.human_attribute_name('resource'), h(@resource.resource) %>
   <%= cell Resource.human_attribute_name('name'), h(@resource.name) %>
   <%= cell Resource.human_attribute_name('description'), h(@resource.description) %>

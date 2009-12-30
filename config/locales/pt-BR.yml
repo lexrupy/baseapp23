@@ -180,7 +180,7 @@ pt-BR:
         master: Master
         state_names:
           active: Ativo
-          suspended: Suspendido
+          suspended: Suspenso
           pending: Pendente
           deleted: Excluído
       setting:

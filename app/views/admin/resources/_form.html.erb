@@ -5,6 +5,15 @@
 <% end -%>
 <% form_for @resource, :url => resource_form_path(@resource) do |f| %>
   <%= f.error_messages %>
+	<p>
+		<%= f.label :resource_group_id, Resource.human_attribute_name("resource_group_id") %><br />
+		<%= f.collection_select :resource_group_id, ResourceGroup.all, :id, :name %> 
+		<%= link_to_remote t('.new_group', :default => "New Group"), 
+			:html => { :class  => "action new" }, :url => { :controller => 'admin/resources', :action => 'add_new_group'},
+      :method => :post,
+			:with => "'resource_group[name]='+value",
+      :condition => "value = prompt('#{t('.group_name', :default => 'Group Name')}','')" %>
+	</p>
   <p>
     <%= f.label :resource, Resource.human_attribute_name('resource') %><br />
     <%= f.text_field :resource, :size => 40 %><br />
@@ -18,15 +27,6 @@
     <%= f.label :description, Resource.human_attribute_name('description') %><br />
     <%= f.text_field :description, :size => 60 %>
   </p>
-	<p>
-		<%= f.label :resource_group_id, Resource.human_attribute_name("resource_group_id") %><br />
-		<%= f.collection_select :resource_group_id, ResourceGroup.all, :id, :name %> 
-		<%= link_to_remote t('.new_group', :default => "New Group"), 
-			:html => { :class  => "action new" }, :url => { :controller => 'admin/resources', :action => 'add_new_group'},
-      :method => :post,
-			:with => "'resource_group[name]='+value",
-      :condition => "value = prompt('#{t('.group_name', :default => 'Group Name')}','')" %>
-	</p>
   <p>
     <%= f.submit t('.submit', :default => "Confirm") %>
   </p>
