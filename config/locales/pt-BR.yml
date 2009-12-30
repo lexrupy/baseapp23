@@ -352,6 +352,7 @@ pt-BR:
     announcements:
       index:
         header: Listando anúncios
+        new: Novo anúncio
       new:
         header: Novo anúncio
       edit:
@@ -362,6 +363,7 @@ pt-BR:
       show:
         header: Anúncio
         back: Voltar para a lista de anúncios
+        new: Novo anúncio
       create:
         flash:
           notice: Anúncio foi salvo com sucesso.
@@ -372,6 +374,7 @@ pt-BR:
     resources:
       index:
         header: Listando recursos
+        new: Novo recurso
       new:
         header: Novo recurso
       edit:
@@ -384,6 +387,7 @@ pt-BR:
         resource_help: "Para um <strong>Action Resource</strong>, o identificador deve ter o formato: <strong>namespace:controller-action</strong>"
       show:
         header: Recurso
+        new: Novo recurso
         back: Voltar para a lista de recursos
       create:
         flash:
@@ -587,37 +591,3 @@ pt-BR:
     failed_creation:
       flash:
         error: Desculpe, ocorreu um erro ao criar sua conta.
-
-  tickets:
-    index:
-      header: Listando tickets
-      sidebar_info: Antes de enviar um ticket, verifique se o problema já não foi reportado
-      search: Pesquisar
-      view_all_tickets: Ver todos os tickets
-      view_tickets_by_status: "Ver tickets {{status}}"
-    new:
-      header: Novo ticket
-    edit:
-      header: Alterando ticket
-    form:
-      submit: Confirmar
-      assigned_to_prompt: --não atribuído--
-    show:
-      by: por
-      back: Voltar para a lista de tickets
-      opened: Aberto a
-      last_modified: Ultima alteração a
-      description: Descrição
-      submit: Confirmar
-      assigned_to_prompt: --não atribuído--
-    create:
-      flash:
-        notice: O Ticket foi criado com sucesso.
-    update:
-      flash:
-        notice: O Ticket foi atualizado com sucesso.
-    ticket_update:
-      flash:
-        notice: O Ticket foi atualizado com sucesso.
-        error: Preencha todos os campos requeridos.
-

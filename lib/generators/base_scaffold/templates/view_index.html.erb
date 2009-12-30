@@ -17,8 +17,8 @@
     <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
 <% end -%>
     <td class="actions">
-      <%%= link_to_show t('app.actions.show', :default => "Show"), <%= singular_name %> %> |
-      <%%= link_to_edit t('app.actions.edit', :default => "Edit"), <%= singular_name %> %> |
+      <%%= link_to_show t('app.actions.show', :default => "Show"), <%= singular_name %> %>&nbsp;
+      <%%= link_to_edit t('app.actions.edit', :default => "Edit"), <%= singular_name %> %>&nbsp;
       <%%= link_to_destroy t('app.actions.destroy', :default => "Delete"), <%= singular_name %> %>
     </td>
   </tr>

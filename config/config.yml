@@ -3,7 +3,7 @@
 
 development: &local
     site_name: BaseApp
-    site_url: "http://baseapp.local"
+    site_url: "baseapp.local"
 
     company_name: BaseApp Inc.
     admin_email: admin@example.com

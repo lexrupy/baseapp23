@@ -263,7 +263,7 @@ module ApplicationHelper
   end
 
   def display_avatar(user, options={})
-    gravatar_for user, options.reverse_merge(:alt => 'Avatar', :default => "#{configatron.site_url}/images/gravatar-80.png")
+    gravatar_for user, options.reverse_merge(:alt => 'Avatar', :default => "http://#{configatron.site_url}/images/gravatar-80.png")
   end
   
   def activate_first_element_of(form)

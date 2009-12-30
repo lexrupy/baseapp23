@@ -2,7 +2,7 @@
 <% content_for :additional_css do %>
   <%= stylesheet_link_tag "nosidebar" %>
 <% end -%>
-<span style="float:left;margin-top:5px;"><%= link_to_new nil, Admin::Announcement %></span>
+<span style="float:left;margin-top:5px;"><%= link_to_new t('.new', :default => 'New announcement'), Admin::Announcement %></span>
 <br />
 <table class="index">
   <tr>
@@ -17,8 +17,8 @@
     <td><%=h announcement.starts_at.to_s(:short) %></td>
     <td><%=h announcement.ends_at.to_s(:short) %></td>
     <td class="actions">
-      <%= link_to_show nil, announcement %> |
-      <%= link_to_edit nil, announcement %> |
+      <%= link_to_show nil, announcement %>
+      <%= link_to_edit nil, announcement %>
       <%= link_to_destroy nil, announcement %>
     </td>
   </tr>
