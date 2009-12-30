@@ -194,6 +194,33 @@ module ApplicationHelper
   def string_array_for_select(options, names=nil)
     names.nil? ? options.map { |o| [o.to_s.humanize, o.to_s] } : names.zip(options)
   end
+  
+  # Calendar For
+  #
+  # Helper to be used with date fields
+  def calendar_for(field_id)
+    include_calendar_headers_tags
+    date_format = I18n.t('date.formats.default', :default => '%Y-%m-%d')
+    image_tag("calendar.png", {:id => "#{field_id}_trigger", :class => "calendar-trigger"}) +
+    javascript_tag("Calendar.setup({inputField : '#{field_id}', ifFormat : '#{date_format}', button : '#{field_id}_trigger' });")
+  end
+  
+  # Calendar Javascript Header
+  #
+  # Used by <tt>calendar_for</tt> helper to include necessary javascript at page that
+  # uses the calendar
+  def include_calendar_headers_tags
+    unless @calendar_headers_tags_included
+      @calendar_headers_tags_included = true
+      content_for :additional_js do
+        javascript_include_tag('calendar/calendar') +
+        #javascript_include_tag("calendar/lang/calendar-#{current_language.to_s.downcase}.js") +
+        javascript_include_tag("calendar/lang/calendar-pt-br.js") +
+        javascript_include_tag('calendar/calendar-setup') +
+        stylesheet_link_tag('calendar')
+      end
+    end
+  end
 
   # Render Tabs.
   #
