@@ -196,7 +196,8 @@ class ApplicationController < ActionController::Base
   # Return the roles required for execute the given method in this controller
   # +method+ The method to test what roles are required
   def self.required_roles_for_method(method)
-    if resources = @security_resources
+    resources = @security_resources
+    unless resources.nil?
       roles ||= begin
         resources.keys.select do |role|
           unless resources[role].nil?

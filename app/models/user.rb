@@ -141,7 +141,8 @@ class User < ActiveRecord::Base
     # Give the user a profile
     self.profile = Profile.create
     # Set the default role
-    if role = Role.find_by_name(DEFAULT_USER_ROLE)
+    role = Role.find_by_name(DEFAULT_USER_ROLE)
+    unless role.nil?
       self.roles = [role]
     else
       raise "[BASEAPP ERROR]: Default Role '#{DEFAULT_USER_ROLE}' does not exist."

@@ -82,7 +82,8 @@ module ApplicationHelper
     # Calculate Resource Name from path
     action = options.delete(:action)
     path = options.delete(:url) || path
-    unless resource = options.delete(:resource)
+    resource = options.delete(:resource)
+    unless resource.nil?
       new_path = path.is_a?(String) ? path.sub(%r{^\w+://#{request.host}(?::\d+)?}, "").split("?", 2)[0] : path
       url = url_for(new_path)
       path_hash = ActionController::Routing::Routes.recognize_path(url.split('?').first, :method => options[:method] || :get)
