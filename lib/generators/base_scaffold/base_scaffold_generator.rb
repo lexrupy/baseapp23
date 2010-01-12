@@ -110,8 +110,7 @@ module Rails
       def input_type
         @input_type ||= case type
           when :text                        then "textarea"
-          else
-            "input"
+          else "input"
         end
       end
       def default_value
