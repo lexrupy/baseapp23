@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   require_role :admin
   
-  before_filter :load_user, :except => [:index, :create]
+  before_filter :load_user, :except => [:index, :create, :new]
   
   def load_user
     @user = User.find(params[:id])

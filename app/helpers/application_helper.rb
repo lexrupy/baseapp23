@@ -68,7 +68,7 @@ module ApplicationHelper
   # Create a link to an specified kind of action to a resource, and observe if
   # user have access to that resource before generate the link.
   #
-  # 
+  #
   # +text+ Specifies the text to be displayed on link, if <tt>nil</tt> the text will be chosen according to de <tt>action</tt>
   # +path+ is just the same path as passed to a regular link_to helper.
   # +options+ the options hash, all options for link_to helper are available
@@ -151,14 +151,12 @@ module ApplicationHelper
     link_to_action(text, path, options.reverse_merge(:action => :go))
   end
 
-
   # Link to search.
   #
   # A shortcut for a link_to_action(:search, object_path, options)
   def link_to_search(text, path, options={})
     link_to_action(text, path, options.reverse_merge(:action => :search))
   end
-
 
   # Link to back.
   #
@@ -195,7 +193,7 @@ module ApplicationHelper
   def string_array_for_select(options, names=nil)
     names.nil? ? options.map { |o| [o.to_s.humanize, o.to_s] } : names.zip(options)
   end
-  
+
   # Calendar For
   #
   # Helper to be used with date fields. if you are not using default english locale, you will need
@@ -207,7 +205,7 @@ module ApplicationHelper
     image_tag("calendar.png", {:id => "#{field_id}_trigger", :class => "calendar-trigger"}) +
     javascript_tag("Calendar.setup({inputField : '#{field_id}', ifFormat : '#{date_format}', button : '#{field_id}_trigger' });")
   end
-  
+
   # Calendar Javascript Header
   #
   # Used by <tt>calendar_for</tt> helper to include necessary javascript at page that
@@ -266,7 +264,7 @@ module ApplicationHelper
   def display_avatar(user, options={})
     gravatar_for user, options.reverse_merge(:alt => 'Avatar', :default => "http://#{configatron.site_url}/images/gravatar-80.png")
   end
-  
+
   def activate_first_element_of(form)
     content_for :javascript do
     	javascript_tag "Form.focusFirstElement('#{form}')"

@@ -9,21 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230162027) do
+ActiveRecord::Schema.define(:version => 20090216045512) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
     t.text     "message"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "people", :force => true do |t|
-    t.string   "name"
-    t.integer  "age"
-    t.date     "born_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

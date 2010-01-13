@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ResourceGroup do
   before(:each) do
     @valid_attributes = {
-      
+      :name => 'group'
     }
   end
 

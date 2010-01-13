@@ -20,22 +20,6 @@ describe Admin::RolesController do
 
   end
 
-  describe "Inaccecible actions" do
-
-    it "should not respond to show action" do
-      Role.expects(:find).never
-      get :show
-      response.body == ''
-    end
-
-    it "should not respond to new action" do
-      Role.expects(:create).never
-      get :new
-      response.body == ''
-    end
-
-  end
-
   describe "responding to GET edit" do
 
     it "should expose the requested role as @role" do
@@ -43,15 +27,6 @@ describe Admin::RolesController do
       get :edit, :id => "37"
       assigns[:role].should equal(mock_role)
     end
-
-  end
-
-  describe "responding to POST create" do
-
-      it "should redirect to the created role" do
-        Role.expects(:create).never
-        post :create, :role => {}
-      end
 
   end
 
@@ -99,15 +74,6 @@ describe Admin::RolesController do
         response.should render_template('edit')
       end
 
-    end
-
-  end
-
-  describe "responding to DELETE destroy" do
-
-    it "should not destroy the requested role" do
-      Role.expects(:find).with('37').never
-      delete :destroy, :id => "37"
     end
 
   end
