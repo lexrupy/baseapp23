@@ -1,69 +1,49 @@
 class Admin::UsersController < ApplicationController
   require_role :admin
-
-  def reset_password
+  
+  before_filter :load_user, :except => [:index, :create]
+  
+  def load_user
     @user = User.find(params[:id])
-    @user.reset_password!
-    flash[:notice] = t('admin.users.reset_password.flash.notice', :default => "A new password has been sent to the user by email.")
-    redirect_to admin_user_path(@user)
   end
-
-  def pending
-    @users = User.paginate :all, :conditions => {:state => 'pending'}, :page => params[:page]
-    render :action => 'index'
+  
+  def index 
+    conditions = {:state => params[:state]} unless params[:state].blank?
+    @users = User.paginate :all, :conditions => conditions, :page => params[:page]
   end
-
-  def suspended
-    @users = User.paginate :all, :conditions => {:state => 'suspended'}, :page => params[:page]
-    render :action => 'index'
-  end
-
-  def active
-    @users = User.paginate :all, :conditions => {:state => 'active'}, :page => params[:page]
-    render :action => 'index'
-  end
-
-  def deleted
-    @users = User.paginate :all, :conditions => {:state => 'deleted'}, :page => params[:page]
-    render :action => 'index'
-  end
-
+  
   def activate
-    @user = User.find(params[:id])
     @user.activate!
     redirect_to admin_users_path
   end
 
   def suspend
-    @user = User.find(params[:id])
     @user.suspend!
     redirect_to admin_users_path
   end
 
   def unsuspend
-    @user = User.find(params[:id])
     @user.unsuspend!
     redirect_to admin_users_path
   end
 
   def purge
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_users_url
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.delete!
     redirect_to admin_users_path
   end
-
-  def index
-    @users = User.paginate :all, :page => params[:page]
+  
+  def reset_password
+    @user.reset_password!
+    flash[:notice] = t('admin.users.reset_password.flash.notice', :default => "A new password has been sent to the user by email.")
+    redirect_to admin_user_path(@user)
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -71,11 +51,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     @user.role_ids = params[:user][:role_ids]
     @user.resource_ids = params[:user][:resource_ids]
     if @user.save
@@ -95,5 +73,6 @@ class Admin::UsersController < ApplicationController
       render :action => "new"
     end
   end
+  
 end
 

@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
     @have_access[resource.to_s] ||= begin
       res = Resource.find_by_resource(resource)
       res.nil? || resource_ids.include?(res.id) || roles.any? { |r| r.resource_ids.include?(res.id) }
-     end
+    end
   end
 
   # Creates a new password for the user, and notifies him with an email

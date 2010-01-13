@@ -4,10 +4,10 @@
 <% content_for :sidebar do -%>
   <ul class="sidebar_menu">
     <li><%= link_to_search t('.view_all_users', :default => "All users"), admin_users_url %></li>
-    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('active').to_s.downcase.pluralize, :default => "Active users only"), active_admin_users_url %></li>
-    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('suspended').to_s.downcase.pluralize, :default => "Suspended users only"), suspended_admin_users_url %></li>
-    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('pending').to_s.downcase.pluralize, :default => "Pending users only"), pending_admin_users_url %></li>
-    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('deleted').to_s.downcase.pluralize, :default => "Deleted users only"), deleted_admin_users_url %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('active').to_s.downcase.pluralize, :default => "Active users only"), admin_users_url(:state => 'active') %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('suspended').to_s.downcase.pluralize, :default => "Suspended users only"), admin_users_url(:state => 'suspended') %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('pending').to_s.downcase.pluralize, :default => "Pending users only"), admin_users_url(:state => 'pending') %></li>
+    <li><%= link_to_search t('.view_users_by_state', :state => User.state_name('deleted').to_s.downcase.pluralize, :default => "Deleted users only"), admin_users_url(:state => 'deleted') %></li>
   </ul>
 <% end -%>
 <span style="float:left;margin-top:5px;"><%= link_to_new nil, User, :url => new_admin_user_path %></span>
