@@ -172,7 +172,7 @@ class ApplicationController < ActionController::Base
   # end
   #
   # :except and :only options also accepts an array of options, just like a filter (before_filter)
-  #
+  
   def self.require_role(role, options={})
     # Configure the security resources
     resources = @security_resources || {}
@@ -196,23 +196,15 @@ class ApplicationController < ActionController::Base
   # Return the roles required for execute the given method in this controller
   # +method+ The method to test what roles are required
   def self.required_roles_for_method(method)
-    resources = @security_resources
-    unless resources.nil?
-      roles ||= begin
-        resources.keys.select do |role|
-          unless resources[role].nil?
-            except, only = resources[role][:except], resources[role][:only]
-            if except.blank? && only.blank?
-              true
-            else
-              # INFO: Only supports one of "except" or "only" at time
-              except.blank? ? only.include?(method.to_s) : !except.include?(method.to_s)
-            end
-          end
-        end
+    return [] if @security_resources.nil?
+    @security_resources.keys.select do |role|
+      except, only = @security_resources[role][:except], @security_resources[role][:only]
+      if except.blank? && only.blank?
+        true
+      else
+        # INFO: Only supports one of "except" or "only" at time
+        except.blank? ? only.include?(method.to_s) : !except.include?(method.to_s)
       end
-    else
-      []
     end
   end
 

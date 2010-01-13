@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  require_role :support, :only => [:suspend, :destroy]
+  require_role :admin
 
   def reset_password
     @user = User.find(params[:id])
