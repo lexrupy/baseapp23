@@ -69,6 +69,12 @@ class User < ActiveRecord::Base
     rolelist.any? { |r| list.include?(r.to_s) } || list.include?('admin') || self.master?
   end
 
+  # Have Access?
+  #
+  # Vefiry if user have access to given resource
+  #
+  # +resource+ The resource that users need access to
+  #
   def have_access?(resource)
     # Master User always have access to all
     return true if self.master?
