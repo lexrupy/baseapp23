@@ -83,7 +83,7 @@ module ApplicationHelper
     action = options.delete(:action)
     path = options.delete(:url) || path
     resource = options.delete(:resource)
-    unless resource.nil?
+    if resource.blank?
       new_path = path.is_a?(String) ? path.sub(%r{^\w+://#{request.host}(?::\d+)?}, "").split("?", 2)[0] : path
       url = url_for(new_path)
       path_hash = ActionController::Routing::Routes.recognize_path(url.split('?').first, :method => options[:method] || :get)
@@ -119,7 +119,7 @@ module ApplicationHelper
 
   # Link to new.
   #
-  # A shortcut for a link_to_action(:new, objects_path, options)
+  # A shortcut for a link_to_action(:new, object_path, options)
   #
   # +path+ The path also accepts a Model ClassName
   # Example:

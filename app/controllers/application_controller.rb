@@ -113,6 +113,7 @@ class ApplicationController < ActionController::Base
   #   :action     - See :controller option
   def authorized?(options={})
     if current_user
+      return true if current_user.master?
       ctrl = self.class
       action = action_name
       unless options[:controller].blank?
@@ -197,9 +198,7 @@ class ApplicationController < ActionController::Base
   # +method+ The method to test what roles are required
   def self.required_roles_for_method(method)
     return [] if @security_resources.nil?
-    @security_resources.keys.select do |role|
-      self.required_role_for_method?(role, method)
-    end
+    @security_resources.keys.select {|role| self.required_role_for_method?(role, method) }
   end
 
   # Is role required for method?
