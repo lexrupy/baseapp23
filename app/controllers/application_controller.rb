@@ -198,14 +198,17 @@ class ApplicationController < ActionController::Base
   def self.required_roles_for_method(method)
     return [] if @security_resources.nil?
     @security_resources.keys.select do |role|
-      except, only = @security_resources[role][:except], @security_resources[role][:only]
-      if except.blank? && only.blank?
-        true
-      else
-        # INFO: Only supports one of "except" or "only" at time
-        except.blank? ? only.include?(method.to_s) : !except.include?(method.to_s)
-      end
+      self.required_role_for_method?(role, method)
     end
+  end
+
+  # Is role required for method?
+  #
+  # Return true if given role is required by given method
+  def self.required_role_for_method?(role, method)
+    except, only = @security_resources[role][:except], @security_resources[role][:only]
+    return true if except.blank? && only.blank?
+    except.blank? ? only.include?(method.to_s) : !except.include?(method.to_s)
   end
 
   # Required roles for method
