@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
 
   # Have Access?
   #
-  # Vefiry if user have access to given resource
+  # Verify if user have access to given resource
   #
   # +resource+ The resource that users need access to
   #
