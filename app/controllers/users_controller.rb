@@ -97,34 +97,27 @@ class UsersController < ApplicationController
   end
 
   def update_password
-    if current_user == @user
-      current_password, new_password, new_password_confirmation = params[:current_password], params[:new_password], params[:new_password_confirmation]
-      if @user.valid_password? current_password
-        if new_password == new_password_confirmation
-          if new_password.blank? || new_password_confirmation.blank?
-            flash[:error] = t('users.update_password.flash.error.blank_password', :default => "You cannot set a blank password.")
-            redirect_to edit_password_user_url(@user)
-          else
-            @user.password = new_password
-            @user.password_confirmation = new_password_confirmation
-            if @user.save
-              flash[:notice] = t('users.update_password.flash.notice', :default => "Your password has been updated.")
-              redirect_to profile_url(@user)
-            else
-              render 'edit_password'
-            end
-          end
+    user = current_user
+    current_password, new_password, new_password_confirmation = params[:current_password], params[:new_password], params[:new_password_confirmation]
+    if user.valid_password? current_password
+      unless new_password.blank?
+        if new_password != new_password_confirmation
+          failed_update_password(:dont_match)
         else
-          flash[:error] = t('users.update_password.flash.error.confirmation_does_not_match', :default => "Your new password and it's confirmation don't match.")
-          redirect_to edit_password_user_url(@user)
+          @user.password = new_password
+          @user.password_confirmation = new_password_confirmation
+          if @user.save
+            flash[:notice] = t('users.update_password.flash.notice', :default => "Your password has been updated.")
+            redirect_to profile_url(@user)
+          else
+            render 'edit_password'
+          end
         end
       else
-        flash[:error] = t('users.update_password.flash.error.current_password_invalid', :default => "Your current password is not correct. Your password has not been updated.")
-        redirect_to edit_password_user_url(@user)
+        failed_update_password(:blank)
       end
     else
-      flash[:error] = t('users.update_password.flash.error.another_user_password', :default => "You cannot update another user's password!")
-      redirect_to edit_password_user_url(@user)
+      failed_update_password(:current_invalid)
     end
   end
 
@@ -184,5 +177,20 @@ class UsersController < ApplicationController
     # @user = User.new
     render :action => :new
   end
+  
+  def failed_update_password(error)
+    flash[:error] = case error
+    when :dont_match
+      t('users.update_password.flash.error.confirmation_does_not_match', :default => "Your new password and it's confirmation don't match.")
+    when :current_invalid
+      t('users.update_password.flash.error.current_password_invalid', :default => "Your current password is not correct. Your password has not been updated.")
+    when :blank
+      t('users.update_password.flash.error.blank_password', :default => "You cannot set a blank password.")
+    else
+      t('user.update_password.flash.unknown', :default => "Unknown error when updating your password.")
+    end
+    redirect_to edit_password_user_url(@user)
+  end
+  
 end
 
