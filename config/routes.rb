@@ -41,8 +41,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Dashboard as the default location
   map.root :controller => 'dashboard', :action => 'index'
-  map.resources :tickets, :member => { :ticket_update => :post, :update_delete => :delete }
-  map.resources :items
+
   # Install the default routes as the lowest priority.
   map.connect ":controller/:action.:format"
   map.connect ':controller/:action/:id'

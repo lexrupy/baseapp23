@@ -2,16 +2,16 @@
 #   configatron.site_name
 
 development: &local
-    site_name: rTrac
-    site_url: "rtrac.local"
+    site_name: BaseApp
+    site_url: "baseapp.local"
 
-    company_name: Siverti Inc.
-    admin_email: admin@rtrac.com.com
+    company_name: BaseApp Inc.
+    admin_email: admin@example.com
 
-    support_name: Suporte
-    support_email: suporte@rtrac.com
+    support_name: Support
+    support_email: support@example.com
 
-    ticket_email: tickets@rtrac.com
+    ticket_email: issues@example.com
 
     session_time_out: 30
 
