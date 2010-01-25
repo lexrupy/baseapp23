@@ -245,8 +245,47 @@ pt-BR:
         message: Mensagem
         starts_at: Inicia em
         ends_at: Termina em
-
-
+      item:
+        name: Nome
+        location: Localização
+        description: Descrição
+        item_type: Tipo
+        item_role: Função
+        item_model: Modelo
+        manufacturer: Fabricante
+        serial: Número de Série
+        user: Usuário
+        operating_system: Sistema Operacional
+        memory: Memória
+        disk: Disco
+        video: Video
+        display: Monitor
+        optical_drive: CD/DVD
+        processor: Processador
+        dhcp: DHCP
+        ip_address: Endereço IP
+        subnet: Subrede
+        supplier: Fornecedor
+        cost: Custo
+        document: Documento/NF
+        status: Situação
+        guarantee: Garantia
+        comments: Comentários
+        type_names:
+          computer: Computador
+          monitor: Monitor
+          printer: Impressora
+          network: Rede
+        role_names:
+          workstation: Estação de trabalho
+          server: Servidor
+          print-server: Servidor de Impressão
+        status_names:
+          active: Ativo
+          inactive: Inativo
+          damaged: Danificado
+          maintenance: Em manutenção
+          
   authlogic:
     error_messages:
       login_blank: não pode ser vazio
@@ -591,3 +630,61 @@ pt-BR:
     failed_creation:
       flash:
         error: Desculpe, ocorreu um erro ao criar sua conta.
+  tickets:
+    index:
+      header: Listando tickets
+      sidebar_info: Antes de enviar um ticket, verifique se o problema já não foi reportado por outro usuário
+      search: Pesquisar
+      new: Novo Ticket
+      view_all_tickets: Ver todos os tickets
+      view_tickets_by_status: "Ver tickets {{status}}"
+    new:
+      header: Novo ticket
+    edit:
+      header: Alterando ticket
+    form:
+      tags_help: "(Use vírgula ',' para separar as tags)"
+      submit: Confirmar
+      assigned_to_prompt: --não atribuído--
+    show:
+      by: por
+      back: Voltar para a lista de tickets
+      opened: Aberto a
+      last_modified: Ultima alteração a
+      description: Descrição
+      submit: Confirmar
+      assigned_to_prompt: --não atribuído--
+    create:
+      flash:
+        notice: O Ticket foi criado com sucesso.
+    update:
+      flash:
+        notice: O Ticket foi atualizado com sucesso.
+    ticket_update:
+      flash:
+        notice: O Ticket foi atualizado com sucesso.
+        error: Preencha todos os campos requeridos.  
+    
+  items:
+    index:
+      header: Listando itens
+      new: Novo Item
+    new:
+      header: Novo Item
+    edit:
+      header: Alterando item
+    form:
+      back: Voltar para a lista de itens
+      select_promt: --selecionar--
+      new: Novo
+      cancel: Cancelar
+      submit: Confirmar
+    show:
+      header: Item
+      back: Voltar para a lista de itens
+    create:
+      flash:
+        notice: Item salvo com sucesso.
+    update:
+      flash:
+        notice: Item atualizado com sucesso.

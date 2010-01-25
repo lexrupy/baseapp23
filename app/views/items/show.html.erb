@@ -1,0 +1,107 @@
+<%= content_for :header, t('.header', :default => "Item") %>
+<% content_for :sidebar do -%>
+  <ul class="sidebar_menu">
+    <li><%= link_to_new t('.new',:default => "New Item"), Item %></li>
+    <li class="separator">&nbsp;</li>
+    <li><%= link_to_back t('.back', :default => 'Back to item list'), items_path %></li>
+    <li><%= link_to_edit "Edit Item", @item %></li>
+    <li><%= link_to_destroy "Delete Item", @item %></li>
+  </ul>
+<% end -%>
+<p>
+  <b><%= Item.human_attribute_name('name') %>:</b>
+  <%=h @item.name %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('description') %>:</b>
+  <%=h @item.description %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('item_type') %>:</b>
+  <%=h @item.item_type %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('item_role') %>:</b>
+  <%=h @item.item_role %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('user') %>:</b>
+  <%=h @item.user %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('item_model') %>:</b>
+  <%=h @item.item_model %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('serial') %>:</b>
+  <%=h @item.serial %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('manufacturer') %>:</b>
+  <%=h @item.manufacturer %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('operating_system') %>:</b>
+  <%=h @item.operating_system %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('ip_address') %>:</b>
+  <%=h @item.ip_address %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('subnet') %>:</b>
+  <%=h @item.subnet %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('dhcp') %>:</b>
+  <%=h @item.dhcp %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('memory') %>:</b>
+  <%=h @item.memory %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('disk') %>:</b>
+  <%=h @item.disk %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('video') %>:</b>
+  <%=h @item.video %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('optical_drive') %>:</b>
+  <%=h @item.optical_drive %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('processor') %>:</b>
+  <%=h @item.processor %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('status') %>:</b>
+  <%=h @item.status %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('location') %>:</b>
+  <%=h @item.location %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('supplier') %>:</b>
+  <%=h @item.supplier %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('cost') %>:</b>
+  <%=h @item.cost %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('guarantee') %>:</b>
+  <%=h @item.guarantee %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('document') %>:</b>
+  <%=h @item.document %>
+</p>
+<p>
+  <b><%= Item.human_attribute_name('comments') %>:</b>
+  <%=h @item.comments %>
+</p>
+
