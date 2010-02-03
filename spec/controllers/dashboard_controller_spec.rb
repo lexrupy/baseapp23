@@ -29,8 +29,14 @@ describe DashboardController do
   end
 
   describe "Global Links" do
+    before :each do
+      do_login
+    end
 
-    it "should show the current user name"
+    it "should show the current user name" do
+      get :index
+      response.should have_tag('div#global_links>strong','test')
+    end
 
     it "should show a dashboard link"
 

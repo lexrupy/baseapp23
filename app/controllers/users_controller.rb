@@ -104,9 +104,7 @@ class UsersController < ApplicationController
         if new_password != new_password_confirmation
           failed_update_password(:dont_match)
         else
-          @user.password = new_password
-          @user.password_confirmation = new_password_confirmation
-          if @user.save
+          if @user.update_attributes(:password => new_password, :password_confirmation => new_password_confirmation)
             flash[:notice] = t('users.update_password.flash.notice', :default => "Your password has been updated.")
             redirect_to profile_url(@user)
           else
